@@ -1,8 +1,10 @@
 <?php
 require_once 'core/init.php';
+
 use \Form\Form;
 use \Form\Field\TextField;
 use \Form\Field\PasswordField;
+use \Model\User;
 
 $form = new Form(array(
         new TextField('username', 'Username',
@@ -22,7 +24,7 @@ if (Input::isSubmit()){
     // TODO
 
     try {
-        User::register($db, Input::get('username'), Input::get('password1'),
+        User::register(Input::get('username'), Input::get('password1'),
                        Input::get('name'), 1);
 
         header("Location: index.php");
@@ -33,15 +35,11 @@ if (Input::isSubmit()){
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>ProgWeb</title>
-</head>
-<body>
-    <form action="#" method="POST">
-        <?php echo $form->as_p(); ?>
-        <input type="submit" value="Register">
-    </form>
-</body>
-</html>
+<?php require 'includes/base_start.php'; ?>
+
+<form action="#" method="POST">
+    <?php echo $form->as_p(); ?>
+    <input type="submit" value="Register">
+</form>
+
+<?php require 'includes/base_end.php'; ?>

@@ -2,18 +2,44 @@
 namespace Model;
 
 use \Session;
+use \Config;
 
 class User {
     
     const TABLE_NAME = 'users';
 
-    public static function getAll($db){
-        return $db->get(self::TABLE_NAME);
+    private static $db;
+
+    /* 
+     * ========================================================================
+     *                                 Init             
+     * ========================================================================
+     */
+    public static function setDatabase($db){
+        self::$db = $db;
     }
 
-    public static function create($db, $username, $password, $name,
+    /* 
+     * ========================================================================
+     *                                Database             
+     * ========================================================================
+     */
+    public static function getAll(){
+        return self::$db->get(self::TABLE_NAME);
+    }
+
+    public static function get($fields){
+        return self::$db->get(self::TABLE_NAME, $fields);
+    }
+
+    public static function getByID($user_id){
+        return self::$db->get(self::TABLE_NAME,
+                              array('id' => $user_id))->first();
+    }
+
+    public static function create($username, $password, $name,
                                   $group, $joined){
-        $ris = $db->insert(self::TABLE_NAME, array(
+        $ris = self::$db->insert(self::TABLE_NAME, array(
                     "username" =>   $username,
                     "password" =>   $password,
                     "name" =>       $name,
@@ -24,25 +50,25 @@ class User {
             throw new Exception("Errore durante la creazione di User");
         }
     }
+
     /* 
      * ========================================================================
      *                              Authentication             
      * ========================================================================
      */
-
-    public static function register($db, $username, $raw_password, $name,
+    public static function register($username, $raw_password, $name,
                                     $group){
         $password = password_hash($raw_password, PASSWORD_BCRYPT);
         $joined = date('Y-m-d H:i:s');
-        self::create($db, $username, $password, $name, $group, $joined);
+        self::create($username, $password, $name, $group, $joined);
     }
 
-    public static function checkLogin($db, $username, $raw_password){
+    public static function checkLogin($username, $raw_password){
         if (!$username || !$raw_password)
             return null;
 
-        $user = $db->get(self::TABLE_NAME,
-                         array('username' => $username))->first();
+        $user = self::$db->get(self::TABLE_NAME,
+                               array('username' => $username))->first();
         if (!$user)     // No user found
             return null;
 
@@ -51,9 +77,29 @@ class User {
         return $user;
     }
 
-    public static function login($db, $user_id){
-        // Check if the user is active
+    public static function login($user_id){
+        // TODO: Verificare che l'utente sia attivo
         Session::put(Config::get('session.session_name'), $user_id);
     }
-    
+
+    public static function logout(){
+        Session::delete(Config::get('session.session_name'));
+    }
+
+    /* 
+     * ========================================================================
+     *                                  Session             
+     * ========================================================================
+     */
+    /** 
+     * Restituisce i dettagli dell'utente autenticato tramite il login.
+     */
+    public static function currentUser(){
+        $session_name = Config::get('session.session_name');
+        if (!Session::exists($session_name))
+            return null;
+        
+        $user_id = Session::get($session_name);
+        return User::getByID($user_id);
+    }
 }

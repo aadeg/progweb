@@ -28,3 +28,11 @@ $username = Config::get('mysql.username');
 $password = Config::get('mysql.password');
 $dbname = Config::get('mysql.db');
 $db = new DB($host, $username, $password, $dbname);
+
+// MODELS
+Model\User::setDatabase($db);
+
+
+// AUTHENTICATION
+$currentUser = Model\User::currentUser();
+$isAuthenticated = $currentUser != null;
