@@ -2,7 +2,5 @@
 
 require_once 'core/init.php';
 
-use \Model\User;
-
-User::logout();
+AuthManager::logout();
 Redirect::to('index.php');

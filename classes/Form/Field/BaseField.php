@@ -7,14 +7,10 @@ class BaseField {
     public $label;
     public $moreAttribs;
 
-    protected $attributes;
-
     protected function __construct($name, $label, $moreAttribs=array()){
         $this->name = $name;
         $this->label = $label;
         $this->moreAttribs = $moreAttribs;
-
-        $this->attributes = $this->getAttributes();    
     }
 
     public function getAttributes(){
@@ -24,10 +20,6 @@ class BaseField {
         $attribs += $this->moreAttribs;
         // Rimozione degli attributi con valure null
         return self::filterAttributes($attribs);
-    }
-
-    public function attributesStr(){
-        return self::implodeAttributes($this->attributes);
     }
 
     /*
@@ -53,7 +45,7 @@ class BaseField {
         $str = "";
         $i = 0;
         foreach($attributes as $key => $value){
-            $str .= "{$key}='{$value}'";
+            $str .= "{$key}=\"{$value}\"";
             if (++$i < count($attributes)){
                 $str .= ' ';
             }

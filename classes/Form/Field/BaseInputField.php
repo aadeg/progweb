@@ -18,12 +18,11 @@ class BaseInputField extends BaseField{
             $value = '';
         }
 
-        $attribs = $this->attributesStr();
+        $attribs = self::implodeAttributes($this->getAttributes());
         
         $value_str = "";
-        if ($value != ''){
-            $value_str = " value={$value}";
-        }
+        if ($value != '')
+            $value_str = " value=\"{$value}\"";
         
         $html = "<input {$attribs}{$value_str}>";
 

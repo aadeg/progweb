@@ -10,17 +10,15 @@ class SelectField extends BaseField {
     public function __construct($name, $label, $choices, $moreAttribs=array()){
         parent::__construct($name, $label, $moreAttribs);
         $this->choices = $choices;
-
-        $this->attributes = $this->getAttributes();
     }
 
     public function html($selectedValue=null, $withLabel=true){
-        $attribs = $this->attributesStr();
+        $attribs = self::implodeAttributes($this->getAttributes());
         $options = "";
 
         foreach ($this->choices as $value => $text){
             $selected = ($value == $selectedValue) ? " selected" : "";
-            $options .= "<option value={$value}{$selected}>$text</option>";
+            $options .= "<option value=\"{$value}\"{$selected}>$text</option>";
         }
 
         return "<select {$attribs}>{$options}</select>";

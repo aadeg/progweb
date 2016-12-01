@@ -18,4 +18,11 @@ class Session {
     public static function delete($key){
         unset($_SESSION[$key]);
     }
+
+    public static function start(){
+        session_start();
+    }
+
+    public static function end(){
+    }
 }

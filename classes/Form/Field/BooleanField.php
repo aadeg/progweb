@@ -4,7 +4,7 @@ namespace Form\Field;
 class BooleanField extends BaseInputField {
     const INPUT_TYPE = 'checkbox';
 
-    private $labelPost;
+    private $labelPost; // Se true, la label verrà visualizzata dopo l'input
 
     public function __construct($name, $label, $moreAttribs=array(),
                                 $labelPost=false){

@@ -4,7 +4,7 @@ require_once 'core/init.php';
 use \Form\Form;
 use \Form\Field\TextField;
 use \Form\Field\PasswordField;
-use \Model\User;
+
 
 $form = new Form(array(
         new TextField('username', 'Username',
@@ -24,10 +24,10 @@ if (Input::isSubmit()){
     // TODO
 
     try {
-        User::register(Input::get('username'), Input::get('password1'),
-                       Input::get('name'), 1);
+        AuthManager::register(Input::get('username'), Input::get('password1'),
+                              Input::get('name'), 1);
 
-        header("Location: index.php");
+        Redirect::to('index.php');
     } catch (Exception $e){
         die($e->getMessage());
     }
