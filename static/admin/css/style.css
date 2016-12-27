@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* ============================== HEADING ============================== */
+h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+
+
+/* ============================== HEADER =============================== */
+header {
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    padding: 10px;
+    background-color: #095256;
+    border-bottom: 1px solid #024144;
+}
+
+header h1 {
+    font-size: 16px;
+    color: #dfdfdf;
+}
+
+/* =============================== FORMS =============================== */
+ul.input-list {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+ul.input-list > li {
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+
+ul.input-list > li:first-child {
+    margin: 0;
+}
+
+input {
+    width: 100%;
+    font-size: 16px;
+    box-shadow: none;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #dcdcdc;
+    outline: none;  /* Chrome fix */
+}
+
+input:focus {
+    border-color: #808080;
+    box-shadow: 0 0 5px #868686;
+}
+
+label {
+    margin: 0 0 5px 0;
+    display: block;
+    padding: 0;
+    font-weight: bold;
+}
+
+button {
+    font-size: 14px;
+    background-color: #f8f4e3;
+    border-style: none;
+    padding: 10px 40px;
+    border: 1px solid #a2a392;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d4cdc3;
+    border-color: #9a998c;
+}
+
+button:active {
+    box-shadow: inset 2px 2px 7px #9a998c;
+    border-color: #9a998c;
+    outline: none; /* Chome Fix */
+}
+
+/* ================================ PANEL ================================ */
+.panel {
+    border: 2px solid black; /* TODO: cambiare colore */
+}
+
+.panel .panel-header {
+    padding: 10px 10px;
+    background-color: red; /* TODO: cambiare colore */
+}
+
+.panel .panel-main {
+    padding: 30px 30px;
+}

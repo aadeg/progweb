@@ -1,3 +1,4 @@
+
 <?php
 $GLOBALS['config'] = array(
     'mysql' => array(
@@ -7,7 +8,7 @@ $GLOBALS['config'] = array(
         'db' => 'progweb'
     ),
     'authmanager' => array(
-        'login_page' => 'login.php',
+        'login_page' => 'admin/login.php',
         'index_page' => 'index.php'
     ),
     'session' => array(

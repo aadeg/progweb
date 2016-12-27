@@ -1,57 +1,63 @@
 <?php
 
-use \Model\User;
+use \Model\Operator;
 
 class AuthManager {
 
-    private static $currentUser = null;
+    private static $currentOperator = null;
 
-    public static function register($username, $raw_password, $name, $group){
-        $password = password_hash($raw_password, PASSWORD_BCRYPT);
-        $joined = date('Y-m-d H:i:s');
-        User::create($username, $password, $name, $group, $joined);
+    public static function register($username, $rawPassword, $firstName,
+                                    $lastName, $email, $isAdmin){
+        $password = password_hash($rawPassword, PASSWORD_BCRYPT);
+        Operator::create($username, $password, $firstName, $lastName,
+                         $email, $isAdmin);
     }
 
-    public static function checkLogin($username, $raw_password){
-        if (!$username || !$raw_password)
+    public static function checkLogin($username, $rawPassword){
+        if (!$username || !$rawPassword)
             return null;
 
-        $user = User::get(array('username' => $username))->first();
+        $operator = Operator::get(array('username' => $username))->first();
 
-        if (!$user || !password_verify($raw_password, $user->password))
+        if (!$operator || !password_verify($rawPassword, $operator->password))
             return null;
 
-        return $user;
+        return $operator;
     }
 
-    public static function login($user_id){
-        // TODO: Verificare che l'utente sia attivo
-        Session::put(Config::get('session.session_name'), $user_id);
+    public static function login($operator_id){
+        $operator = Operator::getByID($operator_id);
+        if (!$operator->enabled)
+            return false;
+
+        Session::put(Config::get('session.session_name'), $operator_id);
+        return $true;
     }
 
     public static function logout(){
-        self::$currentUser == null;
+        self::$currentOperator == null;
         Session::delete(Config::get('session.session_name'));
     }
 
     /** 
-     * Restituisce i dettagli dell'utente autenticato tramite il login.
+     * Restituisce i dettagli dell'operatore autenticato tramite il login.
      */
-    public static function currentUser(){
-        if (self::$currentUser === null){
+    public static function currentOperator(){
+        if (self::$currentOperator === null){
             $session_name = Config::get('session.session_name');
-            if (!Session::exists($session_name))
+            if (!Session::exists($session_name)){
                 return null;
+            }
             
-            $user_id = Session::get($session_name);
-            self::$currentUser = User::getByID($user_id);
+            $operator_id = Session::get($session_name);
+            self::$currentOperator = Operator::getByID($operator_id);
         }
 
-        return self::$currentUser;
+        return self::$currentOperator;
     }
 
     public static function isAuthenticated(){
-        return self::currentUser() != null;
+        return self::currentOperator() != null;
     }
 
     public static function loginRequired($next=true){

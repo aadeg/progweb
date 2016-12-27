@@ -30,7 +30,7 @@ if(Input::isSubmit()){
         // Reindirizzamento
         $next = Input::get('next', 'GET');
         if ($next == null || $next[0] !== '/')
-            $next = Config::get('authmanger.index_page');
+            $next = Config::get('authmanager.index_page');
         Redirect::to($next);
 
     } else {

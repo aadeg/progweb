@@ -16,4 +16,4 @@ $dbname = Config::get('mysql.db');
 $db = new Database\DB($host, $username, $password, $dbname);
 
 // MODELS
-Model\User::setDatabase($db);
+Model\Operator::setDatabase($db);

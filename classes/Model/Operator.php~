@@ -5,9 +5,9 @@ use \Session;
 use \Config;
 use \Exception;
 
-class User extends BaseModel {
+class Operator extends BaseModel {
     
-    const TABLE_NAME = 'users';
+    const TABLE_NAME = 'operators';
 
     
     public static function getAll(){
@@ -18,19 +18,20 @@ class User extends BaseModel {
         return self::$db->get(self::TABLE_NAME, $fields);
     }
 
-    public static function getByID($user_id){
+    public static function getByID($operator_id){
         return self::$db->get(self::TABLE_NAME,
-                              array('id' => $user_id))->first();
+                              array('id' => $operator_id))->first();
     }
 
-    public static function create($username, $password, $name,
-                                  $group, $joined){
+    public static function create($username, $password, $first_name,
+                                  $last_name, $email)
         $ris = self::$db->insert(self::TABLE_NAME, array(
                     "username" =>   $username,
                     "password" =>   $password,
-                    "name" =>       $name,
-                    "group" =>      $group,
-                    "joined" =>     $joined
+                    "first_name" => $first_name,
+                    "last_name" =>  $last_name,
+                    "email" =>      $email,
+                    "is_admin" =>   false
                 ));
         if ($ris->error())
             die($ris->errorMsg());
