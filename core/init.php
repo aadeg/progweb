@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-require_once './core/config.php';
+require_once dirname(__FILE__) . '/config.php';
 
 spl_autoload_register(function($class) {
 	$class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-	require_once 'classes/' . $class . '.php';
+    require_once dirname(__FILE__) . '/../classes/' . $class . '.php';
 });
 
 // Database

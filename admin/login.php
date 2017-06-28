@@ -1,3 +1,11 @@
+<?php 
+require_once '../core/init.php';
+
+use \View\AdminView;
+
+$view = AdminView::login();
+?>
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -7,8 +15,8 @@
 	<meta name="author" content="Andrea Giove">
 	<meta name="description" content="A simple tickets manager">
 	
-	<link rel="stylesheet" href="../static/admin/css/style.css">
-	<link rel="stylesheet" href="../static/admin/css/login.css">
+	<link rel="stylesheet" href="../static/css/admin/style.css">
+	<link rel="stylesheet" href="../static/css/admin/login.css">
     </head>
     <body>
 	<header>
@@ -19,20 +27,15 @@
 	    <div class="panel">
 		<div class="panel-header">
 		    <h2>Pannello di controllo</h2>
-		    <h3>Login</h3>
 		</div>
 
 		<div class="panel-main">
-		    <form>
+
+		    <?php require "../includes/admin/flash_messages.php"; ?>
+
+		    <form action="#" method="POST">
 			<ul class="input-list">
-			    <li>
-				<label for="s">Username</label>
-				<input type="text" placeholder="Username">
-			    </li>
-			    <li>
-				<label for="s">Password</label>
-				<input type="password" placeholder="Password">
-			    </li>
+			    <?php echo $view->form->as_li(); ?>
 			</ul>
 			<button type="submit">Login</button>
 		    </form>

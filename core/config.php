@@ -8,10 +8,11 @@ $GLOBALS['config'] = array(
         'db' => 'progweb'
     ),
     'authmanager' => array(
-        'login_page' => 'admin/login.php',
+        'login_page' => '/admin/login.php',
         'index_page' => 'index.php'
     ),
     'session' => array(
-        'session_name' => 'user'
+        'session_name' => 'user',
+	'flash_messages' => 'flash'
     )
 );

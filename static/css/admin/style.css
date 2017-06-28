@@ -1,37 +1,81 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     font-size: 14px;
     line-height: 1.4;
+    height: 100%;
+    background-color: #F8F8F8;
+}
+
+a {
+    text-decoration: nnone;
+    color: #337ab7;
+}
+
+a:hover {
+    color: #23527c;
+}
+
+a:visited {
+    color: #337ab7;
 }
 
 /* ============================== HEADING ============================== */
 h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
+    color: #2d2d2d;
 }
 
 h1 { font-size: 36px; }
 h2 { font-size: 30px; }
-h3 { font-size: 24px; }
-h4 { font-size: 18px; }
+h3 { font-size: 18px; }
+h4 { font-size: 16px; }
 
 
 /* ============================== HEADER =============================== */
-header {
+body > header {
     width: 100%;
-    height: 20px;
     margin: 0;
     padding: 10px;
     background-color: #095256;
     border-bottom: 1px solid #024144;
+    box-sizing: border-box;
 }
 
-header h1 {
+body > header > h1 {
     font-size: 16px;
     color: #dfdfdf;
 }
+
+/* ============================== ASIDE ================================ */
+body > aside {
+    width: 20%;
+    min-height: 100%;
+/*    background-color: gray; */
+    float: left;
+    box-sizing: border-box;
+}
+
+/* =============================== MAIN ================================ */
+body > main {
+    padding: 10px 20px;
+    float: left;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+body > main > h2 {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    margin-bottom: 20px;
+}
+
 
 /* =============================== FORMS =============================== */
 ul.input-list {
@@ -103,4 +147,58 @@ button:active {
 
 .panel .panel-main {
     padding: 30px 30px;
+}
+
+/* ================================ ALERT ================================ */
+.alert {
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #a2a392;
+}
+
+.alert.error {
+    border-color: #f78a8a;
+    background-color: #f7a8a8;
+    color: #870c0c;
+}
+
+/* ================================ TABLES =============================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    font-weight: bold;
+    border-bottom: 1px solid #a2a392;
+}
+
+tbody tr:hover {
+    background-color: #d4cdc3;
+}
+
+td {
+    height: 2em;
+}
+
+/* ================================ TICKET =============================== */
+section.ticket-list {
+    padding: 10px 5px;
+    border: 1px solid #E7E7E7;
+    background-color: #ffffff;
+}
+
+form.ticket-search {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+form.ticket-search input {
+    width: 30%;
+    padding: 0 5px;
+    height: 1.5em;
+    font-size: 0.95em;
+}
+table.ticket-table tbody tr:hover {
+    cursor: pointer;
 }

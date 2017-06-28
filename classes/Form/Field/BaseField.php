@@ -35,6 +35,11 @@ class BaseField {
     public function as_p($value=null, $withLabel=true){
         return "<p>" . $this->html($value, $withLabel) . "</p>\n";
     }
+    
+    public function as_li($value=null, $withLabel=true){
+        $label = "<label for='{$this->name}'>{$this->label}</label>";
+        return "<li>{$label}" . $this->html($value, false) . "</li>\n";
+    }
 
     /*
      * =========================================================================

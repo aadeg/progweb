@@ -1,0 +1,39 @@
+ul.side-menu {
+    margin: 0;
+    padding: 0;
+}
+
+
+ul.side-menu > li {
+    list-style: none;
+    padding: 0;
+}
+
+ul.side-menu > li > a {
+    display: block;
+    padding: 10px;
+}
+
+/* FIRST LEVEL */
+
+ul.side-menu.first-lvl > li > a {
+    border-style: solid;
+    border-color: black;
+    border-width: 0 1px 1px 1px;
+}
+
+ul.side-menu.first-lvl > li:first-child > a {
+    border-width: 1px;
+}
+
+/* SECOND LEVEL */
+ul.side-menu.second-lvl {
+    margin-left: 30px;
+}
+
+ul.side-menu.collapsed {
+    display: none;
+}
+
+ul.side-menu.second-lvl > li > a {
+}

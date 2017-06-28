@@ -22,6 +22,10 @@ class Form {
         return $this->render('as_p', $withLabel);
     }
 
+    public function as_li($withLabel=true){
+        return $this->render('as_li', $withLabel);
+    }
+
     public function fields(){
         return $this->fields;
     }

@@ -1,3 +1,8 @@
+body > main {
+    width: 100%;
+    padding: 0;
+}
+
 .panel {
     width: 40%;
     max-width: 500px;
@@ -9,5 +14,6 @@
 .panel .panel-header {
     background-color: #51CB20;
     text-align: center;
+    padding: 15px;
 }
 

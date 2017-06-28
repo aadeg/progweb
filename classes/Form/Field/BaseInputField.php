@@ -35,6 +35,7 @@ class BaseInputField extends BaseField{
     public function getAttributes(){
         $attribs = parent::getAttributes();
         $attribs["type"] = $this->type;
+        $attribs["id"] = $this->name;
         return $attribs;
     }
 }

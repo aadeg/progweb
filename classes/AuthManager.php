@@ -31,7 +31,7 @@ class AuthManager {
             return false;
 
         Session::put(Config::get('session.session_name'), $operator_id);
-        return $true;
+        return true;
     }
 
     public static function logout(){
