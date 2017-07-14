@@ -14,5 +14,8 @@ $GLOBALS['config'] = array(
     'session' => array(
         'session_name' => 'user',
 	'flash_messages' => 'flash'
+    ),
+    'error_page' => array(
+	404 => '/404.php'
     )
 );

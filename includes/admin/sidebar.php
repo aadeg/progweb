@@ -4,10 +4,12 @@ require_once dirname(__FILE__) . "/../../core/init.php";
 $operator = AuthManager::currentOperator();
 ?>
 
-<nav>
-    <p class="operator-info">
-	<?php echo $operator->first_name . ' ' . $operator->last_name; ?>
-    </p>
+<nav class="side-menu-nav">
+<!--<div class="Operator-info">
+	<p><?php echo $operator->first_name . ' ' . $operator->last_name; ?></p>
+	<p class="small"><?php echo $operator->email; ?></p>
+	<a class="#">Profilo</a>
+    </div> -->
 
     <ul class="side-menu first-lvl">
 	<li>
@@ -20,6 +22,9 @@ $operator = AuthManager::currentOperator();
 		</li>
 		<li><a href="/admin/tickets.php?t=open">Aperti</a></li>
 	    </ul>
+	</li>
+	<li>
+	    <a href="#">Amministrazione</a>
 	</li>
     </ul>
 </nav>

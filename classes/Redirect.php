@@ -12,6 +12,10 @@ class Redirect {
 
     public static function error($err_code){
         http_response_code($err_code);
-        exit();
+	$errorPage = Config::get("error_page.${err_code}");
+	if ($errorPage)
+	    self::to($errorPage);
+	else
+            exit();
     }
 }

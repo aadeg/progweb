@@ -24,10 +24,10 @@ class DB {
         $params = array();
 
         if (count($where)){
+	    $this->sanitize($where);
             $sql .= " WHERE ";
             $sql .= self::attributeValueToStr($where, " and ");
         }
-
         return $this->query($sql);
     }
 
@@ -44,6 +44,8 @@ class DB {
             return false;
         }
 
+	$this->sanitize($fields);
+
         $keys_str = '`' . implode('`,`', array_keys($fields)) . '`';
         $values_str = '"'. implode('","', array_values($fields)) . '"';
 
@@ -55,6 +57,9 @@ class DB {
         if (!count($where) || !count($set)){
             return false;
         }
+
+	$this->sanitize($set);
+	$this->sanitize($where);
 
         $where_str = self::attributeValueToStr($where, ' and ');
         $set_str = self::attributeValueToStr($set);
@@ -82,11 +87,24 @@ class DB {
         return new DBResult($rows, $count);
     }
 
+    private function sanitize(&$array){
+	foreach($array as $field => $value){
+	    if (is_null($array[$field])){
+		$array[$field] = "is null";
+	    } else {
+		$array[$field] = $this->mysqli->real_escape_string($value);
+	    }
+	}
+    }
+
     private static function attributeValueToStr($fields, $glue=','){
         $str = "";
         $i = 0;
-        foreach ($fields as $field => $value){            
-            $str .= "{$field}=\"{$value}\"";
+        foreach ($fields as $field => $value){
+	    if ($value === "is null")
+		$str .= "{$field} is null";
+	    else 
+		$str .= "{$field}=\"{$value}\"";
 
             if (++$i< count($fields))
                 $str .= "{$glue}";

@@ -1,6 +1,6 @@
 <?php
 require_once '../core/init.php';
-AuthManager::loginRequired('/admin/index.php');
+AuthManager::loginRequired();
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>
@@ -16,19 +16,15 @@ AuthManager::loginRequired('/admin/index.php');
     <table class="ticket-table">
 	<thead>
 	    <tr>
-		<td width="7%">ID</td>
-		<td width="40%">Oggetto</td>
-		<td width="20%">Cliente</td>
-		<td width="13%">Categoria</td>
+		<td>ID</td>
+		<td>Oggetto</td>
+		<td>Cliente</td>
+		<td class="text-center">Categoria</td>
+		<td class="text-center">Prorità</td>
 		<td>Ultimo aggiornamento</td>
 	    </tr>
 	</thead>
 	<tbody>
-	    <tr><td>13</td><td>Oggetto di prova</td><td>Padoasodaosdoda</td><td>Guasti</td><td>30 minuti fa</td></tr>
-	    <tr><td>13</td><td>Oggetto di prova</td><td>Padoasodaosdoda</td><td>Guasti</td><td>30 minuti fa</td></tr>
-	    <tr><td>13</td><td>Oggetto di prova</td><td>Padoasodaosdoda</td><td>Guasti</td><td>30 minuti fa</td></tr>
-	    <tr><td>13</td><td>Oggetto di prova</td><td>Padoasodaosdoda</td><td>Guasti</td><td>30 minuti fa</td></tr>
-	    <tr><td>13</td><td>Oggetto di prova</td><td>Padoasodaosdoda</td><td>Guasti</td><td>30 minuti fa</td></tr>
 	</tbody>
     </table>
 </section>

@@ -38,6 +38,6 @@ class Input {
         } elseif ($method == 'GET') {
             return $_GET;
         }
-        return false;    
+        return false;
     }
 }

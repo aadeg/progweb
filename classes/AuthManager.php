@@ -60,7 +60,7 @@ class AuthManager {
         return self::currentOperator() != null;
     }
 
-    public static function loginRequired($next=true){
+    public static function loginRequired(){
         $nextPage = $_SERVER['REQUEST_URI'];
         if (!self::isAuthenticated())
             Redirect::to(Config::get('authmanager.login_page'),

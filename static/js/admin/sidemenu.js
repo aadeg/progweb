@@ -1,4 +1,7 @@
 // Required: common.js
+Sidemenu = function(el){
+    this.el = el;
+}
 
 function sideMenuOnClick(event){
     event.preventDefault();
@@ -13,7 +16,7 @@ function sideMenuOnClick(event){
     }
 }
 
-window.onload = (function(){
+onLoadHandlers.push(function(){
     var currentPath = window.location.pathname;
     var sideMenus = document.getElementsByClassName('side-menu');
 
@@ -24,8 +27,14 @@ window.onload = (function(){
 	    for (var j = 0; j < links.length; ++j){
 		if (links[j].pathname === currentPath){
 		    // La tendina della pagina attuale viene aperta
-		    // di default
+		    // di default e impostata come selezionata
 		    var parent = links[j].parentNode;
+		    if (parent && parent.tagName == 'LI' && 
+			!links[j].href.endsWith('#')){
+
+			parent.classList.add('selected');
+		    }
+
 		    if (parent){
 			parent = parent.parentNode;
 			if (hasClass(parent, 'side-menu')){

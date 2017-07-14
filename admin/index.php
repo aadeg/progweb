@@ -1,6 +1,6 @@
 <?php
 require_once '../core/init.php';
-AuthManager::loginRequired('/admin/index.php');
+AuthManager::loginRequired();
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>
