@@ -5,21 +5,12 @@ class BaseInputField extends BaseField{
     const TAG = 'input';
 
     private $type;
-    public $name;
-    public $moreAttribs;
-
-    public $label;
-
-    protected $attributes;
 
     public function __construct($type, $name, $label, $moreAttribs=array()){
+        parent::__construct($name, $label, $moreAttribs);
         $this->type = $type;
-        $this->name = $name;
-        $this->moreAttribs = $moreAttribs;
 
-        $this->attributes = $this->attributes();
-
-        $this->label = $label;
+        $this->attributes = $this->getAttributes();
     }
 
     public function html($value=null, $withLabel=true){
@@ -27,12 +18,11 @@ class BaseInputField extends BaseField{
             $value = '';
         }
 
-        $attribs = $this->attributesStr();
+        $attribs = self::implodeAttributes($this->getAttributes());
         
         $value_str = "";
-        if ($value != ''){
-            $value_str = " value={$value}";
-        }
+        if ($value != '')
+            $value_str = " value=\"{$value}\"";
         
         $html = "<input {$attribs}{$value_str}>";
 
@@ -42,23 +32,10 @@ class BaseInputField extends BaseField{
         return $html;
     }
 
-    public function as_p($value=null, $withLabel=true){
-        return "<p>" . $this->html($value, $withLabel) . "</p>\n";
-    }
-
-    public function attributes(){
-        $attribs = array(
-            "type" =>           $this->type,
-            "name" =>           $this->name
-        );
-
-        $attribs += $this->moreAttribs;
-
-        // Rimozione degli attributi con valure null
-        return self::filterAttributes($attribs);
-    }
-
-    public function attributesStr(){
-        return self::implodeAttributes($this->attributes);
+    public function getAttributes(){
+        $attribs = parent::getAttributes();
+        $attribs["type"] = $this->type;
+        $attribs["id"] = $this->name;
+        return $attribs;
     }
 }

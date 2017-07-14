@@ -3,19 +3,24 @@ require_once 'core/init.php';
 
 use \Form\Form;
 use \Form\Field\TextField;
+use \Form\Field\EmailField;
 use \Form\Field\PasswordField;
-use \Model\User;
+
 
 $form = new Form(array(
-        new TextField('username', 'Username',
+    new TextField('last_name', 'Cognome',
+                  array("required" => "")),
+    new TextField('first_name', 'Nome',
+                  array('required' => '')),
+    new TextField('username', 'Username',
+                  array("required" => "")),
+    new PasswordField('password1', 'Password',
                       array("required" => "")),
-        new PasswordField('password1', 'Password',
-                          array("required" => "")),
-        new PasswordField('password2', 'Conferma password',
-                          array("required" => "")),
-        new TextField('name', 'Name',
-                      array("required" => ""))
-    ));
+    new PasswordField('password2', 'Conferma password',
+                      array("required" => "")),
+    new EmailField('email', 'Email',
+                   array('required' => ''))
+));
 
 if (Input::isSubmit()){
     $form->setValues(Input::getAll());
@@ -24,10 +29,11 @@ if (Input::isSubmit()){
     // TODO
 
     try {
-        User::register(Input::get('username'), Input::get('password1'),
-                       Input::get('name'), 1);
+        AuthManager::register(Input::get('username'), Input::get('password1'),
+                              Input::get('first_name'), Input::get('last_name'),
+                              Input::get('email'), false);
 
-        header("Location: index.php");
+        Redirect::to('index.php');
     } catch (Exception $e){
         die($e->getMessage());
     }

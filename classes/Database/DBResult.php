@@ -1,17 +1,18 @@
 <?php
+namespace Database;
 
 class DBResult {
-
-    const SQLSTATE_SUCCESS = '00000';
-
+    
     private $rows;
     private $count;
-    private $errorInfo;
+    private $errno;
+    private $error;
 
-    public function __construct($rows, $count, $errorInfo=null){
+    public function __construct($rows, $count, $errno=0, $error=''){
         $this->rows = $rows;
         $this->count = $count;
-        $this->errorInfo = $errorInfo;
+        $this->errno = $errno;
+        $this->error = $error;
     }
 
     public function rows(){
@@ -30,19 +31,10 @@ class DBResult {
     }
 
     public function error(){
-        return !(isset($this->errorInfo) &&
-                 $this->errorInfo[0] == self::SQLSTATE_SUCCESS);
-    }
-
-    public function errorInfo(){
-        return $this->errorInfo;
+        return $this->errno != 0;
     }
 
     public function errorMsg(){
-        if (!isset($this->errorInfo)){
-            return null;
-        }
-
-        return $this->errorInfo[2];
+        return $this->error;
     }
 }

@@ -1,0 +1,19 @@
+body > main {
+    width: 100%;
+    padding: 0;
+}
+
+.panel {
+    width: 40%;
+    max-width: 500px;
+    margin: 100px auto;
+    border: 2px solid #81c14b;
+    box-shadow: 5px 5px 30px #9a998c;
+}
+
+.panel .panel-header {
+    background-color: #51CB20;
+    text-align: center;
+    padding: 15px;
+}
+

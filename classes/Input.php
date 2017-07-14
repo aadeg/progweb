@@ -8,22 +8,28 @@ class Input {
         return $_SERVER['REQUEST_METHOD'] == $method && !empty($source);
     }
 
-    public static function get($item){
-        $method = $_SERVER['REQUEST_METHOD'];
+    public static function get($item, $method=null){
+        $method = self::getMethod($method);
         $source = self::getSource($method);
 
-        if(isset($source[$item])){
-            return $source[$item];
-        }
-        return '';
+        if(!isset($source[$item]))
+            return '';
+        return $source[$item];
     }
 
-    public static function getAll(){
-        $method = $_SERVER['REQUEST_METHOD'];
+    public static function getAll($method=null){
+        $method = self::getMethod($method);
         $source = self::getSource($method);
+        
         if (!$source)
             return array();
         return $source;
+    }
+
+    private static function getMethod($method){
+         if ($method == null)
+            return $_SERVER['REQUEST_METHOD'];
+        return strtoupper($method);
     }
 
     private static function &getSource($method){
@@ -32,6 +38,6 @@ class Input {
         } elseif ($method == 'GET') {
             return $_GET;
         }
-        return false;    
+        return false;
     }
 }
