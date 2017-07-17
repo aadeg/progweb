@@ -17,7 +17,6 @@ function sideMenuOnClick(event){
 }
 
 onLoadHandlers.push(function(){
-    var currentPath = window.location.pathname;
     var sideMenus = document.getElementsByClassName('side-menu');
 
     for (var i = 0; i < sideMenus.length; ++i){
@@ -25,16 +24,10 @@ onLoadHandlers.push(function(){
 
 	    var links = sideMenus[i].getElementsByTagName('a');
 	    for (var j = 0; j < links.length; ++j){
-		if (links[j].pathname === currentPath){
-		    // La tendina della pagina attuale viene aperta
-		    // di default e impostata come selezionata
+		if (links[j].classList.contains('selected')){
+		    // Le tendine con link selezionati sono aperte
+		    // di default
 		    var parent = links[j].parentNode;
-		    if (parent && parent.tagName == 'LI' && 
-			!links[j].href.endsWith('#')){
-
-			parent.classList.add('selected');
-		    }
-
 		    if (parent){
 			parent = parent.parentNode;
 			if (hasClass(parent, 'side-menu')){

@@ -1,0 +1,204 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    font-family: "Verdana", sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    height: 100%;
+    width: 100%;
+    background-color: #EEEEEE;
+    background-image: url('../imgs/user_bg.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #222;
+}
+
+body > main {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+    color: #337ab7;
+    outline: none;
+}
+
+a:hover {
+    color: #23527c;
+}
+
+a:visited {
+    color: #337ab7;
+}
+
+/* ============================== HEADING ========================= */
+h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: 400;
+}
+
+h1 { font-size: 28px; font-weight: bold; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+h4 { font-size: 14px; }
+
+
+/* ============================== HEADER ========================== */
+body > header {
+    width: 100%;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    float: left;
+}
+
+body > header > h1 {
+    font-size: 16px;
+    color: #eeeeee;
+    padding: 10px;
+}
+
+body > header > a, body > header > a:visited {
+    color: #ffffff;
+    margin: 0;
+    padding: 10px;
+    display: inline-block;
+}
+
+body > header > a:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* ================================ PANEL ========================= */
+section.panel {
+    box-shadow: -1px 1px 4px rgba(125, 125, 125, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: auto;
+    margin-top: 100px;
+    width: 50%;
+}
+
+section.panel > header {
+    padding: 10px;
+    border-bottom: 1px solid #efefef;
+}
+
+section.panel > header h2 {
+    color: #000;
+}
+
+section.panel > main {
+    padding: 10px 30px 30px 30px;
+}
+
+
+/* ============================== BUTTON ========================== */
+.button {
+    display: block;
+    font-size: 14px;
+    background-color: #f8f4e3;
+    padding: 10px 20px;
+    border: 1px solid #a2a392;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.button:hover {
+    background-color: #d4cdc3;
+    border-color: #9a998c;
+}
+
+.button:active {
+    box-shadow: inset 2px 2px 7px #9a998c;
+    border-color: #9a998c;
+    outline: none;
+}
+
+a.button {
+    color: inherit;
+}
+
+/* ============================== FOOTER ========================== */
+body > footer {
+    width: 100%;
+    background-color: #111;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+    padding: 3px 0;
+}
+
+body > footer > p {
+    margin: 0;
+    font-size: 0.7em;
+}
+
+/* =============================== FORMS =============================== */
+ul.input-list {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+ul.input-list > li {
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+
+ul.input-list > li:first-child {
+    margin: 0;
+}
+
+input, select {
+    width: 100%;
+    font-size: 16px;
+    box-shadow: none;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #acacac;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #808080;
+    box-shadow: 0 0 5px #868686;
+}
+
+label {
+    margin: 0 0 5px 0;
+    display: block;
+    padding: 0;
+    font-weight: bold;
+}
+
+button {
+    font-size: 14px;
+    background-color: #f8f4e3;
+    border-style: none;
+    padding: 10px 40px;
+    border: 1px solid #a2a392;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d4cdc3;
+    border-color: #9a998c;
+}
+
+button:active {
+    box-shadow: inset 2px 2px 7px #9a998c;
+    border-color: #9a998c;
+    outline: none;
+}

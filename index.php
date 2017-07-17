@@ -1,18 +1,14 @@
 <?php
 require_once 'core/init.php';
-
-$title = "Progettazione Web";
-if (AuthManager::isAuthenticated())
-    $title = "Benvenuto, " . AuthManager::currentOperator()->first_name;
-
 ?>
-
 <?php require 'includes/base_start.php'; ?>
 
 <header>
-    <h1><?php echo $title; ?></h1>
+    <h2>Hai bisogno di aiuto?</h2>
 </header>
-
-<?php require 'includes/navbar.php' ?>
+<main>
+    <a class="button text-center" href="new_ticket.php">Contatta un operatore</a>
+    <a class="button text-center" href="check_ticket.php">Verifica lo stato della pratica</a>
+</main>
 
 <?php require 'includes/base_end.php'; ?>

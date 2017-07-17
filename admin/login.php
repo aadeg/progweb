@@ -24,12 +24,12 @@ $view = AdminView::login();
 	</header>
 
 	<main>
-	    <div class="panel">
-		<div class="panel-header">
+	    <section class="panel">
+		<header>
 		    <h2>Pannello di controllo</h2>
-		</div>
+		</header>
 
-		<div class="panel-main">
+		<main>
 
 		    <?php require "../includes/admin/flash_messages.php"; ?>
 
@@ -39,8 +39,8 @@ $view = AdminView::login();
 			</ul>
 			<button type="submit">Login</button>
 		    </form>
-		</div>
-	    </div>
+		</main>
+	    </section>
 	</main>
     </body>
 </html>
