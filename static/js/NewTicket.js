@@ -179,12 +179,15 @@ StartStep.prototype = Object.create(Step.prototype);
 StartStep.prototype.render = function(){
     var ul = document.createElement('ul');
     ul.classList.add('input-list');
+    ul.classList.add('fadeIn');
     this.form.append(ul);
 
     for (var i = 0; i < this.fields.length; ++i){
 	var el = this._getField(this.fields[i]).li;
 	ul.append(el);
     }
+
+    fadeIn(ul);
 }
 
 StartStep.prototype.load = function(){
@@ -268,6 +271,7 @@ MessageStep.prototype.render = function(renderAll=true){
     var self = this;
     var ul = document.createElement('ul');
     ul.classList.add('input-list');
+    ul.classList.add('fadeIn');
     this.ul = ul;
     this.form.append(ul);
 
@@ -292,10 +296,8 @@ MessageStep.prototype.render = function(renderAll=true){
     if (this.curCategory in this.customFields){
 	var cusF = this.customFields[this.curCategory];
 	for (var i = 0; i < cusF.length; ++i){
-	    cusF[i].li.classList.add('fadeIn');
 	    ul.append(cusF[i].li);
 	    this.dynamicElements.push(cusF[i].li);
-	    fadeIn(cusF[i].li);
 	}
     }
 
@@ -306,6 +308,8 @@ MessageStep.prototype.render = function(renderAll=true){
 	ul.append(this.messageField.li);
 	this.dynamicElements.push(this.messageField.li);
     }
+
+    fadeIn(ul);
 }
 
 MessageStep.prototype.load = function() {
@@ -480,6 +484,8 @@ SuccessStep.prototype.render = function(){
     var p = document.createElement('p');
     var text = document.createTextNode('Brava Giovanna!');
     p.append(text);
+    p.classList.add('fadeIn');
     this.form.append(p);
+    fadeIn(p);
 }
 
