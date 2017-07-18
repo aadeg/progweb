@@ -1,0 +1,8 @@
+.fadeIn {
+    opacity: 0;
+}
+
+.drop {
+    position: relative;
+    top: -20px;
+}

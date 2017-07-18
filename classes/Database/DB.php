@@ -4,6 +4,8 @@ namespace Database;
 use \mysqli;
 
 class DB {
+    const ORDER_ASC = 'asc';
+    const ORDER_DESC = 'desc';
     private $mysqli;
 
     public function __construct($host, $user, $password, $dbname){
@@ -19,7 +21,7 @@ class DB {
         return $this->buildResult($result);
     }
 
-    private function action($action, $table, $where=array()){
+    private function action($action, $table, $where=array(), $orderBy=array()){
         $sql = "{$action} FROM {$table}";
         $params = array();
 
@@ -28,11 +30,20 @@ class DB {
             $sql .= " WHERE ";
             $sql .= self::attributeValueToStr($where, " and ");
         }
+	if (count($orderBy)){
+	    $sql .= " ORDER BY ";
+	    $tmp = array();
+	    foreach ($orderBy as $field => $value)
+		$tmp[] = "`" . $field . "` " . $value;
+
+	    $sql .= implode(',', $tmp);
+	}
+
         return $this->query($sql);
     }
 
-    public function get($table, $where=array()){
-        return $this->action("SELECT * ", $table, $where);
+    public function get($table, $where=array(), $orderBy=array()){
+        return $this->action("SELECT * ", $table, $where, $orderBy);
     }
 
     public function delete($table, $where){
@@ -84,6 +95,7 @@ class DB {
         while ($row = $result->fetch_object()){
             $rows[] = $row;
         }
+
         return new DBResult($rows, $count);
     }
 

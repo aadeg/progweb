@@ -2,5 +2,6 @@
 
 onLoadHandlers.push(function(){
     var el = document.getElementById('new-ticket-section');
-    var nt = new NewTicket(el);
+    if (el)
+	var nt = new NewTicketStepForm(el);
 });

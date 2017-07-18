@@ -5,9 +5,11 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/effects.css">
     <link rel="stylesheet" href="static/css/style.css">
 
     <script src="static/js/common.js"></script>
+    <script src="static/js/effects.js"></script>
     <script src="static/js/NewTicket.js"></script>
     <script src="static/js/new_ticket.js"></script>
 </head>

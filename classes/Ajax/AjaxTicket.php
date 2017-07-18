@@ -10,10 +10,9 @@ class AjaxTicket extends AjaxRequest {
     }
 
     protected function onRequest($data){
-	if (!isset($data['action'])){
-	    die(var_dump($data));
+	if (!isset($data['action']))
 	    return $this->error(400, "Campo 'action' mancante");
-	}
+
 
 	$action = $data['action'];
 	unset($data['action']);

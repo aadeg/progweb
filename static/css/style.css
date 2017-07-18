@@ -22,6 +22,7 @@ body {
 
 body > main {
     clear: both;
+    min-height: 100%;
 }
 
 a {
@@ -36,6 +37,10 @@ a:hover {
 
 a:visited {
     color: #337ab7;
+}
+
+hr {
+    margin: 10px 0;
 }
 
 /* ============================== HEADING ========================= */
@@ -81,16 +86,17 @@ body > header > a:hover {
 
 /* ================================ PANEL ========================= */
 section.panel {
-    box-shadow: -1px 1px 4px rgba(125, 125, 125, 0.3);
+    box-shadow: -4px 4px 5px rgba(125, 125, 125, 0.3);
     background-color: rgba(255, 255, 255, 0.9);
     margin: auto;
     margin-top: 100px;
+    margin-bottom: 50px;
     width: 50%;
 }
 
 section.panel > header {
     padding: 10px;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #fff;
 }
 
 section.panel > header h2 {
@@ -101,6 +107,9 @@ section.panel > main {
     padding: 10px 30px 30px 30px;
 }
 
+section.panel > footer {
+    padding: 5px 30px 30px 30px;
+}
 
 /* ============================== BUTTON ========================== */
 .button {
@@ -132,8 +141,8 @@ a.button {
 body > footer {
     width: 100%;
     background-color: #111;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+       bottom: 0; */
     text-align: center;
     color: #fff;
     padding: 3px 0;
@@ -159,7 +168,7 @@ ul.input-list > li:first-child {
     margin: 0;
 }
 
-input, select {
+input, select, textarea {
     width: 100%;
     font-size: 16px;
     box-shadow: none;
@@ -171,9 +180,14 @@ input, select {
     outline: none;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border-color: #808080;
     box-shadow: 0 0 5px #868686;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 41px;
 }
 
 label {

@@ -3,6 +3,7 @@ namespace View;
 
 use \Model\Ticket;
 use \Model\TicketCategory;
+use \Model\CustomField;
 use \Form\Form;
 use \Form\Field\TextField;
 use \Form\Field\EmailField;
@@ -22,21 +23,22 @@ class UserView {
 
 
 	$form = new Form(array(
-	    new TextField('first_name', 'Nome',
+	    new TextField('first_name', 'Nome*',
 			  array("placeholder" => 'Il suo nome',
 				"required" => "",
 				"autofocus" => "")),
-	    new TextField('last_name', 'Cognome',
+	    new TextField('last_name', 'Cognome*',
 			 array("placeholder" => 'Il suo cognome',
 			       "required" => "")),
-	    new EmailField('email', 'Email',
-			   array("placeholder" => "Email sulla quale verrà contattato",
+	    new EmailField('email', 'Email*',
+			   array("placeholder" => "Email sulla quale sarà contattato",
 				 "required" => "")),
-	    new SelectField('category', "Tipologia di problema",
+	    new SelectField('category', "Tipologia di problema*",
 			    $categories,
 			    array("required" => ""))
 	));
 	$view->form = $form;
+	$view->cusF = CustomField::getByCategory(2);
 	return $view;
     }
 }

@@ -1,3 +1,5 @@
+var onLoadHandlers = [];
+
 function nextElementSibling(el){
     var rv = el.nextSibling;
     if (rv) return rv.nextSibling;
@@ -8,6 +10,10 @@ function hasClass(el, cl){
     return el.classList.contains(cl);
 }
 
+
+/* ============================================================
+                                Ajax
+   ============================================================ */
 function AjaxManager(){}
 
 AjaxManager.getAjaxObject = function(){
@@ -46,8 +52,6 @@ AjaxManager.performAjaxRequest = function(method, url, isAsync, dataToSend, resp
     xmlHttp.send(dataToSend);
 }		
 
-
-var onLoadHandlers = [];
 window.onload = function(){
     for (var i = 0; i < onLoadHandlers.length; i++)
 	onLoadHandlers[i]();
