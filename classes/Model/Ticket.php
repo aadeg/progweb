@@ -24,15 +24,16 @@ class Ticket extends BaseModel {
 	    $open_at = date("Y-m-d H:i:s");
 
         $ris = self::$db->insert(self::TABLE_NAME, array(
-	    "cus_first_name" => $cus_first_name,
-	    "cus_last_name" => $cus_last_name, 
-	    "cus_email" => $cus_email,
+	    "cust_first_name" => $cus_first_name,
+	    "cust_last_name" => $cus_last_name, 
+	    "cust_email" => $cus_email,
 	    "subject" => $subject,
 	    "category" => $category, 
 	    "open_at" => $open_at
 	));
         if ($ris->error())
             die($ris->errorMsg());
+	return $ris->lastId();
     }
 
     public static function delete($id){

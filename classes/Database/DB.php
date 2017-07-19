@@ -55,13 +55,21 @@ class DB {
             return false;
         }
 
-	$this->sanitize($fields);
+	$this->sanitize($fields, true);
+	foreach ($fields as $key => $value){
+	    if ($value === null)
+		$fields[$key] = "null";
+	    else
+		$fields[$key] = '"' . $value . '"';
+	}
 
         $keys_str = '`' . implode('`,`', array_keys($fields)) . '`';
-        $values_str = '"'. implode('","', array_values($fields)) . '"';
+        $values_str = implode(',', array_values($fields));
 
         $sql = "INSERT INTO {$table} ({$keys_str}) VALUES ({$values_str})";
-        return $this->query($sql);
+        $ris = $this->query($sql);
+	$ris->setLastId($this->mysqli->insert_id);
+	return $ris;
     }
 
     public function update($table, $set, $where){
@@ -99,8 +107,11 @@ class DB {
         return new DBResult($rows, $count);
     }
 
-    private function sanitize(&$array){
+    private function sanitize(&$array, $ignoreNull=false){
 	foreach($array as $field => $value){
+	    if ($value === null && $ignoreNull)
+		continue;
+	    
 	    if (is_null($array[$field])){
 		$array[$field] = "is null";
 	    } else {

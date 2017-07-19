@@ -1,4 +1,20 @@
 // required: common.js, effects.js
+
+// TODO: Messaggio di attesa durante il caricamento dei campi custom
+// TODO: Validazione della form ad ogni step
+// TODO: Bug con custom field di tipo select
+
+
+/* ============================================================
+    NewTicketStepForm
+   ------------------------------------------------------------
+    + renderStep
+    + clear
+    + _onNext
+    + _onPrev
+    + _onSubmit
+    + _saveSession
+   ============================================================ */
 function NewTicketStepForm(el){
     var self = this;
     // Elements
@@ -13,7 +29,6 @@ function NewTicketStepForm(el){
 	new StartStep(this.elForm, this.sessionStoragePrefix),
 	new MessageStep(this.elForm, this.sessionStoragePrefix)
     ];
-    this.successStep = new SuccessStep(this.elForm);
 
     // Events
     this.elNextBtn.onclick = function(e) { return self._onNext(e); };
@@ -55,6 +70,11 @@ NewTicketStepForm.prototype.renderStep = function(){
     }
 }
 
+NewTicketStepForm.prototype.clear = function(){
+    while(this.elForm.firstChild)
+	this.elForm.removeChild(this.elForm.firstChild);
+}
+
 NewTicketStepForm.prototype._onNext = function(event){
     if (this.currentStep + 1 >= this.steps.length)
 	return;
@@ -78,6 +98,7 @@ NewTicketStepForm.prototype._onPrev = function(event){
 }
 
 NewTicketStepForm.prototype._onSubmit = function(event){
+    var self = this;
     clearInterval(this.autoSave);
     this.steps[this.currentStep].save(this.sessionStoragePrefix);
 
@@ -86,30 +107,45 @@ NewTicketStepForm.prototype._onSubmit = function(event){
 	var key = sessionStorage.key(i);
 	if (key.startsWith(this.sessionStoragePrefix)){
 	    var item = sessionStorage.getItem(key);
-	    key = key.slice(this.sessionStoragePrefix.length);
-	    formData[key] = item;
+	    if (item){
+		key = key.slice(this.sessionStoragePrefix.length);
+		formData[key] = item;
+	    }
 	}
     }
 
     console.log(formData);
-    // TODO: Invio
-    this.clear();
-    this.elNextBtn.style.display = 'none';
-    this.elPrevBtn.style.display = 'none';
-    this.successStep.render();
+    this.elNextBtn.disabled = true;
+    this.elPrevBtn.disabled = true;
+    AjaxManager.performAjaxRequest(
+	'post',	'ajax/new_ticket.php', true, formData,
+	function(data, status) {
+	    self.clear();
+	    self.elNextBtn.style.display = 'none';
+	    self.elPrevBtn.style.display = 'none';
+	    
+	    if (status === 200)
+		var step = new SuccessStep(self.elForm, data.ticket);
+	    else
+		var step = new ErrorStep(self.elForm);
+	    step.render();
+
+	    // sessionStorage.clear();
+	}
+    );
+
 }
 
 NewTicketStepForm.prototype._sessionSave = function(){
     this.steps[this.currentStep].save(this.sessionStoragePrefix);
 }
 
-NewTicketStepForm.prototype.clear = function(){
-    while(this.elForm.firstChild)
-	this.elForm.removeChild(this.elForm.firstChild);
-}
-
 /* ============================================================
                                  Step
+   ------------------------------------------------------------
+   Oggetto che rappresenta un generico step
+   + _getField: crea un elemento <li> contenente la label e il 
+                campo (input, select, textarea)
    ============================================================ */
 function Step() {}
 Step.prototype._getField = function(obj){
@@ -148,6 +184,11 @@ Step.prototype._getField = function(obj){
 
 /* ============================================================
                            StartStep
+   ------------------------------------------------------------
+   Step iniziale con campo Nome, Cognome ed Email
+   + render
+   + load
+   + save
    ============================================================ */
 function StartStep(form, storagePrefix){
     this.form = form;
@@ -216,6 +257,15 @@ StartStep.prototype.save = function(){
 
 /* ============================================================
                             MessageStep
+   ------------------------------------------------------------
+   + render
+   + save
+   + load
+   + _clear
+   + _onCategoryChange
+   + _loadCategories
+   + _fetchCustomField
+   + _parseCustomField
    ============================================================ */
 function MessageStep(form, storagePrefix){
     var self = this;
@@ -313,8 +363,6 @@ MessageStep.prototype.render = function(renderAll=true){
 }
 
 MessageStep.prototype.load = function() {
-    console.log('Loading...');
-
     var inputs = this.ul.getElementsByTagName('input');
     for (var i = 0; i < inputs.length; ++i){
 	var key = this.storagePrefix + inputs[i].name;
@@ -341,7 +389,6 @@ MessageStep.prototype.load = function() {
 }
 
 MessageStep.prototype.save = function(){
-    console.log('Saving...');
     sessionStorage.setItem(
 	this.storagePrefix + this.categorySelect.name,
 	this.elCategory.selectedIndex
@@ -473,16 +520,41 @@ MessageStep.prototype._parseCustomField = function(raw){
 
 /* ============================================================
                           SuccessStep
+   ------------------------------------------------------------
+   Step finale di conferma
+   + render
    ============================================================ */
-function SuccessStep(form, storagePrefix){
+function SuccessStep(form, ticketId){
     this.form = form;
+    this.ticketId = ticketId;
 }
 
 SuccessStep.prototype = Object.create(Step.prototype);
 
 SuccessStep.prototype.render = function(){
     var p = document.createElement('p');
-    var text = document.createTextNode('Brava Giovanna!');
+    var text = document.createTextNode('Brava Giovanna!' + this.ticketId);
+    p.append(text);
+    p.classList.add('fadeIn');
+    this.form.append(p);
+    fadeIn(p);
+}
+
+/* ============================================================
+                          ErrorStep
+   ------------------------------------------------------------
+   Step finale di errore
+   + render
+   ============================================================ */
+function ErrorStep(form){
+    this.form = form;
+}
+
+ErrorStep.prototype = Object.create(Step.prototype);
+
+ErrorStep.prototype.render = function(){
+    var p = document.createElement('p');
+    var text = document.createTextNode('Giovanna è scappata! :(');
     p.append(text);
     p.classList.add('fadeIn');
     this.form.append(p);

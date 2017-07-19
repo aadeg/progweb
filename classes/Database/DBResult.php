@@ -7,12 +7,15 @@ class DBResult {
     private $count;
     private $errno;
     private $error;
+    private $lastId;
 
-    public function __construct($rows, $count, $errno=0, $error=''){
+    public function __construct($rows, $count, $errno=0, $error='',
+				$lastId=null){
         $this->rows = $rows;
         $this->count = $count;
         $this->errno = $errno;
         $this->error = $error;
+	$this->lastId = $lastId;
     }
 
     public function rows(){
@@ -36,5 +39,13 @@ class DBResult {
 
     public function errorMsg(){
         return $this->error;
+    }
+
+    public function lastId(){
+	return $this->lastId;
+    }
+
+    public function setLastId($id){
+	$this->lastId = $id;
     }
 }

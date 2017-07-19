@@ -21,7 +21,7 @@ class AjaxRequest {
 	}
 
 	$reqMethod = $_SERVER['REQUEST_METHOD'];
-	if ($reqMethod != 'GET'){
+	if (!in_array($reqMethod, $this->getAllowedMethods())){
 	    http_response_code(405); // Method Not Allowed
 	    return;
 	}

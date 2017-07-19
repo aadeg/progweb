@@ -1,6 +1,7 @@
 <?php
 namespace View;
 
+use \DateTime;
 use \Input;
 use \AuthManager;
 use \Redirect;
@@ -9,6 +10,8 @@ use \Config;
 use \Form\Form;
 use \Form\Field\TextField;
 use \Form\Field\PasswordField;
+use \Model\Ticket;
+use \Model\Message;
 
 
 class AdminView {
@@ -49,5 +52,32 @@ class AdminView {
              Redirect::to($next);
         }
         return $view;
+    }
+
+    public static function ticketView(){
+	$view = new \stdClass();
+
+	$ticketId = Input::get('id');
+	if (!$ticketId)
+	    Redirect::error(404);
+	
+	$ticket = Ticket::getById($ticketId);
+	if (!$ticket)
+	    Redirect::error(404);
+
+	// Customer Full Name
+	$view->customerFullName = $ticket->cust_last_name . ' ' . $ticket->cust_first_name;
+
+	// Open At
+	$openAtDate = DateTime::createFromFormat(
+	    'Y-m-d H:i:s', $ticket->open_at);
+	$view->openAtStr = $openAtDate->format('d M Y - H:i');
+
+	// Messages
+	$messages = Message::getByTicketId($ticketId);
+
+	$view->ticket = $ticket;
+	$view->messages = $messages;
+	return $view;
     }
 }

@@ -1,6 +1,9 @@
 <?php
 require_once '../core/init.php';
 AuthManager::loginRequired();
+Template::addScript("../static/js/admin/TicketList.js");
+Template::addScript("../static/js/admin/ticket.js");
+
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>

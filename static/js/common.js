@@ -40,16 +40,23 @@ AjaxManager.performAjaxRequest = function(method, url, isAsync, dataToSend, resp
 	window.alert("Your browser does not support AJAX!"); // set error function
 	return;
     }
+
     
     xmlHttp.open(method, url, isAsync); 
     xmlHttp.onreadystatechange = function (){
 	if (xmlHttp.readyState == 4){
 	    var data = JSON.parse(xmlHttp.responseText);
-	    responseFunction(data);
+	    responseFunction(data, xmlHttp.status);
 	}
     }
+    if (method.toLowerCase() == 'post')
+	xmlHttp.setRequestHeader(
+	    'Content-Type', 'application/x-www-form-urlencoded');
 
-    xmlHttp.send(dataToSend);
+    var dataTmp = [];
+    for (var key in dataToSend)
+	dataTmp.push(key + '=' + encodeURIComponent(dataToSend[key]));
+    xmlHttp.send(dataTmp.join('&'));
 }		
 
 window.onload = function(){

@@ -1,0 +1,70 @@
+#messages-box {
+    float: left;
+    width: 69%;
+}
+
+#side-box {
+    float: right;
+    width: 30%;
+}
+
+#side-box > section {
+    margin-bottom: 10px;
+}
+
+#side-box > section:last-child {
+    margin-bottom: 0;
+}
+
+dl {
+    margin: 5px 0;
+}
+
+dt {
+    display: inline;
+    color: #666;
+}
+
+dd {
+    display: inline;
+    margin: 0;
+    font-weight: bold;
+}
+
+ul.message-list {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    maring: 0;
+    float: left;
+}
+
+li.message {
+    width: 100%;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.message-text {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #;
+    width: 55%;
+}
+
+.customer > .message-text {
+    float: left;
+    background-color: #ECF7FA;
+}
+
+.operator > .message-text {
+    float: right;
+}
+
+.internal > .message-text {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: monospace;
+}

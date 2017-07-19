@@ -3,8 +3,6 @@ require_once 'core/init.php';
 
 use \View\UserView;
 
-$view = UserView::newTicket();
-
 ?>
 <?php require 'includes/base_start.php'; ?>
 
@@ -20,14 +18,11 @@ $view = UserView::newTicket();
 	-->
 	
 	<form method="post" action="#">
-	    <!-- <ul class="input-list">
-		<?php /* echo $view->form->as_li();  */?>
-	    </ul>-->
 	</form>
     </main>
     <footer>
 	<button type="button" class="left" id="prev-step-btn">Indietro</button>
-	<button type="button" class="right" id="next-step-btn">Avanti</button>
+	<button type="button" class="right primary" id="next-step-btn">Avanti</button>
 	<div style="clear: both;"></div>
     </footer>
 </section>

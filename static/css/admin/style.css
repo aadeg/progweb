@@ -15,7 +15,7 @@ body {
     color: #333;
 }
 
-main {
+aside {
     clear: both;
 }
 
@@ -33,7 +33,7 @@ a:visited {
     color: #337ab7;
 }
 
-/* ============================== HEADING ============================== */
+/* ========================== HEADING ============================ */
 h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
@@ -47,7 +47,7 @@ h3 { font-size: 18px; }
 h4 { font-size: 14px; }
 
 
-/* ============================== HEADER =============================== */
+/* ========================== HEADER ============================= */
 body > header {
     width: 100%;
     margin: 0;
@@ -74,7 +74,7 @@ body > header > a:hover {
     color: #ffffff;
 }
 
-/* ============================== ASIDE ================================ */
+/* =========================== ASIDE ============================== */
 body > aside {
     width: 15%;
     height: 100%;
@@ -82,7 +82,7 @@ body > aside {
     box-sizing: border-box;
 }
 
-/* =============================== MAIN ================================ */
+/* ============================ MAIN ============================== */
 body > main {
     padding: 10px 20px;
     float: left;
@@ -95,7 +95,7 @@ body > main > h2 {
 }
 
 
-/* =============================== FORMS =============================== */
+/* ============================ FORMS ============================ */
 ul.input-list {
     padding: 0;
     margin: 0 0 10px 0;
@@ -110,7 +110,7 @@ ul.input-list > li:first-child {
     margin: 0;
 }
 
-input {
+input, select, textarea {
     width: 100%;
     font-size: 16px;
     box-shadow: none;
@@ -121,9 +121,14 @@ input {
     outline: none;  /* Chrome fix */
 }
 
-input:focus {
+input:focus, select:focus, textarea:focus {
     border-color: #808080;
     box-shadow: 0 0 5px #868686;
+}
+
+input.small, select.small, textarea.small {
+    font-size: 0.9em;
+    padding: 5px;
 }
 
 label {
@@ -153,8 +158,30 @@ button:active {
     outline: none;
 }
 
-/* ================================ PANEL ================================ */
+button.small {
+    font-size: 0.9em;
+    padding: 5px 10px;
+}
+
+button.primary {
+    background-color: #0085BA;
+    color: #fff;
+    border-color: #0073AA;
+}
+
+button.primary:hover {
+    background-color: #008ec2;
+}
+
+button.primary:active {
+    box-shadow: inset 2px 2px 7px #0073AA;
+    border-color: #0073AA;
+    outline: none;
+}
+
+/* ============================= PANEL ============================ */
 section.panel {
+    box-sizing: border-box;
     box-shadow: -1px 1px 4px rgba(125, 125, 125, 0.3);
     background-color: #ffffff;
 }
@@ -172,20 +199,22 @@ section.panel {
     padding: 10px;
 }
 
-/* ================================ ALERT ================================ */
+/* ============================= ALERT ============================ */
 .alert {
     padding: 10px;
+    background-color: #fff;
     margin: 5px 0 10px 0;
-    border: 1px solid #a2a392;
+    border-left: 4px solid #00a0d2;
+    box-sizing: border-box;
+    box-shadow: -1px 1px 5px rgba(125, 125, 125, 0.2);
+    font-size: 0.9em;
 }
 
 .alert.error {
-    border-color: #f78a8a;
-    background-color: #f7a8a8;
-    color: #870c0c;
+    border-left: 4px solid #DC3232;
 }
 
-/* ================================ TABLES =============================== */
+/* ============================= TABLES =========================== */
 table {
     width: 100%;
     border-collapse: collapse;

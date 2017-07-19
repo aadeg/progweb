@@ -197,6 +197,10 @@ label {
     font-weight: bold;
 }
 
+textarea {
+    height: 5em;
+}
+
 button {
     font-size: 14px;
     background-color: #f8f4e3;
@@ -214,5 +218,21 @@ button:hover {
 button:active {
     box-shadow: inset 2px 2px 7px #9a998c;
     border-color: #9a998c;
+    outline: none;
+}
+
+button.primary {
+    background-color: #0085BA;
+    color: #fff;
+    border-color: #0073AA;
+}
+
+button.primary:hover {
+    background-color: #008ec2;
+}
+
+button.primary:active {
+    box-shadow: inset 2px 2px 7px #0073AA;
+    border-color: #0073AA;
     outline: none;
 }

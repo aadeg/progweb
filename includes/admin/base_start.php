@@ -1,6 +1,9 @@
-<?php 
+<?php
+require_once '../core/init.php';
+
 AuthManager::loginRequired();
 $operator = AuthManager::currentOperator();
+
 ?>
 
 <!DOCTYPE html>
@@ -16,11 +19,11 @@ $operator = AuthManager::currentOperator();
     <link rel="stylesheet" href="../static/css/common.css">
     <link rel="stylesheet" href="../static/css/admin/style.css">
     <link rel="stylesheet" href="../static/css/admin/sidemenu.css">
+    <?php echo Template::getStylesheetHTML(); ?>
 
     <script src="../static/js/common.js"></script>
     <script src="../static/js/admin/sidemenu.js"></script>
-    <script src="../static/js/admin/TicketList.js"></script>
-    <script src="../static/js/admin/ticket.js"></script>
+    <?php echo Template::getScriptHTML(); ?>
 </head>
 <body>
       <header>
