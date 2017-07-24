@@ -17,22 +17,28 @@ $operator = AuthManager::currentOperator();
 
     <link rel="stylesheet" href="../static/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/common.css">
+    <link rel="stylesheet" href="../static/css/effects.css">
+    <link rel="stylesheet" href="../static/css/admin/dropdown.css">
     <link rel="stylesheet" href="../static/css/admin/style.css">
     <link rel="stylesheet" href="../static/css/admin/sidemenu.css">
     <?php echo Template::getStylesheetHTML(); ?>
-
-    <script src="../static/js/common.js"></script>
-    <script src="../static/js/admin/sidemenu.js"></script>
-    <?php echo Template::getScriptHTML(); ?>
 </head>
 <body>
-      <header>
-	  <h1 class="left">SimpleTicket</h1>
-	  <a href="#" class="right"><?php echo $operator->first_name . ' ' . $operator->last_name; ?></a>
-      </header>
+    <header>
+	<img src="../static/imgs/logo_inv.png" alt="logo" class="logo">
+	<h1 class="left">SimpleTicket</h1>
+	<div class="dropdown right">
+	    <a href="#" onclick="dropdown(event);">
+		<?php echo $operator->first_name . ' ' . $operator->last_name; ?> <i class="fa fa-caret-down"></i>
+	    </a>
+	    <ul id="operator-dropdown">
+		<li><a href="/admin/profile.php">Profilo</a></li>
+		<li><a href="/admin/logout.php">Logout</a></li>
+	    </ul>
+	</div>
+    </header>
+    <aside>
+	<?php require '../includes/admin/sidebar.php' ?>
+    </aside>
 
-      <aside>
-	  <?php require '../includes/admin/sidebar.php' ?>
-      </aside>
-
-      <main>
+    <main>

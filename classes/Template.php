@@ -27,6 +27,7 @@ class Template {
 	}
 	return $html;
     }
+
 }
 
 ?>

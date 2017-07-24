@@ -7,9 +7,9 @@ require_once 'core/init.php';
     <header>
 	<h2>Hai bisogno di aiuto?</h2>
     </header>
-    <main>
+    <div class="body">
 	<a class="button text-center" href="new_ticket.php">Contatta un operatore</a>
 	<a class="button text-center" href="check_ticket.php">Verifica lo stato della pratica</a>
-    </main>
+    </div>
 </section>
 <?php require 'includes/base_end.php'; ?>

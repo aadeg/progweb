@@ -103,7 +103,7 @@ section.panel > header h2 {
     color: #000;
 }
 
-section.panel > main {
+section.panel > .body {
     padding: 10px 30px 30px 30px;
 }
 

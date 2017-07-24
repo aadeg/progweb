@@ -34,8 +34,7 @@ TicketList.prototype.load = function(url) {
 	    self.tickets = data;
 	    self.visibleTickets = data;
 	    self.render();
-	}
-    );
+	}, loadingBox);
 }
 
 TicketList.prototype._getTicketRow = function(ticket){

@@ -29,12 +29,6 @@ function selMenu($index){
 ?>
 
 <nav class="side-menu-nav">
-<!--<div class="Operator-info">
-	<p><?php echo $operator->first_name . ' ' . $operator->last_name; ?></p>
-	<p class="small"><?php echo $operator->email; ?></p>
-	<a class="#">Profilo</a>
-    </div> -->
-
     <ul class="side-menu first-lvl">
 	<li>
 	    <a href="/admin/index.php" class="<?php echo selMenu("0"); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -47,8 +41,10 @@ function selMenu($index){
 		<li><a href="/admin/tickets.php?t=open" class="<?php echo selMenu("1-1"); ?>">Aperti</a></li>
 	    </ul>
 	</li>
+	<?php if ($operator->is_admin) { ?>
 	<li>
 	    <a href="#" class="<?php echo selMenu("2"); ?>"><i class="fa fa-lock"></i> Amministrazione</a>
 	</li>
+	<?php } ?>
     </ul>
 </nav>

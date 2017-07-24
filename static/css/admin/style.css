@@ -51,6 +51,7 @@ h4 { font-size: 14px; }
 body > header {
     width: 100%;
     margin: 0;
+    padding: 0 5px;
     background-color: #222222;
     box-sizing: border-box;
     float: left;
@@ -59,19 +60,28 @@ body > header {
 body > header > h1 {
     font-size: 16px;
     color: #eeeeee;
+    line-height: 20px;
     padding: 10px;
 }
 
-body > header > a, body > header > a:visited {
+body > header a, body > header a:visited {
     color: #ffffff;
     margin: 0;
     padding: 10px;
+    line-height: 20px;
     display: inline-block;
 }
 
-body > header > a:hover {
+body > header a:hover {
     background-color: #333333;
     color: #ffffff;
+}
+
+header .logo {
+    display: inline-block;
+    height: 20px;
+    padding: 10px 5px;
+    float: left;
 }
 
 /* =========================== ASIDE ============================== */
@@ -119,6 +129,10 @@ input, select, textarea {
     margin: 0;
     border: 1px solid #dcdcdc;
     outline: none;  /* Chrome fix */
+}
+
+option {
+    outline: none;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -179,11 +193,25 @@ button.primary:active {
     outline: none;
 }
 
+button.danger {
+}
+
+button.danger:hover {
+}
+
+button.danger:active {
+}
+
 /* ============================= PANEL ============================ */
 section.panel {
     box-sizing: border-box;
     box-shadow: -1px 1px 4px rgba(125, 125, 125, 0.3);
     background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+section.panel:last-child {
+    margin-bottom: 0;
 }
 
 .panel > header {
@@ -195,8 +223,15 @@ section.panel {
     color: #666;
 }
 
-.panel > main {
+.panel > .body {
     padding: 10px;
+}
+
+.panel > footer {
+    clear: both;
+    border-top: 1px solid #E1E1E1;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 /* ============================= ALERT ============================ */
@@ -240,12 +275,6 @@ td {
 }
 
 /* ================================ TICKET =============================== */
-/* section.ticket-list {
-    padding: 10px 5px;
-    border: 1px solid #E7E7E7;
-    background-color: #ffffff;
-}*/
-
 form.ticket-search {
     text-align: right;
     margin-bottom: 10px;
@@ -259,4 +288,14 @@ form.ticket-search input {
 }
 table.ticket-table tbody tr:hover {
     cursor: pointer;
+}
+
+dt {
+    font-weight: bold;
+    display: inline;
+}
+
+dd {
+    margin-left: 5px;
+    display: inline;
 }

@@ -38,4 +38,23 @@ class Operator extends BaseModel {
             die($ris->errorMsg());
     }
 
+    public static function update($id, $fields){
+	return self::$db->update(
+	    self::TABLE_NAME, $fields, array('id' => $id));
+    }
+
+    public static function resetRecoveryToken($id){
+	self::update($id, array("recovery_token" => null));
+    }
+    
+    public static function setRecoveryToken($id){
+	$token = rand(10000, 999999);
+	self::update($id, array("recovery_token" => $token));
+	return $token;
+    }
+
+    public static function checkRecoveryToken($id, $token){
+	$operator = self::getById($id);
+	return $operator && $operator->recovery_token == $token;
+    }
 }

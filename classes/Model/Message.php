@@ -18,7 +18,7 @@ class Message extends BaseModel {
 	return self::$db->get(self::TABLE_NAME, $fields);
     }
 
-    public static function getByID($id, $ticketId){
+    public static function getById($id, $ticketId){
         return self::$db->get(
 	    self::TABLE_NAME,
 	    array('id' => $id, 'ticket' => $ticketId)

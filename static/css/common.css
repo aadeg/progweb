@@ -9,3 +9,65 @@
 .right {
     float: right;
 }
+
+.clear {
+    clear: both;
+}
+
+.loading-box {
+    padding: 5px 10px;
+    background-color: #222;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+}
+
+.loading-animation {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    background-color: #222;
+}
+
+.popup-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup {
+    background-color: #fff;
+    box-sizing: border-box;
+    z-index: 100;
+    border: 1px solid #333333;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px 30px;
+    position: fixed;
+    width: 24%;
+    top: 30%;
+    left: 38%;
+}
+
+.popup p {
+    margin: 5px 0;
+}
+
+.popup .btn-group {
+    float: right;
+    margin: 10px auto;
+}
+
+.popup button {
+    float: left;
+    margin-right: 10px;
+    display: block;
+}
+
+.popup button:last-child {
+    margin-right: 0px;
+}

@@ -1,26 +1,26 @@
-<?php 
-require_once '../core/init.php';
+<?php
+require_once ('../core/init.php');
 
-use \View\AdminView;
+use \View\RecoveryView;
 
-$view = AdminView::login();
+$view = RecoveryView::passwordRecovery();
 ?>
+
 <?php include '../includes/admin/base_login_start.php' ?>
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
 	<div class="body">
+	    <p>Per recuperare la password, inserisca l'email con la quale si è registrato.</p>
+
 	    <form action="#" method="POST">
 		<ul class="input-list">
 		    <?php echo $view->form->as_li(); ?>
 		</ul>
-		<button type="submit" class="primary right">Login</button>
+		<button type="submit" class="primary right">Recupera</button>
 	    </form>
 	    <div class="clear"></div>
 	</div>
-	<footer>
-	    <a href="/admin/password_recovery.php">Hai dimenticato la password?</a>
-	</footer>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

@@ -2,6 +2,8 @@
 namespace Ajax; 
 
 use \Model\Ticket;
+use \Model\TicketCategory;
+use \Model\Operator;
 
 class AjaxTicket extends AjaxRequest {
     
@@ -20,19 +22,21 @@ class AjaxTicket extends AjaxRequest {
 	    return $this->get($data);
 	} else if ($action == 'delete') {
 	    return $this->delete($data);
+	} else if ($action == 'edit') {
+	    return $this->edit($data);
 	}
 
-	return $this->error(400, "Azione '" . $action . "' non valida");
+	return $this->error(400, "Azione '$action' non valida");
     }
 
     private function get($data){
-	$searchableField = ['id', 'cust_first_name', 'cust_last_name',
+	$searchableFields = ['id', 'cust_first_name', 'cust_last_name',
 			    'cust_email', 'subject', 'category',
 			    'operator', 'status'];
 
 	foreach ($data as $field => $value){
-	    if (!in_array($field, $searchableField))
-		return $this->error(400, "Campo '" . $field . "' non valido");
+	    if (!in_array($field, $searchableFields))
+		return $this->error(400, "Campo '$field' non valido");
 	}
 	if (isset($data['operator']) && $data['operator'] == 'null')
 	    $data['operator'] = null;
@@ -41,12 +45,46 @@ class AjaxTicket extends AjaxRequest {
 	return $tickets;
     }
 
-    protected function delete($data){
+    private function delete($data){
 	if (!isset($data['id']))
 		return $this->error(400, "Campo 'id' mancante");
 
 	
 	$ris = Ticket::delete($data['id']);
+	return [];
+    }
+
+    private function edit($data){
+	$editableFields = ['priority', 'operator', 'category'];
+	if (!isset($data['id']))
+	    return $this->error(400, "Campo 'id' mancante");
+
+	$ticketId = $data['id'];
+	unset($data['id']);
+	foreach ($data as $key => $value){
+	    if (!in_array($key, $editableFields))
+		return $this->error(400, "Campo '{$key}' non modificabile");
+	}
+
+	// operator can be null
+	$priority = @$data['id'] ? : null;
+	$operatorId = @$data['operator'] ? : null;
+	$categoryId = @$data['category'] ? : null;
+	if ($operatorId == "null")
+	    $operatorId = null;
+
+	if ($priority && ($priority < 0 || $priority > 2))
+	    return $this->error(400, "Priorità non valida");
+
+	if (array_key_exists('operator', $data) &&
+	    $operatorId && !Operator::getById($operatorId))
+	    return $this->error(400, "Operatore non valido");
+
+	if ($categoryId && !TicketCategory::getById($categoryId))
+	    return $this->error(400, "Categoria non valida");
+
+
+	Ticket::update($ticketId, $data);
 	return [];
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
 class Input {
-    public static function isSubmit($method='POST'){
+    public static function isSubmit($method='POST', $empty=false){
         $method = strtoupper($method);
         $source = self::getSource($method);
 
-        return $_SERVER['REQUEST_METHOD'] == $method && !empty($source);
+        return $_SERVER['REQUEST_METHOD'] == $method && ($empty || !empty($source));
     }
 
     public static function get($item, $method=null){

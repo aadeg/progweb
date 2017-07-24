@@ -56,11 +56,11 @@ class DB {
         }
 
 	$this->sanitize($fields, true);
-	foreach ($fields as $key => $value){
+	foreach ($fields as $key => &$value){
 	    if ($value === null)
-		$fields[$key] = "null";
+		$value = "null";
 	    else
-		$fields[$key] = '"' . $value . '"';
+		$value = '"' . $value . '"';
 	}
 
         $keys_str = '`' . implode('`,`', array_keys($fields)) . '`';
@@ -77,14 +77,15 @@ class DB {
             return false;
         }
 
-	$this->sanitize($set);
 	$this->sanitize($where);
+	$this->sanitize($set, true);
+
 
         $where_str = self::attributeValueToStr($where, ' and ');
-        $set_str = self::attributeValueToStr($set);
+        $set_str = self::attributeValueToStr($set, ',', true);
 
         $sql = "UPDATE {$table} SET {$set_str} WHERE {$where_str}";
-        
+
         return $this->query($sql);
     }
 
@@ -120,12 +121,14 @@ class DB {
 	}
     }
 
-    private static function attributeValueToStr($fields, $glue=','){
+    private static function attributeValueToStr($fields, $glue=',', $allowedNull=false){
         $str = "";
         $i = 0;
         foreach ($fields as $field => $value){
 	    if ($value === "is null")
 		$str .= "{$field} is null";
+	    else if ($value === null && $allowedNull)
+	        $str .= "{$field}=null";
 	    else 
 		$str .= "{$field}=\"{$value}\"";
 

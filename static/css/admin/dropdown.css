@@ -1,0 +1,38 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown ul {
+    display: none;
+    position: absolute;
+    z-index: 50;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #222222;
+}
+
+.dropdown ul.show {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    background-color: #333;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown ul li {
+    margin: 0;
+    width: 100%;
+}
+
+.dropdown ul a {
+    display: block;
+    margin: 0;
+    padding: 7px 10px;
+    background-color: #333;
+}
+
+.dropdown ul a:hover {
+    background-color: #222;
+}
+

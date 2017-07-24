@@ -9,9 +9,13 @@ use \Session;
 use \Config;
 use \Form\Form;
 use \Form\Field\TextField;
+use \Form\Field\EmailField;
+use \Form\Field\HiddenField;
 use \Form\Field\PasswordField;
 use \Model\Ticket;
+use \Model\TicketCategory;
 use \Model\Message;
+use \Model\Operator;
 
 
 class AdminView {
@@ -27,8 +31,8 @@ class AdminView {
                               array("placeholder" => "Password",
                                     "required" => ""))
         ));
+
         $view->form = $form;
-        
         if (Input::isSubmit()){
             $form->setValues(Input::getAll());
             
@@ -73,11 +77,126 @@ class AdminView {
 	    'Y-m-d H:i:s', $ticket->open_at);
 	$view->openAtStr = $openAtDate->format('d M Y - H:i');
 
-	// Messages
-	$messages = Message::getByTicketId($ticketId);
+	// Categories
+	$view->categories = TicketCategory::getAll()->rows();
 
+
+	// Priority
+	$priorClasses = ['priority-low', 'priority-normal', 'priority-high'];
+	$view->priorityClass = $priorClasses[$ticket->priority];
+
+	// Operators
+	$view->operators = Operator::getAll()->rows();
+	
 	$view->ticket = $ticket;
-	$view->messages = $messages;
+
 	return $view;
+    }
+
+    public static function profile(){
+	$view = new \stdClass();
+	
+	$operatorId = Input::get('id', 'GET');
+	
+	$currentOperator = AuthManager::currentOperator();
+	if (!$operatorId)
+	    $operatorId = $currentOperator->id;
+
+	$operator = Operator::getById($operatorId);
+	if (!$operator)
+	    Redirect::error(404);
+
+	$view->operator = $operator;
+	$view->currentOperator = $currentOperator;
+
+	$baseActionForm = "?id=" . $operatorId;
+	
+	// Password change
+	$passwordForm = new Form(array(
+	    new PasswordField('password', 'Nuova password',
+			      array("placeholder" => "Scegli una nuova password",
+				    "required" => "", "pattern" => ".{6,}")),
+	    new PasswordField('password-confirm', 'Conferma password',
+			      array("placeholder" => "Conferma la nuova password",
+				    "required" => "", "pattern" => ".{6,}")),
+	));
+	$view->passwordForm = $passwordForm;
+	$view->passwordFormAction = $baseActionForm . "&action=change-password";
+
+	// Enable / Disable
+	if ($operator->enabled)
+	    $view->toggleBtn = "Disattiva account";
+	else
+	    $view->toggleBtn = "Attiva account";
+	$view->toggleFormAction = $baseActionForm . "&action=toggle-account";
+
+	// Info
+	if ($currentOperator->id == $operatorId){
+	    $view->title = "Il tuo profilo";
+	    $view->ownProfile = true;
+	} else {
+	    $view->title = "Profilo di {$operator->username}";
+	    $view->ownProfile = false;
+	}
+
+	$view->isAdmin = $currentOperator->is_admin;
+
+	// Submit
+	if (Input::isSubmit('POST', true)){
+	    $action = Input::get('action', 'GET');
+	    if (!$action)
+		Redirect::error(400);
+	    if ($action == 'change-password'){
+		return self::profileChangePassword($view);
+	    } else if ($action == 'toggle-account') {
+		return self::profileToggleAccount($view);
+	    }
+	    
+	}
+
+	return $view;
+    }
+
+    private static function profileChangePassword($view){
+	$operatorId = $view->operator->id;
+	$currentOperator = $view->currentOperator;
+
+	if ($operatorId != $currentOperator->id && !$currentOperator->is_admin)
+	    Redirect::error(403);
+
+	$password = Input::get('password');
+	$passwordConfirm = Input::get('password-confirm');
+
+	if (!$password || !$passwordConfirm)
+		Redirect::error(400);
+
+	if ($password != $passwordConfirm){
+	    Session::flash("Le password inserite non sono uguali", "error");
+	    return $view;
+	}
+	
+	if (strlen($password) < 6){
+	    Session::flash("La password deve essere di almeno 6 caratteri");
+	    return $view;
+	}
+
+	AuthManager::changePassword($operatorId, $password);
+	Operator::resetRecoveryToken($operatorId);
+	
+	Session::flash("Password cambiata correttamente");
+	Redirect::to("?id=" . $operatorId);
+    }
+
+    private static function profileToggleAccount($view){
+	$operatorId = $view->operator->id;
+	$currentOperator = $view->currentOperator;
+
+	$enabled = !$view->operator->enabled;
+	Operator::update($operatorId, array("enabled" => $enabled));
+	if ($enabled)
+	    Session::flash("Account attivato");
+	else
+	    Session::flash("Account disattivato");
+	Redirect::to("?id=" . $operatorId);
     }
 }

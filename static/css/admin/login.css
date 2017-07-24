@@ -3,14 +3,14 @@ body > main {
     padding: 0;
 }
 
-#login-box {
+.main-box {
     width: 40%;
     max-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    // margin-top: 100px;
 }
 
-#login-box .alert {
+.main-box .alert {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -29,3 +29,32 @@ section.panel header h2 {
     color: #fff;
 }
 
+section.panel footer {
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-size: 0.9em;
+    text-align: center;
+    border: none;
+}
+
+header > img.logo {
+    float: none;
+    opacity: 0.9;
+    display: block;
+    height: 100px;
+    margin: 0 auto;
+}
+
+body > header {
+    padding: 40px 0;
+    background-color: transparent;
+    float: none;
+}
+
+body > header > h1 {
+    display: block;
+    text-align: center;
+    margin: 0;
+    color: #222;
+    font-size: 2em;
+}

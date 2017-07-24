@@ -1,26 +1,24 @@
 <?php 
 require_once '../core/init.php';
 
-use \View\AdminView;
+use \View\RecoveryView;
 
-$view = AdminView::login();
+$view = RecoveryView::recoveryCode();
 ?>
 <?php include '../includes/admin/base_login_start.php' ?>
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
 	<div class="body">
+	    <p>Inserisca il codice che le è stato inviato tramite email.</p>
 	    <form action="#" method="POST">
 		<ul class="input-list">
 		    <?php echo $view->form->as_li(); ?>
 		</ul>
-		<button type="submit" class="primary right">Login</button>
+		<button type="submit" class="primary right">Conferma</button>
 	    </form>
 	    <div class="clear"></div>
 	</div>
-	<footer>
-	    <a href="/admin/password_recovery.php">Hai dimenticato la password?</a>
-	</footer>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

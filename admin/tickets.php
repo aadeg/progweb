@@ -14,7 +14,7 @@ Template::addScript("../static/js/admin/ticket.js");
     <header>
 	<h3>Ticket non assegnati ad un operatore</h3>
     </header>
-    <main>
+    <div class="body">
 	<form class="ticket-search" action="#">
 	    <input type="text" placeholder="Ricerca nella tabella">
 	</form>
@@ -33,7 +33,7 @@ Template::addScript("../static/js/admin/ticket.js");
 	    <tbody>
 	    </tbody>
 	</table>
-    </main>
+    </div>
 </section>
 
 <?php require '../includes/admin/base_end.php'; ?>

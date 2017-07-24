@@ -1,15 +1,17 @@
 <?php 
 require_once '../core/init.php';
 
-use \View\AdminView;
+use \View\RecoveryView;
 
-$view = AdminView::login();
+$view = RecoveryView::recoveryChange();
 ?>
 <?php include '../includes/admin/base_login_start.php' ?>
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
 	<div class="body">
+	    <p>Inserisca una nuova password di almeno 6 caratteri.</p>
+
 	    <form action="#" method="POST">
 		<ul class="input-list">
 		    <?php echo $view->form->as_li(); ?>
@@ -18,9 +20,6 @@ $view = AdminView::login();
 	    </form>
 	    <div class="clear"></div>
 	</div>
-	<footer>
-	    <a href="/admin/password_recovery.php">Hai dimenticato la password?</a>
-	</footer>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

@@ -17,5 +17,15 @@ $GLOBALS['config'] = array(
     ),
     'error_page' => array(
 	404 => '/404.php'
+    ),
+    'email' => array(
+	'host' => 'smtp.gmail.com',
+	'smtp_auth' => true,
+	'username' => 'pweb1617@gmail.com',
+	'password' => 'andrea96',
+	'smtp_secure' => 'tls',
+	'port' => 587,
+	'default_from' => 'pweb1617@gmail.com',
+	'default_name' => 'SimpleTicket'
     )
 );

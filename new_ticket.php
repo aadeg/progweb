@@ -10,16 +10,10 @@ use \View\UserView;
     <header>
 	<h2>Contatta un operatore</h2>
     </header>
-    <main>
-	<!--
-	<p>
-	    Le chiediamo di inserire i propri dati anagrafici e di fornire una descrizione del suo problema, così da permettere ad un operatore di aiutarla.
-	</p>
-	-->
-	
+    <div class="body">
 	<form method="post" action="#">
 	</form>
-    </main>
+    </div>
     <footer>
 	<button type="button" class="left" id="prev-step-btn">Indietro</button>
 	<button type="button" class="right primary" id="next-step-btn">Avanti</button>

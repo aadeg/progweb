@@ -41,5 +41,10 @@ class Ticket extends BaseModel {
 				 array('id' => $id));
 	return $ris;
     }
+
+    public static function update($id, $fields){
+	return self::$db->update(
+	    self::TABLE_NAME, $fields, array('id' => $id));
+    }
 }
 ?>
