@@ -1,8 +1,7 @@
 <?php
 require_once 'core/init.php';
-
-use \View\UserView;
-
+Template::addScript("./static/js/NewTicket.js");
+Template::addScript("./static/js/new_ticket.js");
 ?>
 <?php require 'includes/base_start.php'; ?>
 

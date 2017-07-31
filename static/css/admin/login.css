@@ -20,12 +20,12 @@ section.panel {
     padding: 20px;
 }
 
-section.panel header {
+section.panel > header {
     background-color: #222;
     padding: 15px;
 }
 
-section.panel header h2 {
+section.panel > header h2 {
     color: #fff;
 }
 

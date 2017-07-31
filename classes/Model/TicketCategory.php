@@ -8,8 +8,9 @@ class TicketCategory extends BaseModel {
 	return self::$db->get(self::TABLE_NAME);
     }
 
-    public static function get($fields){
-	return self::$db->get(self::TABLE_NAME, $fields);
+    public static function get($fields, $orderBy=array()){
+	return self::$db->get(self::TABLE_NAME, $fields,
+			      $orderBy);
     }
 
     public static function getByID($id){
@@ -30,6 +31,16 @@ class TicketCategory extends BaseModel {
 	$ris = self::$db->delete(self::TABLE_NAME,
 				 array('id' => $id));
 	return $ris;
+    }
+
+    public static function getNames(){
+	$rv = array();
+	$cats = self::getAll()->rows();
+	foreach ($cats as $cat){
+	    $rv[$cat->id] = $cat->label;
+	}
+
+	return $rv;
     }
 }
 ?>

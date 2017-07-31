@@ -3,7 +3,7 @@ require_once '../core/init.php';
 AuthManager::loginRequired();
 Template::addStylesheet('../static/css/admin/ticket_view.css');
 Template::addScript('../static/js/admin/ticket_view.js');
-Template::addScript('../static/js/admin/Messages.js');
+Template::addScript('../static/js/Messages.js');
 Template::addScript('../static/js/admin/TicketView.js');
 
 use \View\AdminView;
@@ -30,10 +30,10 @@ foreach ($optPriority as $key => &$value){
     </header>
 
     <div class="body">
-	<section class="messages">
+	<div class="messages">
 	    <ul class="message-list">
 	    </ul>
-	</section>
+	</div>
     </div>
     <footer>
 	<form action="#" method="post">

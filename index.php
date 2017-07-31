@@ -1,5 +1,8 @@
 <?php
 require_once 'core/init.php';
+
+
+
 ?>
 <?php require 'includes/base_start.php'; ?>
 

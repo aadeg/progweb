@@ -8,8 +8,8 @@ class Ticket extends BaseModel {
 	return self::$db->get(self::TABLE_NAME);
     }
 
-    public static function get($fields){
-	return self::$db->get(self::TABLE_NAME, $fields);
+    public static function get($fields, $orderBy=array()){
+	return self::$db->get(self::TABLE_NAME, $fields, $orderBy);
     }
 
     public static function getByID($id){

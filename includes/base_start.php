@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="static/css/common.css">
     <link rel="stylesheet" href="static/css/effects.css">
     <link rel="stylesheet" href="static/css/style.css">
+    <?php echo Template::getStylesheetHTML(); ?>
 
-    <script src="static/js/common.js"></script>
-    <script src="static/js/effects.js"></script>
-    <script src="static/js/NewTicket.js"></script>
-    <script src="static/js/new_ticket.js"></script>
 </head>
 <body>
     <header>
-	<h1>Machine Lab</h1>
+	<a href="/index.php"><h1>Machine Lab</h1></a>
     </header>
 
     <main>

@@ -26,13 +26,28 @@ class AjaxNewTicket extends AjaxRequest {
 	$email = $data['email'];
 	$categoryId = $data['category'];
 	$subject = $data['subject'];
-	$message = $data['message'];
+	$message = $this->getCustomFieldsMsg($categoryId, $data);
+	$message .= $data['message'];
+
 
 	$ticketId = Ticket::create($firstName, $lastName, $email,
 				   $subject, $categoryId);
 	Message::create($ticketId, Message::TYPE_CUSTOMER, $message);
 
 	return ["ticket" => $ticketId];
+    }
+
+    private function getCustomFieldsMsg($categoryId, $data){
+	$msg = "";
+	$customFields = CustomField::getByCategory($categoryId);
+	foreach ($customFields as $field){
+	    $name = 'custom-' . $field->id;
+
+	    $value = @$data[$name] ? : '';
+	    $msg .= "{$field->label}:  $value\n";
+	}
+
+	return $msg;
     }
 
     private function isValid($data){

@@ -20,6 +20,8 @@ use \Model\Operator;
 
 class AdminView {
 
+    const EMAIL_PATTERN = "/(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/";
+
     public static function login(){
         $view = new \stdClass();
 
@@ -198,5 +200,103 @@ class AdminView {
 	else
 	    Session::flash("Account disattivato");
 	Redirect::to("?id=" . $operatorId);
+    }
+
+    public static function operators(){
+	$view = new \stdClass();
+	$operator = AuthManager::currentOperator();
+	if (!$operator->is_admin)
+	    Redirect::error(403);
+
+	$view->operators = Operator::getAll()->rows();
+	return $view;
+    }
+
+    public static function addOperator(){
+	$view = new \stdClass();
+	$operator = AuthManager::currentOperator();
+	if (!$operator->is_admin)
+	    Redirect::error(403);
+
+	$form = new Form(array(
+	    new TextField('first_name', 'Nome',
+			  array('required' => '')),
+	    new TextField('last_name', 'Cognome',
+			  array("required" => "")),
+	    new TextField('username', 'Username',
+			  array("required" => "")),
+	    new PasswordField('password1', 'Password',
+			      array("required" => "", "pattern" => ".{6,}")),
+	    new PasswordField('password2', 'Conferma password',
+			      array("required" => "", "pattern" => ".{6,}")),
+	    new EmailField('email', 'Email',
+			   array('required' => ''))
+	));
+	$view->form = $form;
+
+	if (Input::isSubmit()){
+	    $view->form->setValues(Input::getAll());
+	    // Validation
+	    $requiredFields = ['first_name', 'last_name', 'username',
+			       'password1', 'password2', 'email'];
+	    foreach ($requiredFields as $field){
+		if (!Input::get($field)){
+		    Session::flash("Compila tutti i campi", "error");
+		    return $view;
+		}
+		    
+	    }
+
+	    $firstName = Input::get('first_name');
+	    $lastName = Input::get('last_name');
+	    $username = Input::get('username');
+	    $password = Input::get('password1');
+	    $passwordConfirm = Input::get('password2');
+	    $email = Input::get('email');
+
+	    // Username Validation
+	    $sameUsernameOp = Operator::get(array("username" => $username))->count();
+	    if ($sameUsernameOp){
+		Session::flash("Username inserito è già in uso", "error");
+		return $view;
+	    }
+
+	    // Email Validation
+	    if(!preg_match(self::EMAIL_PATTERN, $email)){
+		Session::flash("Email non valida", "error");
+		return $view;
+	    }
+
+	    $sameEmailOp = Operator::get(array("email" => $email))->count();
+	    if ($sameEmailOp){
+		Session::flash("Email inserita già in uso", "error");
+		return $view;
+	    }
+
+	    // Password Validation
+	    if ($password != $passwordConfirm){
+		Session::flash("Le password non sono uguali", "error");
+		return $view;
+	    }
+
+	    if (strlen($password) < 6){
+		Session::flash("La password deve essere lunga almeno 6 caretteri",
+			       "error");
+		return $view;
+	    }
+
+	    // Registration
+	    try {
+		AuthManager::register($username, $password, $firstName, $lastName,
+				      $email, false);
+		Session::flash("Operatore aggiunto con successo");
+	    } catch (Exception $e){
+		Session::flash("Errore durante la creazione dell'operatore",
+			       "error");
+	    }
+	    Redirect::to('');
+	}
+
+	return $view;
     }
 }

@@ -1,4 +1,4 @@
-// Required: common.js
+// Required: common.js, effects.js
 Sidemenu = function(el){
     this.el = el;
 }
@@ -9,10 +9,7 @@ function sideMenuOnClick(event){
     var sib = nextElementSibling(el);
     if (sib && hasClass(sib, 'side-menu')){
 	// sidebar toggle
-	if (hasClass(sib, 'collapsed'))
-	    sib.classList.remove('collapsed');
-	else
-	    sib.classList.add('collapsed');
+	sib.classList.toggle('collapsed');
     }
 }
 

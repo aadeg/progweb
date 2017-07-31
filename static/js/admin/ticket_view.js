@@ -4,10 +4,11 @@ onLoadHandlers.push(function(){
     var elMsgBox = document.getElementById('messages-box');
     var elMsgList = document.getElementsByClassName('message-list')[0];
     var elForm = elMsgBox.getElementsByTagName('form')[0];
-    
-    var messageHandler = new MessageHandler(elMsgList, elForm);
-    while (elMsgList.firstChild)
-	elMsgList.removeChild(elMsgList.firstChild);
+
+    var ticketId = getSearchParameters().id;
+    var url = '/admin/ajax/message.php?action=get';
+    var messageHandler = new MessageHandler(elMsgList, elForm, ticketId, url,
+					    'Cliente', '');
     messageHandler.loadAll();
 
     var elPriority = document.getElementById('priority-select');

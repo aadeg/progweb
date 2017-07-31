@@ -1,27 +1,37 @@
 // required: common.js, effects.js
 
-function MessageHandler(elBox, elForm){
+function MessageHandler(elBox, elForm, ticketId, url,
+			customerLabel, operatorPrefix){
     var self = this;
     this.elBox = elBox;
     this.elForm = elForm;
     this.elMsgTextarea = this.elForm.getElementsByTagName('textarea')[0];
 
-    this.ticketId = getSearchParameters().id;
+    this.ticketId = ticketId;
+    this.url = url + '&ticket=' + this.ticketId;
+    this.customerLabel = customerLabel;
+    this.operatorPrefix = operatorPrefix;
+    this.messages = 0;
     this.elForm.onsubmit = function(e) { return self._onSendMessage(e); };
+    this.autoRefresh = setInterval(function() { return self._onRefresh(); },
+				   20000);
 }
 
-
-MessageHandler.prototype.loadAll = function(){
+MessageHandler.prototype.loadAll = function(data=null){
+    this._clear();
     var self = this;
-    var url = 'ajax/message.php?action=get&ticket=';
-    url += this.ticketId;
-    
-    AjaxManager.performAjaxRequest(
-	'get', url, true, {}, function(data){
-	    for (var i in data){
-		new Message(data[i]).render(self.elBox);
-	    }
-	}, loadingBox);
+    fn = function(data){
+	for (var i in data){
+	    var msg = new Message(data[i], self.customerLabel, self.operatorPrefix);
+	    msg.render(self.elBox);
+	}
+	self.messages = data.length;
+    };
+
+    if (data == null)
+	AjaxManager.performAjaxRequest('get', this.url, true, {}, fn, loadingBox);
+    else
+	fn(data);
 }
 
 MessageHandler.prototype.load = function(id){
@@ -31,8 +41,15 @@ MessageHandler.prototype.load = function(id){
     url += '&ticket=' + this.ticketId;
     AjaxManager.performAjaxRequest(
 	'get', url, true, {}, function(data){
-	    new Message(data).render(self.elBox);
+	    var msg = new Message(data, self.customerLabel, self.operatorPrefix);
+	    msg.render(self.elBox);
+	    self.messages += 1;
 	}, loadingBox);   
+}
+
+MessageHandler.prototype._clear = function(){
+    while (this.elBox.firstChild)
+	this.elBox.removeChild(this.elBox.firstChild);
 }
 
 MessageHandler.prototype._onSendMessage = function(event){
@@ -55,19 +72,25 @@ MessageHandler.prototype._onSendMessage = function(event){
 	}, loadingBox);
 }
 
+MessageHandler.prototype._onRefresh = function() {
+    var self = this;
+    AjaxManager.performAjaxRequest(
+	'get', this.url, true, {}, function (data){
+	    if (data.length != self.messages)
+		self.loadAll(data);
+	}, loadingBox);
+}
+
 MessageHandler.prototype._retrieveFormData = function(){
     var data = {};
     data[this.elMsgTextarea.name] = this.elMsgTextarea.value;
     return data;
 }
 
-function Message(data){
+function Message(data, customerLabel, operatorPrefix){
     this.data = data;
-    this.senderText = {
-	'INTERNAL': 'Operatore',
-	'CUSTOMER': 'Cliente',
-	'OPERATOR': 'Operatore'
-    };
+    this.customerLabel = customerLabel;
+    this.operatorPrefix = operatorPrefix;
 }
 
 Message.prototype.render = function(el){
@@ -78,7 +101,12 @@ Message.prototype.render = function(el){
     var divText = document.createElement('div');
     divText.classList.add('message-text');
 
-    var senderText = this.senderText[this.data.type];
+    var senderText = "";
+    if (this.data.type == 'CUSTOMER')
+	senderText = this.customerLabel;
+    else if (this.data.type == 'OPERATOR')
+	senderText = this.operatorPrefix + this.data.operator_name;
+    
     var sender = document.createElement('span');
     sender.classList.add('message-sender');
     if (senderText)

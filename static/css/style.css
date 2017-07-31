@@ -61,15 +61,14 @@ h4 { font-size: 14px; }
 body > header {
     width: 100%;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.7);
     box-sizing: border-box;
     float: left;
 }
 
-body > header > h1 {
-    font-size: 16px;
-    color: #eeeeee;
-    padding: 10px;
+body > header h1 {
+    font-size: 16px !important;
+    color: #eeeeee !important;
 }
 
 body > header > a, body > header > a:visited {
@@ -80,7 +79,7 @@ body > header > a, body > header > a:visited {
 }
 
 body > header > a:hover {
-    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.4);
     color: #ffffff;
 }
 
@@ -137,6 +136,11 @@ a.button {
     color: inherit;
 }
 
+.button.inline {
+    margin: 0;
+    display: inline-block;
+}
+
 /* ============================== FOOTER ========================== */
 body > footer {
     width: 100%;
@@ -183,6 +187,14 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
     border-color: #808080;
     box-shadow: 0 0 5px #868686;
+}
+
+input:invalid, select:invalid, textarea:invalid {
+    border-color: #DC3232;
+}
+
+span.error-msg {
+    color: #DC3232;
 }
 
 textarea {
@@ -235,4 +247,26 @@ button.primary:active {
     box-shadow: inset 2px 2px 7px #0073AA;
     border-color: #0073AA;
     outline: none;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    border-left: 4px solid #00a0d2;
+    box-sizing: border-box;
+    box-shadow: -1px 1px 5px rgba(125, 125, 125, 0.2);
+    font-size: 0.9em;
+}
+
+.alert.error {
+    border-left: 4px solid #DC3232;
+}
+
+.ticket-id {
+    font-weight: bold;
+    text-align: center;
+    font-family: monospace;
+    font-size: 2em;
+    color: #000;
 }

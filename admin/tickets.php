@@ -16,22 +16,26 @@ Template::addScript("../static/js/admin/ticket.js");
     </header>
     <div class="body">
 	<form class="ticket-search" action="#">
+	    <!-- <label>Mostra solo i tuoi</label>
+	    <input type="checkbox">-->
+		
 	    <input type="text" placeholder="Ricerca nella tabella">
 	</form>
 
 	<table class="ticket-table">
 	    <thead>
 		<tr>
-		    <td>ID</td>
-		    <td>Oggetto</td>
-		    <td>Cliente</td>
-		    <td class="text-center">Categoria</td>
-		    <td class="text-center">Prorità</td>
-		    <td>Ultimo aggiornamento</td>
+		    <th>ID</td>
+		    <th>Oggetto</td>
+		    <th>Cliente</td>
+		    <th class="text-center">Categoria</td>
+		    <th>Ultimo aggiornamento</td>
 		</tr>
 	    </thead>
 	    <tbody>
 	    </tbody>
+	    <tfoot>
+	    </tfoot>
 	</table>
     </div>
 </section>

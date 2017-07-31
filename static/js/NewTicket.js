@@ -79,8 +79,12 @@ NewTicketStepForm.prototype._onNext = function(event){
     if (this.currentStep + 1 >= this.steps.length)
 	return;
 
-    this.steps[this.currentStep].save(this.sessionStoragePrefix);
+    var step = this.steps[this.currentStep];
+    if (!step.checkValidity())
+	return;
+    step.save(this.sessionStoragePrefix);
     this.clear();
+
     ++this.currentStep;
     this.renderStep();
     this.steps[this.currentStep].load(this.sessionStoragePrefix);
@@ -98,9 +102,12 @@ NewTicketStepForm.prototype._onPrev = function(event){
 }
 
 NewTicketStepForm.prototype._onSubmit = function(event){
+    var step = this.steps[this.currentStep];
+    if (!step.checkValidity())
+	return;
     var self = this;
     clearInterval(this.autoSave);
-    this.steps[this.currentStep].save(this.sessionStoragePrefix);
+    step.save(this.sessionStoragePrefix);
 
     var formData = {};
     for (var i = 0; i < sessionStorage.length; ++i){
@@ -114,7 +121,6 @@ NewTicketStepForm.prototype._onSubmit = function(event){
 	}
     }
 
-    console.log(formData);
     this.elNextBtn.disabled = true;
     this.elPrevBtn.disabled = true;
     AjaxManager.performAjaxRequest(
@@ -155,6 +161,8 @@ Step.prototype._getField = function(obj){
     el.name = obj.name;
     el.placeholder = obj.placeholder;
     el.required = obj.required;
+    if (obj.pattern)
+	el.pattern = obj.pattern;
     
     if (obj.tagName == 'input'){
 	el.type = obj.type;
@@ -182,6 +190,34 @@ Step.prototype._getField = function(obj){
     return {li: li, field: el, label: label};
 }
 
+Step.prototype._getElError = function(el, create=true){
+    var elError = el.parentNode.getElementsByTagName('span');
+    if (elError.length && elError[0].classList.contains('error-msg'))
+	return elError[0];
+
+    if (!create)
+	return null;
+    
+    var elError = document.createElement('span')
+    elError.classList.add('error-msg');
+    appendTextNode(elError, '');
+
+    el.parentNode.append(elError);
+    return elError;
+}
+
+Step.prototype._validateField = function(el){
+    if (el.checkValidity()){
+	var elError = this._getElError(el, false);
+	if (elError)
+	    elError.textContent = '';
+	return;
+    }
+
+    var elError = this._getElError(el);
+    elError.textContent = el.validationMessage;
+}
+
 /* ============================================================
                            StartStep
    ------------------------------------------------------------
@@ -207,8 +243,9 @@ function StartStep(form, storagePrefix){
 	  placeholder: 'Il suo cognome',
 	  required: true },
 	{ tagName: 'input',
-	  type: 'email',
+	  type: 'text',
 	  name: 'email',
+	  pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
 	  label: 'Email',
 	  placeholder: 'Email alla quale sarà contattato',
 	  required: true }
@@ -253,6 +290,18 @@ StartStep.prototype.save = function(){
 	if (field.tagName == 'input')
 	    sessionStorage.setItem(prefix + field.name, el.value);
     }
+}
+
+StartStep.prototype.checkValidity = function(){
+
+    if (this.form.checkValidity())
+	return true;
+
+    console.log('Here');
+    var inputs = this.form.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; ++i)
+	this._validateField(inputs[i]);
+    return false;
 }
 
 /* ============================================================
@@ -416,6 +465,20 @@ MessageStep.prototype.save = function(){
     }
 }
 
+MessageStep.prototype.checkValidity = function(){
+    if (this.form.checkValidity())
+	return true;
+
+
+    var tagNames = ['input', 'select', 'textarea'];
+    for (var j = 0; j < tagNames.length; ++j){
+	var fields = this.form.getElementsByTagName(tagNames[j]);
+	for (var i = 0; i < fields.length; ++i)
+	    this._validateField(fields[i]);
+    }
+    return false;
+}
+
 MessageStep.prototype._clear = function(clearAll=false){
     if (clearAll && this.ul){
 	while (this.ul.firstChild)
@@ -527,17 +590,36 @@ MessageStep.prototype._parseCustomField = function(raw){
 function SuccessStep(form, ticketId){
     this.form = form;
     this.ticketId = ticketId;
+
+    this.paragraphs = [
+	{text: 'Messaggio inviato con successo! Un operatore prenderà in carico il suo problema il prima possibile.'},
+	{text: 'Il suo numero di pratica è: '},
+	{text: ticketId, 'class': 'ticket-id'},
+	{text: 'Prenda nota del numero per poter visualizzare lo stato della sua pratica.'}
+    ]
 }
 
 SuccessStep.prototype = Object.create(Step.prototype);
 
 SuccessStep.prototype.render = function(){
-    var p = document.createElement('p');
-    var text = document.createTextNode('Brava Giovanna!' + this.ticketId);
-    p.append(text);
-    p.classList.add('fadeIn');
-    this.form.append(p);
-    fadeIn(p);
+
+    for (var i = 0; i < this.paragraphs.length; ++i){
+	var par = this.paragraphs[i];
+	var p = document.createElement('p');
+	appendTextNode(p, par.text);
+	if (par.class)
+	    p.classList.add(par.class);
+	p.classList.add('fadeIn');
+	
+	this.form.append(p);
+	fadeIn(p);
+    }
+
+    var button = document.createElement('a');
+    appendTextNode(button, 'Visualizza pratica');
+    button.classList.add('button', 'inline');
+    button.href = '/check_ticket.php';
+    this.form.append(button);
 }
 
 /* ============================================================

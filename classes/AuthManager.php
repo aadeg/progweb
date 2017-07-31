@@ -89,7 +89,7 @@ class AuthManager {
     public static function isAuthenticated(){
         return self::currentOperator() != null;
     }
-
+    
     public static function loginRequired(){
         $nextPage = $_SERVER['REQUEST_URI'];
         if (!self::isAuthenticated())

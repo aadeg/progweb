@@ -1,20 +1,29 @@
 function TicketList(el){
+    // CONFIG
+    this.priorityClasses = ['ticket-low', null, 'ticket-high'];
+    this.maxSubjectLength = 50;
+    this.pageSize = 15;
+    
     var self = this;
     this.el = el;
     this.elSearch = null;
     this.elTable = null;
     this.elTableBody = null;
+    this.elTableFoot = null;
     this.lastSearch = null;
     this.tickets = [];
     this.visibleTickets = [];
+    this.pageTickets = [];
     this.selectedRow = null;
-
+    this.page = 0;
+    
     var form = el.getElementsByClassName('ticket-search')[0];
     this.elSearch = form.getElementsByTagName('input')[0];
     this.elSearch.onkeyup = function(e) { return self._onSearch(e); };
 
     this.elTable = el.getElementsByClassName('ticket-table')[0];
     this.elTableBody = this.elTable.getElementsByTagName('tbody')[0];
+    this.elTableFoot = this.elTable.getElementsByTagName('tfoot')[0];
 }
 
 TicketList.prototype.load = function(url) {
@@ -24,28 +33,37 @@ TicketList.prototype.load = function(url) {
 	function (data) {
 	    for (var i = 0; i < data.length; ++i){
 		var ticket = data[i];
+		// Customer name
 		ticket.customer = ticket.cust_last_name + " " + ticket.cust_first_name;
-		if (ticket.priority == null)
-		    ticket.priority = '-';
 
-		ticket.last_activity = 0;
+		// Subject
+		if (ticket.subject.length > self.maxSubjectLength){
+		    ticket.subject = ticket.subject.slice(0, self.maxSubjectLength)
+		    ticket.subject += '...';
+		}
+
+		// Priority
+		ticket.rowClass = self.priorityClasses[ticket.priority];
+
 	    }
 
 	    self.tickets = data;
 	    self.visibleTickets = data;
+	    self._updatePageTickets();
 	    self.render();
 	}, loadingBox);
 }
 
 TicketList.prototype._getTicketRow = function(ticket){
     var row = document.createElement('tr');
+    if (ticket.rowClass)
+	row.classList.add(ticket.rowClass);
     row.id = 't-' + ticket.id
     var data = [
 	ticket.id,
 	ticket.subject,
 	ticket.customer,
 	ticket.category,
-	ticket.priority,
 	ticket.last_activity
     ];
     var centerCols = [3, 4];
@@ -65,19 +83,82 @@ TicketList.prototype._getTicketRow = function(ticket){
     return row;
 }
 
+TicketList.prototype._updatePageTickets = function(){
+    var start = this.page * this.pageSize;
+    var end = start + this.pageSize;
+    this.pageTickets = this.visibleTickets.slice(start, end);
+}
+
+TicketList.prototype._getPaginationDesc = function(){
+    var total = this.visibleTickets.length;
+    var start = this.page * this.pageSize + 1;
+    var end = start + Math.min(this.pageSize, this.pageTickets.length) - 1;
+    
+    var p = document.createElement('p');
+    var text = 'Ticket da ' + start + ' a ' + end + ' su ' + total;
+    appendTextNode(p, text);
+    return p;
+}
+
+TicketList.prototype._getPaginationCtrl = function(){
+    var self = this;
+    // Indice dell'ultima pagina
+    var lastPage = Math.floor(this.visibleTickets.length / this.pageSize);
+    var nextAct = this.page != lastPage;
+    var prevAct = this.page != 0;
+    
+    var div = document.createElement('div');
+    
+    var nextBtn = document.createElement('button');
+    appendTextNode(nextBtn, '>>');
+    nextBtn.type = 'button';
+    if (!nextAct)
+	nextBtn.disabled = true;
+
+    var prevBtn = document.createElement('button');
+    appendTextNode(prevBtn, '<<');
+    prevBtn.type = 'button';
+    if (!prevAct)
+	prevBtn.disabled = true;
+
+    nextBtn.onclick = function(e) { return self._onPagNext(e); };
+    prevBtn.onclick = function(e) { return self._onPagPrev(e); };
+
+    div.appendChild(nextBtn);
+    div.appendChild(prevBtn);
+    return div;
+}
+
 TicketList.prototype._clearTable = function(){
     var tbody = this.elTableBody;
     while (tbody.firstChild)
 	tbody.removeChild(tbody.firstChild);
+    var tfoot = this.elTableFoot;
+    while (tfoot.firstChild)
+	tfoot.removeChild(tfoot.firstChild);
 }
 
 TicketList.prototype.render = function() {
     this._clearTable();
-    for (var i = 0; i < this.visibleTickets.length; ++i){
-	var ticket = this.visibleTickets[i];
+
+    // body
+    for (var i = 0; i < this.pageTickets.length; ++i){
+	var ticket = this.pageTickets[i];
 	this.elTableBody.appendChild(this._getTicketRow(ticket));
     }
+
+    // foot
+    var tr = document.createElement('tr');
+    var tdDesc = document.createElement('td');
+    tdDesc.colSpan = 3;
+    tdDesc.appendChild(this._getPaginationDesc());
+    var tdCtrl = document.createElement('td');
+    tdCtrl.colSpan = 3;
+    tdCtrl.appendChild(this._getPaginationCtrl());
     
+    tr.appendChild(tdDesc);
+    tr.appendChild(tdCtrl);
+    this.elTableFoot.appendChild(tr);
 }
 
 TicketList.prototype._clearSelection = function() {
@@ -94,7 +175,6 @@ TicketList.prototype._onSearch = function(event){
     // - id
     // - oggetto
     // - cliente
-
     this._clearSelection();
 
     var newSearch = this.elSearch.value.toLowerCase();
@@ -114,7 +194,9 @@ TicketList.prototype._onSearch = function(event){
 	}
     }
 
+    this.page = 0;
     this.lastSearch = newSearch;
+    this._updatePageTickets();
     this.render();
 }
 
@@ -134,4 +216,21 @@ TicketList.prototype._onTicketDoubleClicked = function(event, row){
     var win = window.open(url, '_blank');
     win.focus();
     this._clearSelection();
+}
+
+TicketList.prototype._onPagNext = function(event){
+    ++this.page;
+    var start = this.page * this.pageSize;
+    var end = start + this.pageSize;
+    this._updatePageTickets();
+    this.render();
+}
+
+TicketList.prototype._onPagPrev = function(event){
+    --this.page;
+    var start = this.page * this.pageSize;
+    var end = start + this.pageSize;
+    this._updatePageTickets();
+    this.render();
+
 }

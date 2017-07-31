@@ -1,0 +1,83 @@
+body {
+    background-image: none;
+    background-color: #eee;
+}
+
+body > header {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+section.panel {
+    width: 100%;
+    margin: 0;
+}
+
+ul.message-list {
+    list-style: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 10px;
+    margin: 0 0 10px 0;
+    float: left;
+    background-color: #e0e0e0;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+li.message {
+    width: 100%;
+    clear: both;
+    float: left;
+    margin-bottom: 15px;
+}
+
+li.message:last-child {
+    margin-bottom: 0;
+}
+
+.message-text {
+    box-sizing: border-box;
+    max-width: 55%;
+    background-color: #fff;
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+
+.message-text p {
+    margin: 2px 0;
+}
+
+.customer .message-text {
+    float: left;
+    color: #fff;
+    background-color: #444;
+}
+
+.operator .message-text{
+    float: right;
+}
+
+span.message-time {
+    display: block;
+    text-align: right;
+    font-size: 0.6em;
+    font-style: italic;
+}
+
+span.message-sender {
+    display: block;
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+#messages-box form button {
+    margin: 10px 0;
+}
+
