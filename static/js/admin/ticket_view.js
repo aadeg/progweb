@@ -9,7 +9,6 @@ onLoadHandlers.push(function(){
     var url = '/admin/ajax/message.php?action=get';
     var messageHandler = new MessageHandler(elMsgList, elForm, ticketId, url,
 					    'Cliente', '');
-    messageHandler.loadAll();
 
     var elPriority = document.getElementById('priority-select');
     var elCategory = document.getElementById('category-select');
@@ -17,6 +16,8 @@ onLoadHandlers.push(function(){
     var elClose = document.getElementById('close-button');
     var elDelete = document.getElementById('delete-button');
     var elHeader = elMsgBox.getElementsByTagName('header')[0];
-    var ticketView = new TicketView(elPriority, elCategory, elAssign,
-				    elClose, elDelete, elHeader);
+    var ticketView = new TicketView(messageHandler, operatorId, elPriority,
+				    elCategory, elAssign, elClose, elDelete,
+				    elHeader);
+    messageHandler.loadAll();
 });

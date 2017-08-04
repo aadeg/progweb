@@ -27,6 +27,11 @@ class TicketCategory extends BaseModel {
             die($ris->errorMsg());
     }
 
+    public static function update($id, $fields){
+	return self::$db->update(
+	    self::TABLE_NAME, $fields, array('id' => $id));
+    }
+
     public static function delete($id){
 	$ris = self::$db->delete(self::TABLE_NAME,
 				 array('id' => $id));

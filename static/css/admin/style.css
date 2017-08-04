@@ -120,6 +120,17 @@ ul.input-list > li:first-child {
     margin: 0;
 }
 
+ul.input-row {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+ul.input-row > li {
+    list-style: none;
+    float: left;
+    margin: 0 5px;
+}
+
 input, select, textarea {
     width: 100%;
     font-size: 16px;
@@ -281,6 +292,7 @@ tfoot button {
 
 td {
     height: 2em;
+    cursor: pointer;
 }
 
 /* ================================ TICKET =============================== */

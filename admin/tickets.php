@@ -4,15 +4,17 @@ AuthManager::loginRequired();
 Template::addScript("../static/js/admin/TicketList.js");
 Template::addScript("../static/js/admin/ticket.js");
 
+use \View\AdminView;
+$view = AdminView::tickets();
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>
 
-<h2>Tickets</h2>
+<h2>Ticket</h2>
 
 <section class="panel ticket-list" id="ticket-list-new">
     <header>
-	<h3>Ticket non assegnati ad un operatore</h3>
+	<h3><?php echo $view->title; ?></h3>
     </header>
     <div class="body">
 	<form class="ticket-search" action="#">

@@ -1,6 +1,7 @@
 <?php
 namespace Ajax; 
 
+use \DateTime;
 use \Session;
 use \AuthManager;
 use \Model\Message;
@@ -37,7 +38,7 @@ class AjaxMessage extends AjaxRequest {
 	
 	if ($action == 'get')
 	    return $this->get($ticketId, $data);
-	else if ($action == 'add')
+	else if (!$userMode && $action == 'add')
 	    return $this->add($ticketId, $data);
 
 	return $this->error(400, "Azione '$action' non valida");
@@ -57,12 +58,15 @@ class AjaxMessage extends AjaxRequest {
 	if ($messageId){
 	    $msg = Message::getById($messageId, $ticketId);
 	    $this->putOperatorName($msg);
+	    $this->formatSendAt($msg);
 	    return $msg;
 	}
 
 	$msgs = Message::getByTicketId($ticketId);
-	foreach ($msgs as &$msg)
+	foreach ($msgs as &$msg){
 	    $this->putOperatorName($msg);
+	    $this->formatSendAt($msg);
+	}
 
 	return $msgs;
     }
@@ -78,6 +82,12 @@ class AjaxMessage extends AjaxRequest {
 	$msg->operator_name = $operator->first_name;
 	if (!$this->userMode)
 	    $msg->operator_name .= ' ' . $operator->last_name;
+    }
+
+    private function formatSendAt(&$msg){
+	$dt = DateTime::createFromFormat(
+	    'Y-m-d H:i:s', $msg->send_at);
+	$msg->send_at = $dt->format('d/m/Y H:i');
     }
 
     private function add($ticketId, $data){

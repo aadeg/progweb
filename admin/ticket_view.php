@@ -9,6 +9,7 @@ Template::addScript('../static/js/admin/TicketView.js');
 use \View\AdminView;
 use \Model\Message;
 
+$operator = AuthManager::currentOperator();
 $view = AdminView::ticketView();
 
 $optPriority = array("0" => "", "1" => "", "2" => "");
@@ -124,5 +125,7 @@ foreach ($optPriority as $key => &$value){
 	</div>
     </section>
 </div>
-
+<script>
+ var operatorId = <?php echo $operator->id; ?>;
+</script>
 <?php require '../includes/admin/base_end.php'; ?>

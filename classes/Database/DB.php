@@ -127,6 +127,8 @@ class DB {
         foreach ($fields as $field => $value){
 	    if ($value === "is null")
 		$str .= "{$field} is null";
+	    else if ($value === 'not null')
+	        $str .= "{$field} is not null";
 	    else if ($value === null && $allowedNull)
 	        $str .= "{$field}=null";
 	    else 

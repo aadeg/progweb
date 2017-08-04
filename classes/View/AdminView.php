@@ -14,6 +14,7 @@ use \Form\Field\HiddenField;
 use \Form\Field\PasswordField;
 use \Model\Ticket;
 use \Model\TicketCategory;
+use \Model\CustomField;
 use \Model\Message;
 use \Model\Operator;
 
@@ -58,6 +59,27 @@ class AdminView {
              Redirect::to($next);
         }
         return $view;
+    }
+
+    public static function tickets(){
+	$view = new \stdClass();
+
+	$type = Input::get('t');
+	if (!$type)
+	    Redirect::to('/admin/tickets.php?t=all');
+	
+	if ($type == 'new')
+	    $view->title = 'Ticket non assegnati ad un operatore';
+	else if ($type == 'pending')
+	    $view->title = 'Ticket in attesa di una risposta';
+	else if ($type == 'open')
+	    $view->title = 'Ticket aperti';
+	else if ($type == 'all')
+            $view->title = 'Tutti i ticket';
+	else
+	    Redirect::to('/admin/tickets.php?t=all');
+
+	return $view;
     }
 
     public static function ticketView(){
@@ -296,6 +318,69 @@ class AdminView {
 	    }
 	    Redirect::to('');
 	}
+
+	return $view;
+    }
+
+    public static function ticketCategories(){
+	$view = new \stdClass();
+
+	$categories =  TicketCategory::getAll()->rows();
+	foreach ($categories as &$cat){
+	    $cstmFields = CustomField::get(
+		array('ticket_category' => $cat->id)
+	    )->count();
+	    $cat->custom_fields = $cstmFields;
+
+	    $tickets = Ticket::get(
+		array('category' => $cat->id)
+	    )->count();
+	    $cat->tickets = $tickets;
+	}
+
+	$view->categories = $categories;
+	return $view;
+    }
+
+    public static function ticketCategory(){
+	$view = new \stdClass();
+
+	$categoryId = Input::get('id', 'GET');
+	if (!$categoryId)
+	    Redirect::to(404);
+	$category = TicketCategory::getById($categoryId);
+	if (!$category)
+	    Redirect::to(404);
+
+	$categoryForm = new Form(array(
+	    new TextField('label', 'Etichetta', array(
+		"placeholder" => 'Nome della categoria mostrata all\'utente',
+		"required" => "",
+		"autofocus" => "",
+		"value" => $category->label
+	    ))));
+	$view->category = $category;
+	$view->categoryForm = $categoryForm;
+
+	if (Input::isSubmit()){
+	    $view->categoryForm->setValues(Input::getAll());
+
+	    $label = Input::get('label');
+	    if (!$label){
+		Session::flash('Etichetta della categoria mancante.',
+			       'error');
+		return $view;
+	    }
+
+	    TicketCategory::update(
+		$category->id,
+		array('label' => $label)
+	    );
+	    Session::flash('Etichetta modificata con successo.');
+	    Redirect::to('');
+	}
+	
+
 
 	return $view;
     }

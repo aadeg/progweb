@@ -97,4 +97,10 @@ class AuthManager {
                          array("next" => $nextPage));
     }
 
+    public static function adminRequired(){
+	$operator = self::currentOperator();
+	if (!$operator || !$operator->is_admin)
+	    Redirect::to(403);
+    }
+
 }

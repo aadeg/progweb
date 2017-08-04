@@ -1,6 +1,7 @@
 <?php
 require_once '../core/init.php';
 AuthManager::loginRequired();
+Template::addScript('../static/js/admin/operators.js');
 
 use \View\AdminView;
 
@@ -9,10 +10,12 @@ $view = AdminView::operators();
 
 function _operatorRow($op){
     $html = <<<EOD
+<tr id="o-{$op->id}">
 <td>{$op->id}</td>
 <td>{$op->first_name} {$op->last_name}</td>
 <td>{$op->username}</td>
 <td>{$op->email}</td>
+</tr>
 EOD;
     return $html;
 }
@@ -39,9 +42,7 @@ EOD;
 	    </thead>
 	    <tbody>
 		<?php foreach($view->operators as $op){ ?>
-		    <tr>
-			<?php echo _operatorRow($op); ?>
-		    </tr>
+		    <?php echo _operatorRow($op); ?>
 		<?php } ?>
 	    </tbody>
 	</table>

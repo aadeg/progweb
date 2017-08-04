@@ -11,4 +11,5 @@ onLoadHandlers.push(function(){
 					    'Tu', '');
 
     messageHandler.loadAll();
+    messageHandler.enable();
 });

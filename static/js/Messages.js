@@ -6,15 +6,15 @@ function MessageHandler(elBox, elForm, ticketId, url,
     this.elBox = elBox;
     this.elForm = elForm;
     this.elMsgTextarea = this.elForm.getElementsByTagName('textarea')[0];
+    this.elMsgTextarea.disabled = true;
 
     this.ticketId = ticketId;
+    this.enabled = false;
     this.url = url + '&ticket=' + this.ticketId;
     this.customerLabel = customerLabel;
     this.operatorPrefix = operatorPrefix;
     this.messages = 0;
-    this.elForm.onsubmit = function(e) { return self._onSendMessage(e); };
-    this.autoRefresh = setInterval(function() { return self._onRefresh(); },
-				   20000);
+    this.autoRefresh = null;
 }
 
 MessageHandler.prototype.loadAll = function(data=null){
@@ -45,6 +45,18 @@ MessageHandler.prototype.load = function(id){
 	    msg.render(self.elBox);
 	    self.messages += 1;
 	}, loadingBox);   
+}
+
+MessageHandler.prototype.enable = function(){
+    if (this.enabled)
+	return;
+    var self = this;
+    
+    this.elForm.onsubmit = function(e) { return self._onSendMessage(e); };
+    this.autoRefresh = setInterval(function() { return self._onRefresh(); },
+				   20000);
+    this.elMsgTextarea.disabled = false;
+    this.enabled = true;
 }
 
 MessageHandler.prototype._clear = function(){

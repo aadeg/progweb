@@ -8,8 +8,9 @@ $itemSelected = array(
     "0" => "/^\/admin\/(index\.php)?$/",
     "1" => "/^\/admin\/tickets\.php(\?)?/",
     "1-0" => "/^\/admin\/tickets\.php\?(.*)t=new/",
-    "1-1" => "/^\/admin\/tickets\.php\?(.*)t=open/",
-    "1-2" => "/^\/admin\/tickets\.php\?(.*)t=all/",
+    "1-1" => "/^\/admin\/tickets\.php\?(.*)t=pending/",
+    "1-2" => "/^\/admin\/tickets\.php\?(.*)t=open/",
+    "1-3" => "/^\/admin\/tickets\.php\?(.*)t=all/",
     "2" => "/^\/admin\/(add_operator|operators|ticket_categories)\.php/",
     "2-0" => "/^\/admin\/operators\.php/",
     "2-1" => "/^\/admin\/add_operator\.php/",
@@ -44,8 +45,9 @@ function selMenu($index){
 	    <ul class="side-menu second-lvl collapsed">
 		<li><a href="/admin/tickets.php?t=new" class="<?php echo selMenu("1-0"); ?>">Nuovi</a>
 		</li>
-		<li><a href="/admin/tickets.php?t=open" class="<?php echo selMenu("1-1"); ?>">Aperti</a></li>
-		<li><a href="/admin/tickets.php?t=all" class="<?php echo selMenu("1-2"); ?>">Tutti</a>
+		<li><a href="/admin/tickets.php?t=pending" class="<?php echo selMenu("1-1"); ?>">In attesa</a></li>
+		<li><a href="/admin/tickets.php?t=open" class="<?php echo selMenu("1-2"); ?>">Aperti</a></li>
+		<li><a href="/admin/tickets.php?t=all" class="<?php echo selMenu("1-3"); ?>">Tutti</a>
 	    </ul>
 	</li>
 	<?php if ($operator->is_admin) { ?>

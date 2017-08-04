@@ -1,7 +1,5 @@
 // required: common.js, effects.js
 
-// TODO: Messaggio di attesa durante il caricamento dei campi custom
-// TODO: Validazione della form ad ogni step
 // TODO: Bug con custom field di tipo select
 
 
@@ -158,6 +156,7 @@ Step.prototype._getField = function(obj){
     var _label = (obj.required) ? obj.label + '*' : obj.label;
     
     var el = document.createElement(obj.tagName);
+    el.id = obj.name;
     el.name = obj.name;
     el.placeholder = obj.placeholder;
     el.required = obj.required;
@@ -325,6 +324,10 @@ function MessageStep(form, storagePrefix){
 	tagName: 'select',
 	name: 'category',
 	label: 'Tipologia di problema',
+
+
+
+
 	placeholder: null,
 	options: null,
 	required: true
@@ -333,9 +336,12 @@ function MessageStep(form, storagePrefix){
     this.elCategory = null;
     this.curCategory = sessionStorage.getItem(
 	this.storagePrefix + this.categorySelect.name);
-    if (this.curCategory == "0")
+    if (this.curCategory == "0" || this.curCategory < 1)
 	this.curCategory = null;
     this.customFields = {};
+
+
+    console.log(this.curCategory);
 
     this.showSubject = (this.curCategory) ? true : false;
     this.showMessage = (this.curCategory) ? true : false;
@@ -508,7 +514,6 @@ MessageStep.prototype._onCategoryChange = function(event){
     self._clear();
     this.save();
     if (!(newCategory in this.customFields)){
-	// TODO: Loading message
 	this._fetchCustomField(
 	    newCategory,
 	    function(){ self.render(false); self.load(); }
@@ -537,7 +542,7 @@ MessageStep.prototype._loadCategories = function(){
 
 MessageStep.prototype._fetchCustomField = function(category, callback){
     var self = this;
-    var url = 'ajax/custom_fields.php?category=' + category;
+    var url = 'ajax/custom_field.php?action=get&category=' + category;
     AjaxManager.performAjaxRequest(
 	'GET', url, true, {}, function(data){
 	    var store = [];
@@ -558,6 +563,14 @@ MessageStep.prototype._parseCustomField = function(raw){
     if (raw.type == "select" || raw.type == 'textarea')
 	tagName = raw.type;
 
+    var options = [];
+    if (raw.select_options){
+	var splitted = raw.select_options.split(',');
+	for (var i = 0; i < splitted.length; ++i){
+	    var option = splitted[i];
+	    options.push({value: option, text: option});
+	}
+    }
 
     var desc = {
 	tagName: tagName,
@@ -565,7 +578,7 @@ MessageStep.prototype._parseCustomField = function(raw){
 	name: name,
 	label: raw.label,
 	placeholder: raw.placeholder,
-	options: raw.options,
+	options: options,
 	required: raw.required
     };
 
@@ -602,6 +615,7 @@ function SuccessStep(form, ticketId){
 SuccessStep.prototype = Object.create(Step.prototype);
 
 SuccessStep.prototype.render = function(){
+    sessionStorage.clear();
 
     for (var i = 0; i < this.paragraphs.length; ++i){
 	var par = this.paragraphs[i];
@@ -636,8 +650,8 @@ ErrorStep.prototype = Object.create(Step.prototype);
 
 ErrorStep.prototype.render = function(){
     var p = document.createElement('p');
-    var text = document.createTextNode('Giovanna è scappata! :(');
-    p.append(text);
+    appendTextNode(p, 'Errore imprevisto durante l\'invio della pratica. ' +
+		      'La invitiamo a riprovare più tradi.');
     p.classList.add('fadeIn');
     this.form.append(p);
     fadeIn(p);

@@ -8,7 +8,18 @@ use \Model\TicketCategory;
 use \Model\Operator;
 
 class AjaxTicket extends AjaxRequest {
-    
+
+    private static $filters = array(
+	'new' => array(
+	    'operator' => null
+	),
+	'pending' => array(
+	    'status' => 'pending',
+	    'operator' => 'not null'
+	)
+    );
+	    
+
     protected function getAllowedMethods() {
 	 return ['GET', 'POST'];
     }
@@ -32,16 +43,17 @@ class AjaxTicket extends AjaxRequest {
     }
 
     private function get($data){
-	$searchableFields = ['id', 'cust_first_name', 'cust_last_name',
-			    'cust_email', 'subject', 'category',
-			    'operator', 'status'];
-
+	$searchableFields = ['id', 'filter'];
 	foreach ($data as $field => $value){
 	    if (!in_array($field, $searchableFields))
 		return $this->error(400, "Campo '$field' non valido");
 	}
-	if (isset($data['operator']) && $data['operator'] == 'null')
-	    $data['operator'] = null;
+
+	$filter = @$data['filter'] ? : null;
+	if ($filter)
+	    unset($data['filter']);
+	if ($filter && isset(self::$filters[$filter]))
+	    $data = array_merge($data, self::$filters[$filter]);
 	
 	$tickets = Ticket::get(
 	    $data,
@@ -72,7 +84,7 @@ class AjaxTicket extends AjaxRequest {
     }
 
     private function edit($data){
-	$editableFields = ['priority', 'operator', 'category'];
+	$editableFields = ['priority', 'operator', 'category', 'status'];
 	if (!isset($data['id']))
 	    return $this->error(400, "Campo 'id' mancante");
 
@@ -87,8 +99,11 @@ class AjaxTicket extends AjaxRequest {
 	$priority = @$data['id'] ? : null;
 	$operatorId = @$data['operator'] ? : null;
 	$categoryId = @$data['category'] ? : null;
-	if ($operatorId == "null")
+	$status = @$data['status'] ? : null;
+	if ($operatorId == "null"){
 	    $operatorId = null;
+	    $data['operator'] = null;
+	}
 
 	if ($priority && ($priority < 0 || $priority > 2))
 	    return $this->error(400, "Priorità non valida");
@@ -100,6 +115,8 @@ class AjaxTicket extends AjaxRequest {
 	if ($categoryId && !TicketCategory::getById($categoryId))
 	    return $this->error(400, "Categoria non valida");
 
+	if ($status != 'OPEN' && $status != 'PENDING' && $status != 'CLOSE')
+	    return $this->error(400, "Status non valido");
 
 	Ticket::update($ticketId, $data);
 	return [];

@@ -1,6 +1,7 @@
 <?php
 require_once '../core/init.php';
 AuthManager::loginRequired();
+AuthManager::adminRequired();
 
 use \View\AdminView;
 
@@ -12,7 +13,7 @@ $view = AdminView::addOperator();
 
 <h2>Aggiungi operatore</h2>
 
-<?php require "../includes/admin/flash_messages.php"; ?
+<?php require "../includes/admin/flash_messages.php"; ?>
 
 <section class="panel">
     <header>
