@@ -40,6 +40,10 @@ $view = AdminView::ticketCategory();
 
     <div class="body">
     </div>
+
+    <footer>
+	<button type="button" id="btn-add-field">Aggiungi un nuovo campo</button>
+    </footer>
 </section>
 
 <?php require '../includes/admin/base_end.php'; ?>

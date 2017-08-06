@@ -1,16 +1,19 @@
-function TicketList(el){
-    // CONFIG
+function TicketList(el, operatorId){
+    // ( CONFIG
     this.priorityClasses = ['ticket-low', null, 'ticket-high'];
     this.maxSubjectLength = 50;
     this.pageSize = 15;
+    // )
     
     var self = this;
+    this.operatorId = operatorId;
     this.el = el;
     this.elSearch = null;
     this.elTable = null;
     this.elTableBody = null;
     this.elTableFoot = null;
     this.lastSearch = null;
+    this.lastCheckbox = null;
     this.tickets = [];
     this.visibleTickets = [];
     this.pageTickets = [];
@@ -18,8 +21,11 @@ function TicketList(el){
     this.page = 0;
     
     var form = el.getElementsByClassName('ticket-search')[0];
-    this.elSearch = form.getElementsByTagName('input')[0];
+    this.elSearch = document.getElementById('search-bar');
+    this.elCheckbox = document.getElementById('only-checkbox');
+
     this.elSearch.onkeyup = function(e) { return self._onSearch(e); };
+    this.elCheckbox.onchange = function(e) { return self._onSearch(e); };
 
     this.elTable = el.getElementsByClassName('ticket-table')[0];
     this.elTableBody = this.elTable.getElementsByTagName('tbody')[0];
@@ -175,22 +181,35 @@ TicketList.prototype._onSearch = function(event){
     // - id
     // - oggetto
     // - cliente
+    // - operatore
     this._clearSelection();
 
     var newSearch = this.elSearch.value.toLowerCase();
-    if (newSearch == this.lastSearch) return;
+    var newCheckbox = this.elCheckbox.checked;
+    if (newSearch == this.lastSearch && newCheckbox == this.lastCheckbox)
+	return;
 
-    if (!newSearch){
+    if (!newSearch && !newCheckbox){
 	this.visibleTickets = this.tickets;
     } else {
 	this.visibleTickets = [];
 	for (var i = 0; i < this.tickets.length; ++i){
 	    var ticket = this.tickets[i];
-	    if (ticket.id.startsWith(newSearch) || 
-		ticket.subject.toLowerCase().includes(newSearch) ||
-		ticket.customer.toLowerCase().includes(newSearch)){
-		this.visibleTickets.push(this.tickets[i]);
+	    var insert = true;
+
+	    if (newSearch){
+		insert &= (
+		    ticket.id.startsWith(newSearch) || 
+		    ticket.subject.toLowerCase().includes(newSearch) ||
+		    ticket.customer.toLowerCase().includes(newSearch)
+		);
 	    }
+
+	    if (newCheckbox)
+		insert &= ticket.operator == this.operatorId;
+
+	    if (insert)
+		this.visibleTickets.push(ticket);
 	}
     }
 

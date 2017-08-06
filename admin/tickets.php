@@ -1,6 +1,7 @@
 <?php
 require_once '../core/init.php';
 AuthManager::loginRequired();
+Template::addStylesheet("../static/css/admin/tickets.css");
 Template::addScript("../static/js/admin/TicketList.js");
 Template::addScript("../static/js/admin/ticket.js");
 
@@ -18,10 +19,11 @@ $view = AdminView::tickets();
     </header>
     <div class="body">
 	<form class="ticket-search" action="#">
-	    <!-- <label>Mostra solo i tuoi</label>
-	    <input type="checkbox">-->
-		
-	    <input type="text" placeholder="Ricerca nella tabella">
+	    <input type="text" id="search-bar" placeholder="Ricerca nella tabella">
+	    <div id="only-checkbox-div">
+		<label for="only-checkbox">Mostra solo i tuoi</label>
+		<input id="only-checkbox" type="checkbox">
+	    </div>
 	</form>
 
 	<table class="ticket-table">
@@ -41,5 +43,9 @@ $view = AdminView::tickets();
 	</table>
     </div>
 </section>
+
+<script>
+ var operatorId = <?php echo AuthManager::currentOperator()->id; ?>
+</script>
 
 <?php require '../includes/admin/base_end.php'; ?>

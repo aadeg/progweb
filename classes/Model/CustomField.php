@@ -28,18 +28,10 @@ class CustomField extends BaseModel {
 	)->rows();
     }
 
-    public static function create(){
-	/*
-        $ris = self::$db->insert(self::TABLE_NAME, array(
-	    "cus_first_name" => $cus_first_name,
-	    "cus_last_name" => $cus_last_name, 
-	    "cus_email" => $cus_email,
-	    "subject" => $subject,
-	    "category" => $category, 
-	    "open_at" => $open_at
-	));
+    public static function create($data){
+        $ris = self::$db->insert(self::TABLE_NAME, $data);
         if ($ris->error())
-            die($ris->errorMsg());*/
+            die($ris->errorMsg());
     }
 
     public static function update($id, $fields){

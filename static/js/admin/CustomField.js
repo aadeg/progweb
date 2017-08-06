@@ -1,8 +1,15 @@
 // required: common.js
 
-function CustomFieldHandler(el, categoryId){
+function CustomFieldHandler(el, elAddBtn, categoryId){
+    var self = this;
+    
     this.el = el;
+    this.elAddBtn = elAddBtn;
     this.categoryId = categoryId;
+
+    this.newCustonField = null;
+
+    this.elAddBtn.onclick = function(e) { return self._onAdd(e); }
 }
 
 CustomFieldHandler.prototype.load = function(){
@@ -21,6 +28,13 @@ CustomFieldHandler.prototype.load = function(){
 	}, loadingBox);
 }
 
+CustomFieldHandler.prototype._onAdd = function(event){
+    this.elAddBtn.disabled = true;
+    this.elAddBtn.onclick = null;
+    
+    this.newCustonField = new CustomField(this.el, {}, true, this.categoryId);
+    this.newCustonField.render();
+}
 
 /* ============================================================
    ------------------------------------------------------------
@@ -142,9 +156,10 @@ var _variableFields = {
     ]
 }
 
-function CustomField(el, data, _new=false){
+function CustomField(el, data, _new=false, categoryId=null){
     this.data = data;
     this.new = _new;
+    this.categoryId = categoryId;
     
     this.el = el;
     this.elForm = null;
@@ -370,6 +385,11 @@ CustomField.prototype._onTypeChange = function(event){
 }
 
 CustomField.prototype._onConfirm = function(event){
+    if (!this.elForm.checkValidity()){
+	alert('Compila correttamente tutti i campi necessari');
+	return;
+    }
+    
     var url = '/admin/ajax/custom_field.php';
     var data = {
 	action: 'update',
@@ -410,11 +430,30 @@ CustomField.prototype._onDelete = function(event){
 }
 
 CustomField.prototype._onAdd = function(event){
-    console.log('Add - ID: ' + this.data.id);
+    if (!this.elForm.checkValidity()){
+	alert('Compila correttamente tutti i campi necessari');
+	return;
+    }
+    
+    var url = '/admin/ajax/custom_field.php';
+    var data = {
+	action: 'add',
+	ticket_category: this.categoryId
+    };
+    Object.assign(data, this._getFormData());
+    AjaxManager.performAjaxRequest(
+	'post', url, true, data, function(data, status){
+	    if (status != 200){
+		alert('Errore durante la modifica');
+		return;
+	    }
+
+	    window.location.reload();
+	}, loadingBox);
 }
 
 CustomField.prototype._onAbort = function(event){
-    console.log('Abort - ID: ' + this.data.id);
+    window.location.reload();
 }
 
 

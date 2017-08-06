@@ -115,7 +115,8 @@ class AjaxTicket extends AjaxRequest {
 	if ($categoryId && !TicketCategory::getById($categoryId))
 	    return $this->error(400, "Categoria non valida");
 
-	if ($status != 'OPEN' && $status != 'PENDING' && $status != 'CLOSE')
+	$validStatus = ['OPEN', 'PENDING', 'CLOSE'];
+	if ($status && !in_array($status, $validStatus))
 	    return $this->error(400, "Status non valido");
 
 	Ticket::update($ticketId, $data);

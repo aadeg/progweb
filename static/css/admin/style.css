@@ -295,22 +295,6 @@ td {
     cursor: pointer;
 }
 
-/* ================================ TICKET =============================== */
-form.ticket-search {
-    text-align: right;
-    margin-bottom: 10px;
-}
-
-form.ticket-search input {
-    width: 30%;
-    padding: 0 5px;
-    height: 1.5em;
-    font-size: 0.95em;
-}
-table.ticket-table tbody tr:hover {
-    cursor: pointer;
-}
-
 dt {
     font-weight: bold;
     display: inline;
@@ -321,19 +305,3 @@ dd {
     display: inline;
 }
 
-tr.ticket-high {
-    background-color:  #d98880;
-    color: #fff;
-}
-
-tr.ticket-high.selected {
-    background-color: #C0392B;
-}
-
-tr.ticket-high:hover {
-    background-color:  #cd6155;
-}
-
-tr.ticket-low {
-    color: #6f6f6f;
-}

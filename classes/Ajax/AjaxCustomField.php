@@ -47,6 +47,27 @@ class AjaxCustomField extends AjaxRequest {
     }
 
     private function add($data){
+	$requiredFields = ['label', 'type', 'ticket_category'];
+	foreach ($requiredFields as $req){
+	    if (!isset($data[$req]))
+		return $this->error(400, "Campo '{$req}' mancante");
+	}
+	$allowedFields = ['label', 'type', 'ticket_category', 'placeholder',
+			  'order_index', 'required', 'default_value',
+			  'min_value', 'max_value', 'regex_pattern',
+			  'select_options'];
+	foreach ($data as $key => &$value){
+	    if (!in_array($key, $allowedFields))
+		return $this->error(400, "Campo '{$key}' non valido");
+
+	    $value = ($value == '') ? null : $value;
+	}
+	if (isset($data['required']) && $data['required'] == 'true')
+	    $data['required'] = true;
+	else
+	    $data['required'] = false;
+	
+	CustomField::create($data);
 	return [];
     }
 
