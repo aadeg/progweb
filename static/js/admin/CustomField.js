@@ -196,14 +196,14 @@ CustomField.prototype.render = function(all=true){
     if (!this.elForm){
 	this.elForm = document.createElement('form');
 	this.elForm.classList.add('custom-field');
-	this.el.append(this.elForm);
+	this.el.appendChild(this.elForm);
     }
     this.clear(all);
 
     if (all){
 	for (var i = 0; i < _fields.length; ++i){
 	    var row = this._getInputRow(i);
-	    this.elForm.append(row);
+	    this.elForm.appendChild(row);
 	}
 	this._setEventHandlers();
     }
@@ -211,8 +211,8 @@ CustomField.prototype.render = function(all=true){
     // Variable Fields
     row = this._getVariableInputRow();
     if (row)
-	this.elForm.append(row);
-    this.elForm.append(this._getButtons());
+	this.elForm.appendChild(row);
+    this.elForm.appendChild(this._getButtons());
     console.log(this._getFormData());
 }
 
@@ -239,9 +239,9 @@ CustomField.prototype._getField = function(obj){
 	    var elOpt = document.createElement('option');
 	    var optText = document.createTextNode(
 		obj.options[opt].text);
-	    elOpt.append(optText);
+	    elOpt.appendChild(optText);
 	    elOpt.value = obj.options[opt].value;
-	    el.append(elOpt);
+	    el.appendChild(elOpt);
 	}
     }
 
@@ -256,13 +256,13 @@ CustomField.prototype._getField = function(obj){
     var label = document.createElement('label');
     label.for = _name;
     var labelText = document.createTextNode(_label);
-    label.append(labelText);
+    label.appendChild(labelText);
 
     // Li
     var li = document.createElement('li');
     li.classList.add(obj.class);
-    li.append(label);
-    li.append(el);
+    li.appendChild(label);
+    li.appendChild(el);
     return {li: li, field: el, label: label};
 }
 
@@ -288,8 +288,8 @@ CustomField.prototype._getButtons = function(){
 	    this.elBtnDelete.onclick = function(e) { return self._onDelete(e); };
 	}
 
-	this.elBtns.append(this.elBtnConfirm);
-	this.elBtns.append(this.elBtnDelete);
+	this.elBtns.appendChild(this.elBtnConfirm);
+	this.elBtns.appendChild(this.elBtnDelete);
     }
 
     return this.elBtns;
@@ -306,12 +306,12 @@ CustomField.prototype._getInputRow = function(index){
     for (var i = 0; i < rowFields.length; ++i){
 	var field = rowFields[i];
 	var renderedField = this._getField(field);
-	row.append(renderedField.li);
+	row.appendChild(renderedField.li);
     }
 
     var divClear = document.createElement('div');
     divClear.classList.add('clear');
-    row.append(divClear);
+    row.appendChild(divClear);
 
     this.elInputRows[index] = row;
     return this.elInputRows[index];
@@ -328,11 +328,11 @@ CustomField.prototype._getVariableInputRow = function(){
     row.classList.add('input-row');
     for (var i = 0; i < varFields.length; ++i){
 	var renderedField = this._getField(varFields[i]);
-	row.append(renderedField.li);
+	row.appendChild(renderedField.li);
     }
     var divClear = document.createElement('div');
     divClear.classList.add('clear');
-    row.append(divClear);
+    row.appendChild(divClear);
     this.elVariableInputRow = row;
     return this.elVariableInputRow;
 }
@@ -395,7 +395,7 @@ CustomField.prototype._onConfirm = function(event){
 	action: 'update',
 	id: this.data.id
     };
-    Object.assign(data, this._getFormData());
+    objectAssign(data, this._getFormData());
     AjaxManager.performAjaxRequest(
 	'post', url, true, data, function(data, status){
 	    if (status != 200){
@@ -440,7 +440,7 @@ CustomField.prototype._onAdd = function(event){
 	action: 'add',
 	ticket_category: this.categoryId
     };
-    Object.assign(data, this._getFormData());
+    objectAssign(data, this._getFormData());
     AjaxManager.performAjaxRequest(
 	'post', url, true, data, function(data, status){
 	    if (status != 200){

@@ -170,9 +170,9 @@ Step.prototype._getField = function(obj){
 	    var elOpt = document.createElement('option');
 	    var optText = document.createTextNode(
 		obj.options[opt].text);
-	    elOpt.append(optText);
+	    elOpt.appendChild(optText);
 	    elOpt.value = obj.options[opt].value;
-	    el.append(elOpt);
+	    el.appendChild(elOpt);
 	}
     }
 
@@ -180,16 +180,19 @@ Step.prototype._getField = function(obj){
     var label = document.createElement('label');
     label.for = obj.name;
     var labelText = document.createTextNode(_label);
-    label.append(labelText);
+    label.appendChild(labelText);
 
     // Li
     var li = document.createElement('li');
-    li.append(label);
-    li.append(el);
+    li.appendChild(label);
+    li.appendChild(el);
     return {li: li, field: el, label: label};
 }
 
-Step.prototype._getElError = function(el, create=true){
+Step.prototype._getElError = function(el, create){
+    if (create === undefined)
+        create = true;
+
     var elError = el.parentNode.getElementsByTagName('span');
     if (elError.length && elError[0].classList.contains('error-msg'))
 	return elError[0];
@@ -201,7 +204,7 @@ Step.prototype._getElError = function(el, create=true){
     elError.classList.add('error-msg');
     appendTextNode(elError, '');
 
-    el.parentNode.append(elError);
+    el.parentNode.appendChild(elError);
     return elError;
 }
 
@@ -257,11 +260,11 @@ StartStep.prototype.render = function(){
     var ul = document.createElement('ul');
     ul.classList.add('input-list');
     ul.classList.add('fadeIn');
-    this.form.append(ul);
+    this.form.appendChild(ul);
 
     for (var i = 0; i < this.fields.length; ++i){
 	var el = this._getField(this.fields[i]).li;
-	ul.append(el);
+	ul.appendChild(el);
     }
 
     fadeIn(ul);
@@ -372,13 +375,16 @@ function MessageStep(form, storagePrefix){
 
 MessageStep.prototype = Object.create(Step.prototype);
 
-MessageStep.prototype.render = function(renderAll=true){
+MessageStep.prototype.render = function(renderAll){
+    if (renderAll === undefined)
+        renderAll = true;
+
     var self = this;
     var ul = document.createElement('ul');
     ul.classList.add('input-list');
     ul.classList.add('fadeIn');
     this.ul = ul;
-    this.form.append(ul);
+    this.form.appendChild(ul);
 
     this.dynamicElements = [];
     // === Category select
@@ -386,14 +392,14 @@ MessageStep.prototype.render = function(renderAll=true){
 	var select = this._getField(this.categorySelect);
 	this.elCategory = select.field;
 	select.field.onchange = function(e) { return self._onCategoryChange(e); };
-	ul.append(select.li);
+	ul.appendChild(select.li);
     }
 
     // === Subject
     if (this.showSubject){
 	if (!this.subjectField)
 	    this.subjectField = this._getField(this.subject);
-	ul.append(this.subjectField.li);
+	ul.appendChild(this.subjectField.li);
 	this.dynamicElements.push(this.subjectField.li);
     }
 
@@ -401,7 +407,7 @@ MessageStep.prototype.render = function(renderAll=true){
     if (this.curCategory in this.customFields){
 	var cusF = this.customFields[this.curCategory];
 	for (var i = 0; i < cusF.length; ++i){
-	    ul.append(cusF[i].li);
+	    ul.appendChild(cusF[i].li);
 	    this.dynamicElements.push(cusF[i].li);
 	}
     }
@@ -410,7 +416,7 @@ MessageStep.prototype.render = function(renderAll=true){
     if (this.showMessage){
 	if (!this.messageField)
 	    this.messageField = this._getField(this.message);
-	ul.append(this.messageField.li);
+	ul.appendChild(this.messageField.li);
 	this.dynamicElements.push(this.messageField.li);
     }
 
@@ -485,7 +491,10 @@ MessageStep.prototype.checkValidity = function(){
     return false;
 }
 
-MessageStep.prototype._clear = function(clearAll=false){
+MessageStep.prototype._clear = function(clearAll){
+    if (clearAll === undefined)
+        clearAll = false;
+
     if (clearAll && this.ul){
 	while (this.ul.firstChild)
 	    this.ul.removeChild(this.ul.firstChild);
@@ -625,7 +634,7 @@ SuccessStep.prototype.render = function(){
 	    p.classList.add(par.class);
 	p.classList.add('fadeIn');
 	
-	this.form.append(p);
+	this.form.appendChild(p);
 	fadeIn(p);
     }
 
@@ -633,7 +642,7 @@ SuccessStep.prototype.render = function(){
     appendTextNode(button, 'Visualizza pratica');
     button.classList.add('button', 'inline');
     button.href = '/check_ticket.php';
-    this.form.append(button);
+    this.form.appendChild(button);
 }
 
 /* ============================================================
@@ -653,7 +662,7 @@ ErrorStep.prototype.render = function(){
     appendTextNode(p, 'Errore imprevisto durante l\'invio della pratica. ' +
 		      'La invitiamo a riprovare più tradi.');
     p.classList.add('fadeIn');
-    this.form.append(p);
+    this.form.appendChild(p);
     fadeIn(p);
 }
 

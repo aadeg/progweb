@@ -38,7 +38,7 @@ class AjaxMessage extends AjaxRequest {
 	
 	if ($action == 'get')
 	    return $this->get($ticketId, $data);
-	else if (!$userMode && $action == 'add')
+	else if ($action == 'add')
 	    return $this->add($ticketId, $data);
 
 	return $this->error(400, "Azione '$action' non valida");

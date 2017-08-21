@@ -123,22 +123,22 @@ Message.prototype.render = function(el){
     sender.classList.add('message-sender');
     if (senderText)
 	appendTextNode(sender, senderText);
-    divText.append(sender);
+    divText.appendChild(sender);
 
     var pars = this.data.text.split('\n');
     for (var i = 0; i < pars.length; ++i){
 	var p = document.createElement('p');
 	appendTextNode(p, pars[i]);
-	divText.append(p);
+	divText.appendChild(p);
     }
 
     var time = document.createElement('span');
     time.classList.add('message-time');
     appendTextNode(time, this.data.send_at);
-    divText.append(time);
+    divText.appendChild(time);
 
-    li.append(divText);
-    el.append(li);
+    li.appendChild(divText);
+    el.appendChild(li);
     fadeIn(li);
 }
 

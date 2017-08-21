@@ -12,7 +12,7 @@ function hasClass(el, cl){
 
 function appendTextNode(el, text){
     var textNode = document.createTextNode(text);
-    el.append(textNode);
+    el.appendChild(textNode);
 }
 
 function getSearchParameters(){
@@ -32,6 +32,29 @@ function getSearchParameters(){
     return parms;
 }
 
+function arrayHas(array, item){
+    return array.indexOf(item) != -1;
+}
+
+function stringContains(str, sub){
+    return str.indexOf(sub) != -1;
+}
+
+function objectAssign(target, varArgs){
+    var to = Object(target);
+
+    for (var i = 1; i < arguments.length; ++i){
+        var source = arguments[i];
+        if (source == null)
+            continue;
+        for (var key in source)
+            if (Object.prototype.hasOwnProperty.call(source, key))
+                to[key] = source[key];
+    }
+
+    return to;
+}
+
 /* ============================================================
                            LoadingBox
    ============================================================ */
@@ -40,7 +63,10 @@ function LoadingBox() {
     this.el = null;
 }
 
-LoadingBox.prototype.startLoading = function(num=1) {
+LoadingBox.prototype.startLoading = function(num) {
+    if (num === undefined)
+        num = 1;
+
     if (this.counter <= 0){
 	this._show();
 	this.counter = 0;
@@ -48,7 +74,9 @@ LoadingBox.prototype.startLoading = function(num=1) {
     this.counter += num;
 }
 
-LoadingBox.prototype.stopLoading = function(num=1) {
+LoadingBox.prototype.stopLoading = function(num) {
+    if (num === undefined)
+        num = 1;
     this.counter -= num;
     if (this.counter <= 0){
 	this._hide();
@@ -65,11 +93,11 @@ LoadingBox.prototype._show = function(){
     var animation = document.createElement('img');
     animation.classList.add('loading-animation');
     animation.src = '../static/imgs/loading.gif';
-    this.el.append(animation);
+    this.el.appendChild(animation);
     var text = document.createTextNode('Caricamento in corso');
-    this.el.append(text);
+    this.el.appendChild(text);
     this.el.classList.add('loading-box');
-    document.body.append(this.el);
+    document.body.appendChild(this.el);
 }
 
 LoadingBox.prototype._hide = function(){
@@ -101,7 +129,10 @@ AjaxManager.getAjaxObject = function(){
     return xmlHttp;
 }
 
-AjaxManager.performAjaxRequest = function(method, url, isAsync, dataToSend, responseFunction, loadingBox=null){
+AjaxManager.performAjaxRequest = function(method, url, isAsync, dataToSend, responseFunction, loadingBox){
+    if (loadingBox === undefined)
+        loadingBox = null;
+
     var xmlHttp = AjaxManager.getAjaxObject();
     if (xmlHttp === null){
 	window.alert("Your browser does not support AJAX!"); // set error function

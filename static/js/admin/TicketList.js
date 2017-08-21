@@ -35,52 +35,52 @@ function TicketList(el, operatorId){
 TicketList.prototype.load = function(url) {
     var self = this;
     AjaxManager.performAjaxRequest(
-	"GET", url, true, {action: 'get'},
-	function (data) {
-	    for (var i = 0; i < data.length; ++i){
-		var ticket = data[i];
-		// Customer name
-		ticket.customer = ticket.cust_last_name + " " + ticket.cust_first_name;
+        "GET", url, true, {action: 'get'},
+        function (data) {
+            for (var i = 0; i < data.length; ++i){
+                var ticket = data[i];
+        // Customer name
+        ticket.customer = ticket.cust_last_name + " " + ticket.cust_first_name;
 
-		// Subject
-		if (ticket.subject.length > self.maxSubjectLength){
-		    ticket.subject = ticket.subject.slice(0, self.maxSubjectLength)
-		    ticket.subject += '...';
-		}
+        // Subject
+        if (ticket.subject.length > self.maxSubjectLength){
+            ticket.subject = ticket.subject.slice(0, self.maxSubjectLength)
+            ticket.subject += '...';
+        }
 
-		// Priority
-		ticket.rowClass = self.priorityClasses[ticket.priority];
+        // Priority
+        ticket.rowClass = self.priorityClasses[ticket.priority];
 
-	    }
+    }
 
-	    self.tickets = data;
-	    self.visibleTickets = data;
-	    self._updatePageTickets();
-	    self.render();
-	}, loadingBox);
+    self.tickets = data;
+    self.visibleTickets = data;
+    self._updatePageTickets();
+    self.render();
+}, loadingBox);
 }
 
 TicketList.prototype._getTicketRow = function(ticket){
     var row = document.createElement('tr');
     if (ticket.rowClass)
-	row.classList.add(ticket.rowClass);
+        row.classList.add(ticket.rowClass);
     row.id = 't-' + ticket.id
     var data = [
-	ticket.id,
-	ticket.subject,
-	ticket.customer,
-	ticket.category,
-	ticket.last_activity
+    ticket.id,
+    ticket.subject,
+    ticket.customer,
+    ticket.category,
+    ticket.last_activity
     ];
     var centerCols = [3, 4];
 
     for (var i = 0; i < data.length; ++i){
-	var cell = document.createElement('td');
-	if (centerCols.includes(i))
-	    cell.classList.add('text-center');
-	var text = document.createTextNode(data[i]);
-	cell.appendChild(text);
-	row.appendChild(cell);
+        var cell = document.createElement('td');
+        if (arrayHas(centerCols, i))
+            cell.classList.add('text-center');
+        var text = document.createTextNode(data[i]);
+        cell.appendChild(text);
+        row.appendChild(cell);
     }
 
     var self = this;
@@ -119,13 +119,13 @@ TicketList.prototype._getPaginationCtrl = function(){
     appendTextNode(nextBtn, '>>');
     nextBtn.type = 'button';
     if (!nextAct)
-	nextBtn.disabled = true;
+        nextBtn.disabled = true;
 
     var prevBtn = document.createElement('button');
     appendTextNode(prevBtn, '<<');
     prevBtn.type = 'button';
     if (!prevAct)
-	prevBtn.disabled = true;
+        prevBtn.disabled = true;
 
     nextBtn.onclick = function(e) { return self._onPagNext(e); };
     prevBtn.onclick = function(e) { return self._onPagPrev(e); };
@@ -138,10 +138,10 @@ TicketList.prototype._getPaginationCtrl = function(){
 TicketList.prototype._clearTable = function(){
     var tbody = this.elTableBody;
     while (tbody.firstChild)
-	tbody.removeChild(tbody.firstChild);
+        tbody.removeChild(tbody.firstChild);
     var tfoot = this.elTableFoot;
     while (tfoot.firstChild)
-	tfoot.removeChild(tfoot.firstChild);
+        tfoot.removeChild(tfoot.firstChild);
 }
 
 TicketList.prototype.render = function() {
@@ -149,8 +149,8 @@ TicketList.prototype.render = function() {
 
     // body
     for (var i = 0; i < this.pageTickets.length; ++i){
-	var ticket = this.pageTickets[i];
-	this.elTableBody.appendChild(this._getTicketRow(ticket));
+        var ticket = this.pageTickets[i];
+        this.elTableBody.appendChild(this._getTicketRow(ticket));
     }
 
     // foot
@@ -169,14 +169,14 @@ TicketList.prototype.render = function() {
 
 TicketList.prototype._clearSelection = function() {
     if (this.selectedRow)
-	this.selectedRow.classList.remove('selected');
+        this.selectedRow.classList.remove('selected');
     this.selectedRow = null;
 }
 
 /* ================================================================
-                                Event Handlers
+                        Event Handlers
    ================================================================ */
-TicketList.prototype._onSearch = function(event){
+    TicketList.prototype._onSearch = function(event){
     // Ricerca i ticket in base a:
     // - id
     // - oggetto
@@ -187,30 +187,30 @@ TicketList.prototype._onSearch = function(event){
     var newSearch = this.elSearch.value.toLowerCase();
     var newCheckbox = this.elCheckbox.checked;
     if (newSearch == this.lastSearch && newCheckbox == this.lastCheckbox)
-	return;
+        return;
 
     if (!newSearch && !newCheckbox){
-	this.visibleTickets = this.tickets;
+        this.visibleTickets = this.tickets;
     } else {
-	this.visibleTickets = [];
-	for (var i = 0; i < this.tickets.length; ++i){
-	    var ticket = this.tickets[i];
-	    var insert = true;
+        this.visibleTickets = [];
+        for (var i = 0; i < this.tickets.length; ++i){
+            var ticket = this.tickets[i];
+            var insert = true;
 
-	    if (newSearch){
-		insert &= (
-		    ticket.id.startsWith(newSearch) || 
-		    ticket.subject.toLowerCase().includes(newSearch) ||
-		    ticket.customer.toLowerCase().includes(newSearch)
-		);
-	    }
+            if (newSearch){
+                insert &= (
+                    ticket.id.startsWith(newSearch) || 
+                    stringContains(ticket.subject.toLowerCase(), newSearch) ||
+                    stringContains(ticket.customer.toLowerCase(), newSearch)
+                    );
+            }
 
-	    if (newCheckbox)
-		insert &= ticket.operator == this.operatorId;
+            if (newCheckbox)
+                insert &= ticket.operator == this.operatorId;
 
-	    if (insert)
-		this.visibleTickets.push(ticket);
-	}
+            if (insert)
+                this.visibleTickets.push(ticket);
+        }
     }
 
     this.page = 0;
@@ -221,7 +221,7 @@ TicketList.prototype._onSearch = function(event){
 
 TicketList.prototype._onTicketSelected = function(event, row){
     if (this.selectedRow == row)
-	return;
+        return;
 
     this._clearSelection();
     row.classList.add('selected');
