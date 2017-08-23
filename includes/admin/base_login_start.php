@@ -17,7 +17,7 @@
     </head>
     <body>
 	<header>
-	    <img src="../static/imgs/logo.png" class="logo" alt="Logo">
+	    <img src="/static/imgs/logo.png" class="logo" alt="Logo">
 	    <h1>SimpleTicket</h1>
 	</header>
 	<main>

@@ -69,13 +69,13 @@ class AdminView {
 	    Redirect::to('/admin/tickets.php?t=all');
 	
 	if ($type == 'new')
-	    $view->title = 'Ticket non assegnati ad un operatore';
+	    $view->title = 'Pratiche non assegnate ad un operatore';
 	else if ($type == 'pending')
-	    $view->title = 'Ticket in attesa di una risposta';
+	    $view->title = 'Pratiche in attesa di una risposta';
 	else if ($type == 'open')
-	    $view->title = 'Ticket aperti';
+	    $view->title = 'Pratiche aperte';
 	else if ($type == 'all')
-            $view->title = 'Tutti i ticket';
+            $view->title = 'Tutte le pratiche';
 	else
 	    Redirect::to('/admin/tickets.php?t=all');
 

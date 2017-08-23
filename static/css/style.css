@@ -270,3 +270,28 @@ button.primary:active {
     font-size: 2em;
     color: #000;
 }
+
+#admin-icon {
+    height: 16px;
+    margin: 0 10px;
+}
+
+#pweb-flag {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+}
+
+#pweb-flag a {
+    padding: 10px 15px;
+    background-color: #229954;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: block;
+}
+
+#pweb-flag a:hover {
+    background-color:  #27ae60;
+    text-decoration: underline;
+}

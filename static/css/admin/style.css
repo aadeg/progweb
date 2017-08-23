@@ -305,3 +305,6 @@ dd {
     display: inline;
 }
 
+img.icon {
+    height: 14px;
+}

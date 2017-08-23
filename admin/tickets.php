@@ -11,7 +11,7 @@ $view = AdminView::tickets();
 
 <?php require '../includes/admin/base_start.php'; ?>
 
-<h2>Ticket</h2>
+<h2>Pratiche</h2>
 
 <section class="panel ticket-list" id="ticket-list-new">
     <header>

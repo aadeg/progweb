@@ -35,7 +35,7 @@ EOD;
 		<tr>
 		    <th>Etichetta</th>
 		    <th class="text-center">Campi personalizzati</th>
-		    <th class="text-center">Numero di ticket</th>
+		    <th class="text-center">Numero di pratiche</th>
 		</tr>
 	    </thead>
 	    <tbody>

@@ -15,7 +15,6 @@ $operator = AuthManager::currentOperator();
     <meta name="author" content="Andrea Giove">
     <meta name="description" content="A simple tickets manager">
 
-    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/common.css">
     <link rel="stylesheet" href="../static/css/effects.css">
     <link rel="stylesheet" href="../static/css/admin/dropdown.css">

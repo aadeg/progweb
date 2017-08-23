@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Progettazione Web</title>
-    <meta charset="utf-8">
+<html lang="it">
+    <head>
+	<title><?php echo Template::getTitle(); ?></title>
+	<meta charset="utf-8">
 
-    <link rel="stylesheet" href="static/css/common.css">
-    <link rel="stylesheet" href="static/css/effects.css">
-    <link rel="stylesheet" href="static/css/style.css">
-    <?php echo Template::getStylesheetHTML(); ?>
+	<link rel="stylesheet" href="static/css/common.css">
+	<link rel="stylesheet" href="static/css/effects.css">
+	<link rel="stylesheet" href="static/css/style.css">
+	<?php echo Template::getStylesheetHTML(); ?>
 
-</head>
-<body>
-    <header>
-	<a href="/index.php"><h1>Machine Lab</h1></a>
-    </header>
+    </head>
+    <body>
+	<header>
+	    <a href="/index.php"><h1>Machine Lab</h1></a>
+	    <a href="/admin/index.php" class="right"><img src="/static/imgs/lock.png" alt="admin" id="admin-icon"></a>
+	</header>
 
-    <main>
+	<div id="pweb-flag">
+	    <a href="/guide.html">Manuale utente</a>
+	</div>
+
+	<main>
 
 
 

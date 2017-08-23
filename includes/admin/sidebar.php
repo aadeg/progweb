@@ -38,21 +38,26 @@ function selMenu($index){
 <nav class="side-menu-nav">
     <ul class="side-menu first-lvl">
 	<li>
-	    <a href="/admin/index.php" class="<?php echo selMenu("0"); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+	    <a href="/admin/index.php" class="<?php echo selMenu("0"); ?>">
+		<img src="/static/imgs/dashboard.png" alt="dashboard" class="icon"> Dashboard
+	    </a>
 	</li>
 	<li>
-	    <a href="#" class="<?php echo selMenu("1"); ?>"><i class="fa fa-list"></i>  Ticket</a>
+	    <a href="#" class="<?php echo selMenu("1"); ?>">
+		<img src="/static/imgs/list.png" alt="list" class="icon"> Pratiche
+	    </a>
 	    <ul class="side-menu second-lvl collapsed">
-		<li><a href="/admin/tickets.php?t=new" class="<?php echo selMenu("1-0"); ?>">Nuovi</a>
+		<li><a href="/admin/tickets.php?t=new" class="<?php echo selMenu("1-0"); ?>">Nuove</a>
 		</li>
 		<li><a href="/admin/tickets.php?t=pending" class="<?php echo selMenu("1-1"); ?>">In attesa</a></li>
-		<li><a href="/admin/tickets.php?t=open" class="<?php echo selMenu("1-2"); ?>">Aperti</a></li>
+		<li><a href="/admin/tickets.php?t=open" class="<?php echo selMenu("1-2"); ?>">Aperte</a></li>
 		<li><a href="/admin/tickets.php?t=all" class="<?php echo selMenu("1-3"); ?>">Tutti</a>
 	    </ul>
 	</li>
 	<?php if ($operator->is_admin) { ?>
 	<li>
-	    <a href="#" class="<?php echo selMenu("2"); ?>"><i class="fa fa-lock"></i> Amministrazione</a>
+	    <a href="#" class="<?php echo selMenu("2"); ?>">
+		<img src="/static/imgs/lock2.png" alt="lock" class="icon"></i> Amministrazione</a>
 	    <ul class="side-menu second-lvl collapsed">
 		<li><a href="/admin/operators.php" class="<?php echo selMenu("2-0"); ?>">Elenco operatori</a></li>
 		<li><a href="/admin/add_operator.php" class="<?php echo selMenu("2-1"); ?>">Aggiungi operatore</a></li>

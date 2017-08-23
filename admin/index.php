@@ -34,17 +34,15 @@ EOD;
 	<div class="counters">
 	    <div class="counter">
 		<p class="number"><?php echo $view->cNewTickets; ?></p>
-		<p class="title">Ticket nuovi</p>
+		<p class="title">Pratiche nuove</p>
 	    </div>
 	    <div class="counter">
 		<p class="number"><?php echo $view->cOwnPending; ?></p>
-		<p class="title">I tuoi ticket in attesa</p>
+		<p class="title">Le tue pratiche in attesa</p>
 	    </div>
 	    <div class="counter">
-		<!--<p class="number"><?php echo $view->cAllTickets; ?></p>-->
-		<p class="number">138501</p>
-		
-		<p class="title">Tutti i ticket</p>
+		<p class="number"><?php echo $view->cAllTickets; ?></p>
+		<p class="title">Tutte le pratiche</p>
 	    </div>
 	</div>
     </div>
@@ -52,7 +50,7 @@ EOD;
 
 <section class="panel">
     <header>
-	<h3>I tuoi ticket in attesa</h3>
+	<h3>Le tue pratiche in attesa</h3>
     </header>
     <div class="body">
 	<table class="ticket-table">

@@ -3,6 +3,7 @@
 class Template {
     private static $stylesheets = array();
     private static $scripts = array();
+    private static $title = "SimpleTicket";
 
     public static function addStylesheet($href){
 	self::$stylesheets[] = $href;
@@ -28,6 +29,13 @@ class Template {
 	return $html;
     }
 
+    public static function setTitle($title){
+	self::$title = $title . " - SimpleTicket";
+    }
+
+    public static function getTitle(){
+	return self::$title;
+    }
 }
 
 ?>
