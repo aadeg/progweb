@@ -141,7 +141,7 @@ TicketView.prototype._onClose = function(event){
 		alert('Errore durante la modifica');
 		return;
 	    }
-	    window.location.reload();
+	    window.location.href = '/admin';
 	}, loadingBox);
 }
 

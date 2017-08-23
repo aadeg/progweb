@@ -1,6 +1,8 @@
 <?php 
 namespace Model;
 
+use \DateTime;
+
 class Ticket extends BaseModel {
     const TABLE_NAME = 'tickets';
 
@@ -12,9 +14,17 @@ class Ticket extends BaseModel {
 	return self::$db->get(self::TABLE_NAME, $fields, $orderBy);
     }
 
-    public static function getByID($id){
+    public static function getById($id){
         return self::$db->get(self::TABLE_NAME,
                               array('id' => $id))->first();
+    }
+
+    public static function getByEmail($email){
+	return self::$db->get(
+	    self::TABLE_NAME,
+	    array('cust_email' => $email),
+	    array('id' => DB::ORDER_DESC)
+	)->rows();
     }
 
     public static function create($cus_first_name, $cus_last_name, 
@@ -45,6 +55,20 @@ class Ticket extends BaseModel {
     public static function update($id, $fields){
 	return self::$db->update(
 	    self::TABLE_NAME, $fields, array('id' => $id));
+    }
+
+    public static function fillCategoryName(&$tickets){
+	$categories = TicketCategory::getNames();
+	foreach ($tickets as &$ticket)
+	    $ticket->category = $categories[$ticket->category];
+    }
+
+    public static function fillFormattedLastActivity(&$tickets){
+	foreach ($tickets as &$ticket){
+	    $dt = DateTime::createFromFormat(
+		'Y-m-d H:i:s', $ticket->last_activity);
+	    $ticket->last_activity = $dt->format('d/m/Y H:i:s');
+	}
     }
 }
 ?>

@@ -384,4 +384,26 @@ class AdminView {
 
 	return $view;
     }
+
+    public static function dashboard(){
+	$view = new \stdClass();
+
+	// Own pending tickets
+	$ownPending = Ticket::get(array(
+	    "status" => "PENDING",
+	    "operator" => AuthManager::currentOperator()->id
+	));
+	$view->ownPending = $ownPending->rows();
+	Ticket::fillCategoryName($view->ownPending);
+	Ticket::fillFormattedLastActivity($view->ownPending);
+
+	// Counters
+	$view->cAllTickets = Ticket::getAll()->count();
+	$view->cOwnPending = $ownPending->count();
+	$view->cNewTickets = Ticket::get(array(
+	    "operator" => null
+	))->count();
+
+	return $view;
+    }
 }

@@ -12,6 +12,7 @@ use \Form\Field\BaseInputField;
 use \Form\Field\TextField;
 use \Form\Field\EmailField;
 use \Form\Field\SelectField;
+use \Email\EmailSender;
 
 
 class UserView {
@@ -34,7 +35,7 @@ class UserView {
 	    $requiredFields = ['email', 'ticket'];
 	    foreach ($requiredFields as $field){
 		if (!Input::get($field)){
-		    Session::flash('Compila tutti i campi', 'error');
+		    Session::flash('Compila tutti i campi richiesti', 'error');
 		    return $view;
 		}
 	    }
@@ -79,6 +80,64 @@ class UserView {
 	}
 
 	$view->ticket = $ticket;
+	return $view;
+    }
+
+    public static function recoverTicket(){
+	$view = new \stdClass();
+
+	$form = new Form(array(
+	    new EmailField('email', 'Indirizzo email*',
+			   array("placeholder" => "Email con la quale ha aperto la pratica",
+				 "required" => "", "autofocus" => ""))
+	));
+	$view->form = $form;
+
+	if (Input::isSubmit()){
+	    $view->form->setValues(Input::getAll());
+
+	    $email = Input::get('email');
+	    if (!$email){
+		Session::flash('Compila tutti i campi richiesti', 'error');
+		return $view;
+	    }
+
+	    $tickets = Ticket::getByEmail($email);
+	    if  (count($tickets) == 0){
+		Session::flash("Non è stata aperta alcuna pratica con l'email inserita", 'error');
+		return $view;
+	    }
+
+	    // Email
+	    $fullName = "{$tickets[0]->cust_first_name} {$tickets[0]->cust_last_name}";
+	    $addr = array(array("email" => $email, "name" => $fullName));
+	    $subject = "Elenco delle pratiche aperte";
+
+	    $body = <<<EOD
+Buongiorno,
+come da lei richiesto, le abbiamo inviato l'elenco delle pratica attualmente aperte con i relativi numeri:
+
+NUMERO    OGGETTO PRATICA
+
+EOD;
+	    var_dump($tickets);
+	    foreach ($tickets as $t){
+		$code = $t->id;
+		for ($i = strlen($code); $i <= 15; $i++)
+		    $code .= " ";
+		$body .= "{$code} {$t->subject}\n";
+	    }
+	    $body .= "\n\nSimpleTicket";
+	    
+	    if (EmailSender::send($addr, $subject, $body)){
+		Session::flash("È stata inviata un'email a {$email} con il numero della sua pratica.");
+		Redirect::to("/check_ticket.php");
+	    } else {
+		Session::flash("Errore imprevisto durante l'invio dell'email", "error");
+		return $view;
+	    }
+	}
+	
 	return $view;
     }
 }

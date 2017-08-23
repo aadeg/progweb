@@ -16,6 +16,10 @@ class AjaxTicket extends AjaxRequest {
 	'pending' => array(
 	    'status' => 'pending',
 	    'operator' => 'not null'
+	),
+	'open' => array(
+	    'status' => 'open',
+	    'operator' => 'not null'
 	)
     );
 	    
@@ -60,17 +64,9 @@ class AjaxTicket extends AjaxRequest {
 	    array("priority" => DB::ORDER_DESC,
 		  "last_activity" => DB::ORDER_DESC,
 	          "id" => DB::ORDER_ASC))->rows();
-	$categories = TicketCategory::getNames();
 
-	foreach ($tickets as &$ticket){
-	    // Last activity
-	    $dt = DateTime::createFromFormat(
-		'Y-m-d H:i:s', $ticket->last_activity);
-	    $ticket->last_activity = $dt->format('d/m/Y H:i:s');
-
-	    // Category
-	    $ticket->category = $categories[$ticket->category];
-	}
+	Ticket::fillCategoryName($tickets);
+	Ticket::fillFormattedLastActivity($tickets);
 	return $tickets;
     }
 

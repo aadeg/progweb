@@ -64,6 +64,9 @@ TicketList.prototype._getTicketRow = function(ticket){
     var row = document.createElement('tr');
     if (ticket.rowClass)
         row.classList.add(ticket.rowClass);
+    if (ticket.status == 'CLOSE')
+	row.classList.add('ticket-close');
+    
     row.id = 't-' + ticket.id
     var data = [
     ticket.id,

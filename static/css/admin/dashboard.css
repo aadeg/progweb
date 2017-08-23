@@ -1,0 +1,27 @@
+/* COUNTER */
+.counters {
+    text-align: center;
+}
+
+.counter {
+    box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    display: inline-block;
+}
+
+.counter .number {
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+
+.counter .title {
+    font-size: 1.1em;
+    color: #666;
+    font-variant: small-caps;
+    font-weight: bold;
+}

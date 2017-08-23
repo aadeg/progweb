@@ -29,11 +29,11 @@ $view = AdminView::tickets();
 	<table class="ticket-table">
 	    <thead>
 		<tr>
-		    <th>ID</td>
-		    <th>Oggetto</td>
-		    <th>Cliente</td>
-		    <th class="text-center">Categoria</td>
-		    <th>Ultimo aggiornamento</td>
+		    <th>ID</th>
+		    <th>Oggetto</th>
+		    <th>Cliente</th>
+		    <th class="text-center">Categoria</th>
+		    <th>Ultimo aggiornamento</th>
 		</tr>
 	    </thead>
 	    <tbody>

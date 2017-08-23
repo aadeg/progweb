@@ -47,3 +47,8 @@ tr.ticket-high:hover {
 tr.ticket-low {
     color: #6f6f6f;
 }
+
+tr.ticket-close {
+    text-decoration: line-through;
+    color: #6f6f6f;
+}
