@@ -5,6 +5,6 @@
 	<meta charset="utf-8">
     </head>
     <body>
-	<h1>404 - Page not Found</h1>
+	<h1>404 - Pagina non trovata</h1>
     </body>
 </html>
