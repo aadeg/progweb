@@ -249,6 +249,13 @@ button.primary:active {
     outline: none;
 }
 
+button[disabled], button[disabled]:hover, button[disabled]:active {
+    cursor: not-allowed;
+    background-color:  #5499c7;
+    border-color:  #5499c7;
+    box-shadow: none;
+}
+
 .alert {
     padding: 10px;
     background-color: #fff;

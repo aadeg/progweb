@@ -12,6 +12,7 @@ use \Form\Field\BaseInputField;
 use \Form\Field\TextField;
 use \Form\Field\EmailField;
 use \Form\Field\SelectField;
+use \Form\Field\TextAreaField;
 use \Email\EmailSender;
 
 
@@ -79,7 +80,22 @@ class UserView {
 	    Redirect::to('/check_ticket.php');
 	}
 
+	$attribs = array("required" => "");
+	if ($ticket->status == 'CLOSE'){
+	    $attribs['placeholder'] = "La pratica è stata chiusa. Non puoi inviare nuovi messaggi.";
+	    $attribs['readonly'] = '';
+	    $attribs['disabled'] = '';
+	} else {
+	    $attribs['placeholder'] = 'Invia una risposta';
+	}
+	
+	$form = new Form(array(
+	    new TextAreaField('message', '', $attribs)
+	));
+	
 	$view->ticket = $ticket;
+	$view->form = $form;
+	
 	return $view;
     }
 

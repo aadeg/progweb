@@ -91,8 +91,11 @@ class AjaxMessage extends AjaxRequest {
         if (!isset($data['message']))
             return $this->error(400, "Campo 'message' mancante");
 
-        if (!Ticket::getById($ticketId))
+	$ticket = Ticket::getById($ticketId);
+        if (!$ticket)
             return $this->error(400, "Ticket $ticketId non trovato");
+	if ($ticket->status == 'CLOSE')
+	    return $this->error(400, "Ticket chiuso");
         
         $text = $data['message'];
         if ($text == "")

@@ -6,7 +6,6 @@ Template::addScript('./static/js/ticket_view.js');
 
 use \View\UserView;
 $view = UserView::ticketView();
-
 ?>
 <?php require 'includes/base_start.php'; ?>
 
@@ -23,8 +22,9 @@ $view = UserView::ticketView();
     </div>
     <footer>
 	<form action="#" method="post">
-	    <textarea name="message" placeholder="Rispondi con un messaggio"></textarea>
-	    <button type="submit" class="right primary">Invia messaggio</button>
+	    <!--<textarea name="message" placeholder="Rispondi con un messaggio"></textarea>-->
+	    <?php echo $view->form->html(false); ?>
+	    <button type="submit" class="right primary" disabled>Invia messaggio</button>
 	</form>
     </footer>
     <div class="clear"></div>

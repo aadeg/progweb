@@ -233,7 +233,6 @@ TicketList.prototype._onTicketSelected = function(event, row){
 
 TicketList.prototype._onTicketDoubleClicked = function(event, row){
     var ticketId = row.id.split('-')[1];
-    console.log(ticketId);
     var url = '/admin/ticket_view.php?id=' + ticketId;
     var win = window.open(url, '_blank');
     win.focus();
