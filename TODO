@@ -4,7 +4,6 @@ TO DO
 
 - Testare invio di Email su Windows
 - Validare HTML pannello admin
-- Validare tutto CSS
 
 ----------------------------------------
 DONE
@@ -14,3 +13,4 @@ DONE
 - Cambiare title ad ogni pagina
 - Aggiungere favicon
 - Sistemare sidebar pannello admin
+- Validare tutto CSS

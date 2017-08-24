@@ -1,8 +1,5 @@
 // required: common.js, effects.js
 
-// TODO: Bug con custom field di tipo select
-
-
 /* ============================================================
     NewTicketStepForm
    ------------------------------------------------------------
@@ -211,14 +208,16 @@ Step.prototype._getElError = function(el, create){
 
 Step.prototype._validateField = function(el){
     if (el.checkValidity()){
-       var elError = this._getElError(el, false);
-       if (elError)
-           elError.textContent = '';
-       return;
-   }
+	var elError = this._getElError(el, false);
+	if (elError)
+            elError.textContent = '';
+	el.classList.remove('invalid');
+	return;
+    }
 
-   var elError = this._getElError(el);
-   elError.textContent = el.validationMessage;
+    var elError = this._getElError(el);
+    elError.textContent = el.validationMessage;
+    el.classList.add('invalid');
 }
 
 /* ============================================================

@@ -81,10 +81,6 @@ span.message-sender {
     margin: 10px 0;
 }
 
-textarea:invalid {
-    border-color: #acacac;
-}
-
 textarea[readonly]:focus {
     border-color: #acacac;
     box-shadow: none;

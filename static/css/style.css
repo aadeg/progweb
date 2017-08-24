@@ -189,7 +189,7 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 5px #868686;
 }
 
-input:invalid, select:invalid, textarea:invalid {
+input.invalid, select.invalid, textarea.invalid {
     border-color: #DC3232;
 }
 
@@ -252,7 +252,7 @@ button.primary:active {
 button[disabled], button[disabled]:hover, button[disabled]:active {
     cursor: not-allowed;
     background-color:  #5499c7;
-    border-color:  #5499c7;
+    border: none;
     box-shadow: none;
 }
 
