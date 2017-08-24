@@ -25,9 +25,8 @@ Template::setTitle("Pratica #{$view->ticket->id}");
     </div>
     <footer>
 	<form action="#" method="post">
-	    <!--<textarea name="message" placeholder="Rispondi con un messaggio"></textarea>-->
 	    <?php echo $view->form->html(false); ?>
-	    <button type="submit" class="right primary" disabled>Invia messaggio</button>
+	    <button type="submit" class="right primary" <?php echo $view->btnDisabled; ?>>Invia messaggio</button>
 	</form>
     </footer>
     <div class="clear"></div>

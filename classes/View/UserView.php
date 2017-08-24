@@ -85,8 +85,10 @@ class UserView {
 	    $attribs['placeholder'] = "La pratica è stata chiusa. Non puoi inviare nuovi messaggi.";
 	    $attribs['readonly'] = '';
 	    $attribs['disabled'] = '';
+	    $view->btnDisabled = "disabled";
 	} else {
 	    $attribs['placeholder'] = 'Invia una risposta';
+	    $view->btnDisabled = "";
 	}
 	
 	$form = new Form(array(

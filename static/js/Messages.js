@@ -76,6 +76,8 @@ MessageHandler.prototype._onSendMessage = function(event){
 	'post', url, true, formData, function(data, status){
 	    if (status != 200){
 		alert("Errore durante l'invio del messaggio");
+		self.elMsgTextarea.value = "";
+		window.location.reload();
 		return;
 	    }
 
