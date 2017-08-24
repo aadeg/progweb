@@ -6,7 +6,7 @@ body > main {
 
 .main-box {
     width: 40%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
@@ -15,21 +15,21 @@ body > main {
     margin-bottom: 20px;
 }
 
-section.panel {
+.panel {
     width: 100%;
-    padding: 20px;
+    padding: 10px;
 }
 
-section.panel > header {
-    background-color: #222;
-    padding: 15px;
+.panel > header {
+    border: none;
 }
 
-section.panel > header h2 {
-    color: #fff;
+.panel > header h2 {
+    color: #666;
+    font-size: 18px;
 }
 
-section.panel footer {
+.panel footer {
     margin: 10px 0 0 0;
     padding: 0;
     font-size: 0.9em;

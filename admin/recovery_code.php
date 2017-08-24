@@ -10,6 +10,9 @@ $view = RecoveryView::recoveryCode();
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
+    <header>
+        <h2>Codice di recupero</h2>
+    </header>
 	<div class="body">
 	    <p>Inserisca il codice che le è stato inviato tramite email.</p>
 	    <form action="#" method="POST">

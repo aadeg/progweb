@@ -221,14 +221,14 @@ button.danger:active {
 }
 
 /* ============================= PANEL ============================ */
-section.panel {
+div.panel, section.panel {
     box-sizing: border-box;
     box-shadow: -1px 1px 4px rgba(125, 125, 125, 0.3);
     background-color: #ffffff;
     margin-bottom: 20px;
 }
 
-section.panel:last-child {
+div.panel:last-child, section.panel:last-child {
     margin-bottom: 0;
 }
 

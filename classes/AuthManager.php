@@ -64,7 +64,12 @@ class AuthManager {
 	$body .= "$token\n\n";
 	$body .= "SimpleTicket";
 
-	return EmailSender::send($addrs, $subject, $body);
+	if (!EmailSender::send($addrs, $subject, $body)){
+        die(EmailSender::getErrorMsg());
+        return false;
+    }
+        return true;    
+
     }
 
     /** 
