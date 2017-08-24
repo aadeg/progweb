@@ -3,7 +3,6 @@ TO DO
 ---------------------------------------
 
 - Testare invio di Email su Windows
-- Cambiare title ad ogni pagina
 - Validare HTML pannello admin
 - Validare tutto CSS
 
@@ -12,4 +11,6 @@ DONE
 ----------------------------------------
 
 - user-end: gestire il caso in cui il ticket sia stato chiuso
-
+- Cambiare title ad ogni pagina
+- Aggiungere favicon
+- Sistemare sidebar pannello admin

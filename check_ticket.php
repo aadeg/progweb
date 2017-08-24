@@ -3,6 +3,7 @@ require_once 'core/init.php';
 
 use \View\UserView;
 $view = UserView::checkTicket();
+Template::setTitle("Visualizza pratica");
 
 ?>
 <?php require 'includes/base_start.php'; ?>

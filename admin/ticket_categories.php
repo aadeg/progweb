@@ -2,6 +2,7 @@
 require_once '../core/init.php';
 AuthManager::loginRequired();
 AuthManager::adminRequired();
+Template::setTitle("Elenco categorie");
 
 Template::addScript('../static/js/admin/ticket_categories.js');
 

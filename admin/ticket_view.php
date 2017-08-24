@@ -12,6 +12,8 @@ use \Model\Message;
 $operator = AuthManager::currentOperator();
 $view = AdminView::ticketView();
 
+Template::setTitle("Pratica #{$view->ticket->id}");
+
 $optPriority = array("0" => "", "1" => "", "2" => "");
 foreach ($optPriority as $key => &$value){
     if ($key == $view->ticket->priority){

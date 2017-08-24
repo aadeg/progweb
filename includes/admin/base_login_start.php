@@ -2,10 +2,12 @@
 <html lang="it">
     <head>
 	<meta charset="utf-8">
-	<title>SimpleTicket - Login</title>
+	<title><?php echo Template::getTitle(); ?></title>
 
 	<meta name="author" content="Andrea Giove">
 	<meta name="description" content="A simple tickets manager">
+
+	<link rel='shortcut icon' type='image/x-icon' href='/static/imgs/favicon.ico'>
 
 	<link rel="stylesheet" href="../static/css/common.css">
 	<link rel="stylesheet" href="../static/css/admin/style.css">

@@ -2,9 +2,9 @@
 require_once '../core/init.php';
 AuthManager::loginRequired();
 Template::addScript('../static/js/admin/operators.js');
+Template::setTitle("Elenco operatori");
 
 use \View\AdminView;
-
 
 $view = AdminView::operators();
 

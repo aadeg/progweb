@@ -2,6 +2,7 @@
 require_once '../core/init.php';
 AuthManager::loginRequired();
 AuthManager::adminRequired();
+Template::setTitle("Aggiungi operatore");
 
 use \View\AdminView;
 

@@ -4,6 +4,7 @@ AuthManager::loginRequired();
 Template::addStylesheet("../static/css/admin/tickets.css");
 Template::addScript("../static/js/admin/TicketList.js");
 Template::addScript("../static/js/admin/ticket.js");
+Template::setTitle("Pratiche");
 
 use \View\AdminView;
 $view = AdminView::tickets();

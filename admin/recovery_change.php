@@ -1,5 +1,6 @@
 <?php 
 require_once '../core/init.php';
+Template::setTitle("Cambia password");
 
 use \View\RecoveryView;
 

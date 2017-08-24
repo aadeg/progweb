@@ -10,10 +10,12 @@ $operator = AuthManager::currentOperator();
 <html lang="it">
 <head>
     <meta charset="utf-8">
-    <title>SimpleTicket</title>
+    <title><?php echo Template::getTitle(); ?></title>
 
     <meta name="author" content="Andrea Giove">
     <meta name="description" content="A simple tickets manager">
+
+    <link rel='shortcut icon' type='image/x-icon' href='/static/imgs/favicon.ico'>
 
     <link rel="stylesheet" href="../static/css/common.css">
     <link rel="stylesheet" href="../static/css/effects.css">
@@ -23,7 +25,7 @@ $operator = AuthManager::currentOperator();
     <?php echo Template::getStylesheetHTML(); ?>
 </head>
 <body>
-    <header>
+    <header class="main-header">
 	<img src="../static/imgs/logo_inv.png" alt="logo" class="logo">
 	<h1 class="left">SimpleTicket</h1>
 	<div class="dropdown right">

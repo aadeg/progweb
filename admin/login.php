@@ -1,6 +1,6 @@
 <?php 
 require_once '../core/init.php';
-
+Template::setTitle("Login");
 use \View\AdminView;
 
 $view = AdminView::login();

@@ -2,6 +2,7 @@
 require_once 'core/init.php';
 Template::addScript("./static/js/NewTicket.js");
 Template::addScript("./static/js/new_ticket.js");
+Template::setTitle("Nuova pratica");
 ?>
 <?php require 'includes/base_start.php'; ?>
 

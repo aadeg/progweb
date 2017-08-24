@@ -1,11 +1,14 @@
 <?php
 require_once 'core/init.php';
-Template::addStylesheet('./static/css/ticket_view.css');
-Template::addScript('./static/js/Messages.js');
-Template::addScript('./static/js/ticket_view.js');
+Template::addStylesheet('/static/css/ticket_view.css');
+Template::addScript('/static/js/Messages.js');
+Template::addScript('/static/js/ticket_view.js');
+
 
 use \View\UserView;
 $view = UserView::ticketView();
+Template::setTitle("Pratica #{$view->ticket->id}");
+
 ?>
 <?php require 'includes/base_start.php'; ?>
 

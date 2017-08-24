@@ -5,6 +5,7 @@ AuthManager::loginRequired();
 use \View\AdminView;
 
 $view = AdminView::profile();
+Template::setTitle("Profilo {$view->operator->username}");
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>

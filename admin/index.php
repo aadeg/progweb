@@ -3,6 +3,7 @@ require_once '../core/init.php';
 AuthManager::loginRequired();
 Template::addStylesheet('../static/css/admin/dashboard.css');
 Template::addScript('../static/js/admin/dashboard.js');
+Template::setTitle("Dashboard");
 
 use \View\AdminView;
 $view = AdminView::dashboard();

@@ -3,7 +3,7 @@ require_once 'core/init.php';
 
 use \View\UserView;
 $view = UserView::recoverTicket();
-
+Template::setTitle("Recupera pratica");
 ?>
 <?php require 'includes/base_start.php'; ?>
 

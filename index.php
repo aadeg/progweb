@@ -1,7 +1,6 @@
 <?php
 require_once 'core/init.php';
-
-
+Template::setTitle('Home');
 
 ?>
 <?php require 'includes/base_start.php'; ?>

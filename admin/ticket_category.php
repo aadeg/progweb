@@ -10,6 +10,7 @@ Template::addScript('../static/js/admin/ticket_category.js');
 use \View\AdminView;
 
 $view = AdminView::ticketCategory();
+Template::setTitle("Categoria {$view->category->label}");
 ?>
 
 <?php require '../includes/admin/base_start.php'; ?>
