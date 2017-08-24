@@ -93,6 +93,7 @@ LoadingBox.prototype._show = function(){
     var animation = document.createElement('img');
     animation.classList.add('loading-animation');
     animation.src = '../static/imgs/loading.gif';
+    animation.alt = 'icon';
     this.el.appendChild(animation);
     var text = document.createTextNode('Caricamento in corso');
     this.el.appendChild(text);
