@@ -2,7 +2,7 @@
 
 function _onDblClick(event){
     var tr = event.target.parentNode;
-    if (tr.id.startsWith('o-')){
+    if (stringStartsWith(tr.id, 'o-')){
 	var id = tr.id.slice(2);
 	window.location.href = '/admin/profile.php?id=' + id;
     }

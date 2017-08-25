@@ -202,7 +202,7 @@ TicketList.prototype._clearSelection = function() {
 
             if (newSearch){
                 insert &= (
-                    ticket.id.startsWith(newSearch) || 
+                    stringStartsWith(ticket.id, newSearch) || 
                     stringContains(ticket.subject.toLowerCase(), newSearch) ||
                     stringContains(ticket.customer.toLowerCase(), newSearch)
                     );

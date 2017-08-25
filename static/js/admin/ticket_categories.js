@@ -2,7 +2,7 @@
 
 function _onDblClick(event){
     var tr = event.target.parentNode;
-    if (tr.id.startsWith('c-')){
+    if (stringStartsWith(tr.id, 'c-')){
 	var id = tr.id.slice(2);
 	window.location.href = '/admin/ticket_category.php?id=' + id;
     }

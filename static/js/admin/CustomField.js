@@ -156,7 +156,10 @@ var _variableFields = {
     ]
 }
 
-function CustomField(el, data, _new=false, categoryId=null){
+function CustomField(el, data, _new, categoryId){
+    if (_new === undefined) _new = false;
+    if (categoryId === undefined) categoryId = null;
+
     this.data = data;
     this.new = _new;
     this.categoryId = categoryId;
@@ -192,7 +195,8 @@ CustomField.prototype.clear = function(all){
     }
 }
 
-CustomField.prototype.render = function(all=true){
+CustomField.prototype.render = function(all){
+    if (all === undefined) all = true;
     if (!this.elForm){
     this.elForm = document.createElement('form');
     this.elForm.classList.add('custom-field');
@@ -229,8 +233,6 @@ CustomField.prototype._getField = function(obj){
     var _name = obj.name;
     if (this.data && this.data.id)
     _name = this.data.id + '-' + _name;
-    
-    console.log(_name);
     
     var el = document.createElement(obj.tagName);
     
@@ -338,10 +340,7 @@ CustomField.prototype._getVariableInputRow = function(){
     var renderedField = this._getField(varFields[i]);
     row.appendChild(renderedField.li);
     }
-    /*
-    var divClear = document.createElement('div');
-    divClear.classList.add('clear');
-    row.appendChild(divClear);*/
+
     this.elVariableInputRow = row;
     return this.elVariableInputRow;
 }
@@ -361,7 +360,7 @@ CustomField.prototype._getFormData = function(){
     for (var j = 0; j < vect.length; ++j){
     for (var i = 0; i < vect[j].length; ++i){
         var input = vect[j][i];
-        if (input.name.startsWith(namePrefix))
+        if (stringStartsWith(input.name, namePrefix))
         fieldName = input.name.slice(2);
         else
         fieldName = input.name;

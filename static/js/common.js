@@ -19,7 +19,7 @@ function getSearchParameters(){
     var search = new String(window.location.search);
     var parms = {}
 
-    if (search.startsWith('?'))
+    if (search[0] == '?')
 	search = search.slice(1);
     var splitted = search.split('&');
     for (var i = 0; i < splitted.length; ++i){
@@ -38,6 +38,10 @@ function arrayHas(array, item){
 
 function stringContains(str, sub){
     return str.indexOf(sub) != -1;
+}
+
+function stringStartsWith(str, search){
+    return str.substr(0, search.length) === search;
 }
 
 function objectAssign(target, varArgs){

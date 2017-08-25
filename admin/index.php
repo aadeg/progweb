@@ -1,6 +1,7 @@
 <?php
 require_once '../core/init.php';
 AuthManager::loginRequired();
+Template::addStylesheet('../static/css/admin/tickets.css');
 Template::addStylesheet('../static/css/admin/dashboard.css');
 Template::addScript('../static/js/admin/dashboard.js');
 Template::setTitle("Dashboard");
@@ -9,8 +10,12 @@ use \View\AdminView;
 $view = AdminView::dashboard();
 
 function ticketRow($t){
+	$class = "";
+	if ($t->priority == '2') $class = 'ticket-high';
+	else if ($t->priority == '0') $class = 'ticket-low';
+
     $html = <<<EOD
-<tr class="ticket-row" id="t-{$t->id}">
+<tr class="ticket-row {$class}" id="t-{$t->id}">
 <td>{$t->id}</td>
 <td>{$t->subject}</td>
 <td>{$t->cust_first_name} {$t->cust_last_name}</td>

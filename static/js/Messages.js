@@ -17,7 +17,9 @@ function MessageHandler(elBox, elForm, ticketId, url,
     this.autoRefresh = null;
 }
 
-MessageHandler.prototype.loadAll = function(data=null){
+MessageHandler.prototype.loadAll = function(data){
+    if (data === undefined) data = null;
+
     this._clear();
     var self = this;
     fn = function(data){

@@ -149,6 +149,11 @@ input, select, textarea {
     outline: none;  /* Chrome fix */
 }
 
+textarea {
+    resize: vertical;
+    min-height: 41px;
+}
+
 option {
     outline: none;
 }

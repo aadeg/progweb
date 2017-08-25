@@ -107,7 +107,7 @@ NewTicketStepForm.prototype._onSubmit = function(event){
    var formData = {};
    for (var i = 0; i < sessionStorage.length; ++i){
        var key = sessionStorage.key(i);
-       if (key.startsWith(this.sessionStoragePrefix)){
+       if (stringStartsWith(key, this.sessionStoragePrefix)){
            var item = sessionStorage.getItem(key);
            if (item){
               key = key.slice(this.sessionStoragePrefix.length);
@@ -299,7 +299,6 @@ StartStep.prototype.checkValidity = function(){
     if (this.form.checkValidity())
        return true;
 
-   console.log('Here');
    var inputs = this.form.getElementsByTagName('input');
    for (var i = 0; i < inputs.length; ++i)
        this._validateField(inputs[i]);
@@ -338,9 +337,6 @@ StartStep.prototype.checkValidity = function(){
    if (this.curCategory == "0" || this.curCategory < 1)
        this.curCategory = null;
    this.customFields = {};
-
-
-   console.log(this.curCategory);
 
    this.showSubject = (this.curCategory) ? true : false;
    this.showMessage = (this.curCategory) ? true : false;

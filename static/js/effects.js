@@ -17,7 +17,7 @@ function drop(el){
     var top = -20;
     var timer = setInterval(function() {
 	top += 3;
-	console.log(top);
+
 	if (top >= 0){
 	    el.style.top = 0;
 	    clearInterval(timer);
