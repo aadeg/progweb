@@ -4,7 +4,7 @@ session_start();
 require_once dirname(__FILE__) . '/config.php';
 
 spl_autoload_register(function($class) {
-	$class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
     require_once dirname(__FILE__) . '/../classes/' . $class . '.php';
 });
 

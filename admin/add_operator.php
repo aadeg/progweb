@@ -18,16 +18,16 @@ $view = AdminView::addOperator();
 
 <section class="panel">
     <header>
-	<h3>Modulo per la registrazione</h3>
+        <h3>Modulo per la registrazione</h3>
     </header>
 
     <div class="body">
-	<form method="post" action="#">
-	    <ul class="input-list">
-		<?php echo $view->form->as_li(); ?>
-	    </ul>
-	    <button type="submit" class="primary">Aggiungi</button>
-	</form>
+        <form method="post" action="#">
+            <ul class="input-list">
+                <?php echo $view->form->as_li(); ?>
+            </ul>
+            <button type="submit" class="primary">Aggiungi</button>
+        </form>
     </div>
 </section>
 

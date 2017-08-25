@@ -8,16 +8,16 @@ Template::setTitle("Nuova pratica");
 
 <section class="panel fadeIn" id="new-ticket-section">
     <header>
-	<h2>Contatta un operatore</h2>
+        <h2>Contatta un operatore</h2>
     </header>
     <div class="body">
-	<form method="post" action="#">
-	</form>
+        <form method="post" action="#">
+        </form>
     </div>
     <footer>
-	<button type="button" class="left" id="prev-step-btn">Indietro</button>
-	<button type="button" class="right primary" id="next-step-btn">Avanti</button>
-	<div style="clear: both;"></div>
+        <button type="button" class="left" id="prev-step-btn">Indietro</button>
+        <button type="button" class="right primary" id="next-step-btn">Avanti</button>
+        <div style="clear: both;"></div>
     </footer>
 </section>
 

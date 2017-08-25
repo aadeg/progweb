@@ -10,12 +10,12 @@ class DBResult {
     private $lastId;
 
     public function __construct($rows, $count, $errno=0, $error='',
-				$lastId=null){
+                                $lastId=null){
         $this->rows = $rows;
         $this->count = $count;
         $this->errno = $errno;
         $this->error = $error;
-	$this->lastId = $lastId;
+        $this->lastId = $lastId;
     }
 
     public function rows(){
@@ -42,10 +42,10 @@ class DBResult {
     }
 
     public function lastId(){
-	return $this->lastId;
+        return $this->lastId;
     }
 
     public function setLastId($id){
-	$this->lastId = $id;
+        $this->lastId = $id;
     }
 }

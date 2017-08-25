@@ -13,16 +13,16 @@ $view = RecoveryView::recoveryCode();
     <header>
         <h2>Codice di recupero</h2>
     </header>
-	<div class="body">
-	    <p>Inserisca il codice che le è stato inviato tramite email.</p>
-	    <form action="#" method="POST">
-		<ul class="input-list">
-		    <?php echo $view->form->as_li(); ?>
-		</ul>
-		<button type="submit" class="primary right">Conferma</button>
-	    </form>
-	    <div class="clear"></div>
-	</div>
+        <div class="body">
+            <p>Inserisca il codice che le è stato inviato tramite email.</p>
+            <form action="#" method="POST">
+                <ul class="input-list">
+                    <?php echo $view->form->as_li(); ?>
+                </ul>
+                <button type="submit" class="primary right">Conferma</button>
+            </form>
+            <div class="clear"></div>
+        </div>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

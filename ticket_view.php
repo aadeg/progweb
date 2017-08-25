@@ -14,20 +14,20 @@ Template::setTitle("Pratica #{$view->ticket->id}");
 
 <section class="panel" id="messages-box">
     <header>
-	<h3>Oggetto: <?php echo $view->ticket->subject ?></h3>
+        <h3>Oggetto: <?php echo $view->ticket->subject ?></h3>
     </header>
 
     <div class="body">
-	<div class="messages">
-	    <ul class="message-list">
-	    </ul>
-	</div>
+        <div class="messages">
+            <ul class="message-list">
+            </ul>
+        </div>
     </div>
     <footer>
-	<form action="#" method="post">
-	    <?php echo $view->form->html(false); ?>
-	    <button type="submit" class="right primary" <?php echo $view->btnDisabled; ?>>Invia messaggio</button>
-	</form>
+        <form action="#" method="post">
+            <?php echo $view->form->html(false); ?>
+            <button type="submit" class="right primary" <?php echo $view->btnDisabled; ?>>Invia messaggio</button>
+        </form>
     </footer>
     <div class="clear"></div>
 </section>

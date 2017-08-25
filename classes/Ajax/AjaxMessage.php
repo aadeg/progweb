@@ -43,7 +43,7 @@ class AjaxMessage extends AjaxRequest {
     }
 
     private function get($ticketId, $data){
-	if (!$this->hasPermission($ticketId))
+        if (!$this->hasPermission($ticketId))
                 return $this->error(403, "Azione non permessa");
         
         $messageId = null;
@@ -86,16 +86,16 @@ class AjaxMessage extends AjaxRequest {
     }
 
     private function add($ticketId, $data){
-	if (!$this->hasPermission($ticketId))
-	    return $this->error(403, "Azione non permessa");
+        if (!$this->hasPermission($ticketId))
+            return $this->error(403, "Azione non permessa");
         if (!isset($data['message']))
             return $this->error(400, "Campo 'message' mancante");
 
-	$ticket = Ticket::getById($ticketId);
+        $ticket = Ticket::getById($ticketId);
         if (!$ticket)
             return $this->error(400, "Ticket $ticketId non trovato");
-	if ($ticket->status == 'CLOSE')
-	    return $this->error(400, "Ticket chiuso");
+        if ($ticket->status == 'CLOSE')
+            return $this->error(400, "Ticket chiuso");
         
         $text = $data['message'];
         if ($text == "")
@@ -110,14 +110,14 @@ class AjaxMessage extends AjaxRequest {
     }
 
     private function hasPermission($ticketId){
-	if (!$this->userMode)
-	    return true;
-	
-	
+        if (!$this->userMode)
+            return true;
+        
+        
         $allowedTicketId = Session::get('cust_ticket_id');
         if (!$allowedTicketId || $allowedTicketId != $ticketId)
             return false;
-	return true;
+        return true;
     }
 }
 

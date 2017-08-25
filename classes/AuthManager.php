@@ -15,9 +15,9 @@ class AuthManager {
     }
 
     public static function changePassword($operatorId, $newPassword){
-	$password = password_hash($newPassword, PASSWORD_BCRYPT);
-	Operator::update($operatorId, array("password" => $password));
-	Operator::resetRecoveryToken();
+        $password = password_hash($newPassword, PASSWORD_BCRYPT);
+        Operator::update($operatorId, array("password" => $password));
+        Operator::resetRecoveryToken();
     }
 
     public static function checkLogin($username, $rawPassword){
@@ -36,8 +36,8 @@ class AuthManager {
         $operator = Operator::getByID($operator_id);
         if (!$operator->enabled)
             return false;
-	if ($operator->recovery_token !== null)
-	    Operator::resetRecoveryToken($operator_id);
+        if ($operator->recovery_token !== null)
+            Operator::resetRecoveryToken($operator_id);
 
 
         Session::put(Config::get('session.session_name'), $operator_id);
@@ -50,21 +50,21 @@ class AuthManager {
     }
 
     public static function recover($operator_id){
-	$token = Operator::setRecoveryToken($operator_id);
-	$operator = Operator::getById($operator_id);
+        $token = Operator::setRecoveryToken($operator_id);
+        $operator = Operator::getById($operator_id);
 
-	$op_full_name = "{$operator->first_name} {$operator->last_name}";
-	$addrs = array(
-	    array("email" => $operator->email, "name" => $op_full_name)
-	);
-	$subject = "Recupero della password";
-	$body = "Buongiorno $op_full_name,\n";
-	$body .= "Come da lei richiesto, le inviamo le informazioni necessarie a recuperare la sua password.\n";
-	$body .= "Il codice per recuperare la password è:\n\n";
-	$body .= "$token\n\n";
-	$body .= "SimpleTicket";
+        $op_full_name = "{$operator->first_name} {$operator->last_name}";
+        $addrs = array(
+            array("email" => $operator->email, "name" => $op_full_name)
+        );
+        $subject = "Recupero della password";
+        $body = "Buongiorno $op_full_name,\n";
+        $body .= "Come da lei richiesto, le inviamo le informazioni necessarie a recuperare la sua password.\n";
+        $body .= "Il codice per recuperare la password è:\n\n";
+        $body .= "$token\n\n";
+        $body .= "SimpleTicket";
 
-	if (!EmailSender::send($addrs, $subject, $body)){
+        if (!EmailSender::send($addrs, $subject, $body)){
         die(EmailSender::getErrorMsg());
         return false;
     }
@@ -84,8 +84,8 @@ class AuthManager {
             
             $operator_id = Session::get($session_name);
             self::$currentOperator = Operator::getByID($operator_id);
-	    if (!self::$currentOperator->enabled)
-		self::$currentOperator = null;
+            if (!self::$currentOperator->enabled)
+                self::$currentOperator = null;
         }
 
         return self::$currentOperator;
@@ -103,9 +103,9 @@ class AuthManager {
     }
 
     public static function adminRequired(){
-	$operator = self::currentOperator();
-	if (!$operator || !$operator->is_admin)
-	    Redirect::to(403);
+        $operator = self::currentOperator();
+        if (!$operator || !$operator->is_admin)
+            Redirect::to(403);
     }
 
 }

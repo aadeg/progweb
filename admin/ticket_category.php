@@ -21,29 +21,29 @@ Template::setTitle("Categoria {$view->category->label}");
 
 <section class="panel">
     <header>
-	<h3>Configurazioni categoria</h3>
+        <h3>Configurazioni categoria</h3>
     </header>
 
     <div class="body">
-	<form action="#" method="post">
-	    <ul class="input-list">
-		<?php echo $view->categoryForm->as_li(); ?>
-	    </ul>
-	    <button type="submit" class="primary">Modifica</button>
-	</form>
+        <form action="#" method="post">
+            <ul class="input-list">
+                <?php echo $view->categoryForm->as_li(); ?>
+            </ul>
+            <button type="submit" class="primary">Modifica</button>
+        </form>
     </div>
 </section>
 
 <section class="panel">
     <header>
-	<h3>Campi personalizzati</h3>
+        <h3>Campi personalizzati</h3>
     </header>
 
     <div class="body">
     </div>
 
     <footer>
-	<button type="button" class="primary" id="btn-add-field">Aggiungi un nuovo campo</button>
+        <button type="button" class="primary" id="btn-add-field">Aggiungi un nuovo campo</button>
     </footer>
 </section>
 

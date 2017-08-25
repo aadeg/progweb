@@ -27,20 +27,20 @@ $operator = AuthManager::currentOperator();
 </head>
 <body>
     <header class="main-header">
-	<img src="../static/imgs/logo_inv.png" alt="logo" class="logo">
-	<h1 class="left">SimpleTicket</h1>
-	<div class="dropdown right">
-	    <a href="#" onclick="dropdown(event);">
-		<?php echo $operator->first_name . ' ' . $operator->last_name; ?> <i class="fa fa-caret-down"></i>
-	    </a>
-	    <ul id="operator-dropdown">
-		<li><a href="/admin/profile.php">Profilo</a></li>
-		<li><a href="/admin/logout.php">Logout</a></li>
-	    </ul>
-	</div>
+        <img src="../static/imgs/logo_inv.png" alt="logo" class="logo">
+        <h1 class="left">SimpleTicket</h1>
+        <div class="dropdown right">
+            <a href="#" onclick="dropdown(event);">
+                <?php echo $operator->first_name . ' ' . $operator->last_name; ?> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul id="operator-dropdown">
+                <li><a href="/admin/profile.php">Profilo</a></li>
+                <li><a href="/admin/logout.php">Logout</a></li>
+            </ul>
+        </div>
     </header>
     <aside>
-	<?php require '../includes/admin/sidebar.php' ?>
+        <?php require '../includes/admin/sidebar.php' ?>
     </aside>
 
     <main>

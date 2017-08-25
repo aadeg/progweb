@@ -13,17 +13,17 @@ $view = RecoveryView::recoveryChange();
     <header>
         <h2>Cambia la password</h2>
     </header>
-	<div class="body">
-	    <p>Inserisca una nuova password di almeno 6 caratteri.</p>
+        <div class="body">
+            <p>Inserisca una nuova password di almeno 6 caratteri.</p>
 
-	    <form action="#" method="POST">
-		<ul class="input-list">
-		    <?php echo $view->form->as_li(); ?>
-		</ul>
-		<button type="submit" class="primary right">Cambia</button>
-	    </form>
-	    <div class="clear"></div>
-	</div>
+            <form action="#" method="POST">
+                <ul class="input-list">
+                    <?php echo $view->form->as_li(); ?>
+                </ul>
+                <button type="submit" class="primary right">Cambia</button>
+            </form>
+            <div class="clear"></div>
+        </div>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

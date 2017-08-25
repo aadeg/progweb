@@ -26,18 +26,18 @@ class DB {
         $params = array();
 
         if (count($where)){
-	    $this->sanitize($where);
+            $this->sanitize($where);
             $sql .= " WHERE ";
             $sql .= self::attributeValueToStr($where, " and ");
         }
-	if (count($orderBy)){
-	    $sql .= " ORDER BY ";
-	    $tmp = array();
-	    foreach ($orderBy as $field => $value)
-		$tmp[] = "`" . $field . "` " . $value;
+        if (count($orderBy)){
+            $sql .= " ORDER BY ";
+            $tmp = array();
+            foreach ($orderBy as $field => $value)
+                $tmp[] = "`" . $field . "` " . $value;
 
-	    $sql .= implode(',', $tmp);
-	}
+            $sql .= implode(',', $tmp);
+        }
 
         return $this->query($sql);
     }
@@ -55,21 +55,21 @@ class DB {
             return false;
         }
 
-	$this->sanitize($fields, true);
-	foreach ($fields as $key => &$value){
-	    if ($value === null)
-		$value = "null";
-	    else
-		$value = '"' . $value . '"';
-	}
+        $this->sanitize($fields, true);
+        foreach ($fields as $key => &$value){
+            if ($value === null)
+                $value = "null";
+            else
+                $value = '"' . $value . '"';
+        }
 
         $keys_str = '`' . implode('`,`', array_keys($fields)) . '`';
         $values_str = implode(',', array_values($fields));
 
         $sql = "INSERT INTO {$table} ({$keys_str}) VALUES ({$values_str})";
         $ris = $this->query($sql);
-	$ris->setLastId($this->mysqli->insert_id);
-	return $ris;
+        $ris->setLastId($this->mysqli->insert_id);
+        return $ris;
     }
 
     public function update($table, $set, $where){
@@ -77,8 +77,8 @@ class DB {
             return false;
         }
 
-	$this->sanitize($where);
-	$this->sanitize($set, true);
+        $this->sanitize($where);
+        $this->sanitize($set, true);
 
 
         $where_str = self::attributeValueToStr($where, ' and ');
@@ -109,30 +109,30 @@ class DB {
     }
 
     private function sanitize(&$array, $ignoreNull=false){
-	foreach($array as $field => $value){
-	    if ($value === null && $ignoreNull)
-		continue;
-	    
-	    if (is_null($array[$field])){
-		$array[$field] = "is null";
-	    } else {
-		$array[$field] = $this->mysqli->real_escape_string($value);
-	    }
-	}
+        foreach($array as $field => $value){
+            if ($value === null && $ignoreNull)
+                continue;
+            
+            if (is_null($array[$field])){
+                $array[$field] = "is null";
+            } else {
+                $array[$field] = $this->mysqli->real_escape_string($value);
+            }
+        }
     }
 
     private static function attributeValueToStr($fields, $glue=',', $allowedNull=false){
         $str = "";
         $i = 0;
         foreach ($fields as $field => $value){
-	    if ($value === "is null")
-		$str .= "{$field} is null";
-	    else if ($value === 'not null')
-	        $str .= "{$field} is not null";
-	    else if ($value === null && $allowedNull)
-	        $str .= "{$field}=null";
-	    else 
-		$str .= "{$field}=\"{$value}\"";
+            if ($value === "is null")
+                $str .= "{$field} is null";
+            else if ($value === 'not null')
+                $str .= "{$field} is not null";
+            else if ($value === null && $allowedNull)
+                $str .= "{$field}=null";
+            else 
+                $str .= "{$field}=\"{$value}\"";
 
             if (++$i< count($fields))
                 $str .= "{$glue}";

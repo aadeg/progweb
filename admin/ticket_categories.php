@@ -27,24 +27,24 @@ EOD;
 
 <section class="panel">
     <header>
-	<h3>Categorie dei ticket</h3>
+        <h3>Categorie dei ticket</h3>
     </header>
 
     <div class="body">
-	<table>
-	    <thead>
-		<tr>
-		    <th>Etichetta</th>
-		    <th class="text-center">Campi personalizzati</th>
-		    <th class="text-center">Numero di pratiche</th>
-		</tr>
-	    </thead>
-	    <tbody>
-		<?php foreach($view->categories as $cat){ ?>
-		    <?php echo _categoryRow($cat); ?>
-		<?php } ?>
-	    </tbody>
-	</table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Etichetta</th>
+                    <th class="text-center">Campi personalizzati</th>
+                    <th class="text-center">Numero di pratiche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($view->categories as $cat){ ?>
+                    <?php echo _categoryRow($cat); ?>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 </section>
 

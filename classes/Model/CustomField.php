@@ -7,11 +7,11 @@ class CustomField extends BaseModel {
     const TABLE_NAME = 'custom_fields';
 
     public static function getAll(){
-	return self::$db->get(self::TABLE_NAME);
+        return self::$db->get(self::TABLE_NAME);
     }
 
     public static function get($fields){
-	return self::$db->get(self::TABLE_NAME, $fields);
+        return self::$db->get(self::TABLE_NAME, $fields);
     }
 
     public static function getByID($id){
@@ -20,12 +20,12 @@ class CustomField extends BaseModel {
     }
 
     public static function getByCategory($categoryId){
-	return self::$db->get(
-	    self::TABLE_NAME,
-	    array('ticket_category' => $categoryId),
-	    array('order_index' => DB::ORDER_ASC,
-		  'id' => DB::ORDER_ASC)
-	)->rows();
+        return self::$db->get(
+            self::TABLE_NAME,
+            array('ticket_category' => $categoryId),
+            array('order_index' => DB::ORDER_ASC,
+                  'id' => DB::ORDER_ASC)
+        )->rows();
     }
 
     public static function create($data){
@@ -35,14 +35,14 @@ class CustomField extends BaseModel {
     }
 
     public static function update($id, $fields){
-	return self::$db->update(
-	    self::TABLE_NAME, $fields, array('id' => $id));
+        return self::$db->update(
+            self::TABLE_NAME, $fields, array('id' => $id));
     }
 
     public static function delete($id){
-	$ris = self::$db->delete(self::TABLE_NAME,
-				 array('id' => $id));
-	return $ris;
+        $ris = self::$db->delete(self::TABLE_NAME,
+                                 array('id' => $id));
+        return $ris;
     }
 }
 ?>

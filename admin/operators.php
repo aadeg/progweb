@@ -27,25 +27,25 @@ EOD;
 
 <section class="panel">
     <header>
-	<h3>Tutto gli operatori</h3>
+        <h3>Tutto gli operatori</h3>
     </header>
 
     <div class="body">
-	<table>
-	    <thead>
-		<tr>
-		    <th>ID</th>
-		    <th>Nome e cognome</th>
-		    <th>Username</th>
-		    <th>Email</th>
-		</tr>
-	    </thead>
-	    <tbody>
-		<?php foreach($view->operators as $op){ ?>
-		    <?php echo _operatorRow($op); ?>
-		<?php } ?>
-	    </tbody>
-	</table>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome e cognome</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($view->operators as $op){ ?>
+                    <?php echo _operatorRow($op); ?>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 </section>
 

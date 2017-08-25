@@ -16,32 +16,32 @@ $view = AdminView::tickets();
 
 <section class="panel ticket-list" id="ticket-list-new">
     <header>
-	<h3><?php echo $view->title; ?></h3>
+        <h3><?php echo $view->title; ?></h3>
     </header>
     <div class="body">
-	<form class="ticket-search" action="#">
-	    <input type="text" id="search-bar" placeholder="Ricerca nella tabella">
-	    <div id="only-checkbox-div">
-		<label for="only-checkbox">Mostra solo i tuoi</label>
-		<input id="only-checkbox" type="checkbox">
-	    </div>
-	</form>
+        <form class="ticket-search" action="#">
+            <input type="text" id="search-bar" placeholder="Ricerca nella tabella">
+            <div id="only-checkbox-div">
+                <label for="only-checkbox">Mostra solo i tuoi</label>
+                <input id="only-checkbox" type="checkbox">
+            </div>
+        </form>
 
-	<table class="ticket-table">
-	    <thead>
-		<tr>
-		    <th>ID</th>
-		    <th>Oggetto</th>
-		    <th>Cliente</th>
-		    <th class="text-center">Categoria</th>
-		    <th class="text-center">Ultimo aggiornamento</th>
-		</tr>
-	    </thead>
-	    <tbody>
-	    </tbody>
-	    <tfoot>
-	    </tfoot>
-	</table>
+        <table class="ticket-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Oggetto</th>
+                    <th>Cliente</th>
+                    <th class="text-center">Categoria</th>
+                    <th class="text-center">Ultimo aggiornamento</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
     </div>
 </section>
 
