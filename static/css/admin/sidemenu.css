@@ -36,10 +36,6 @@ ul.side-menu.first-lvl > li {
     font-weight: 400;
 }
 
-ul.side-menu.first-lvl > li:first-child > a {
-    /* TODO: remove */
-}
-
 ul.side-menu.first-lvl > li > a.selected {
     background-color: #0073A4;
 }

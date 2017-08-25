@@ -1,8 +1,8 @@
-#messages-box {
-    float: left;
-    width: 69%;
-}
-
+/*
+   |--------------------------------------------------------------------|
+   |                             Side Box                               |
+   |--------------------------------------------------------------------|
+*/
 #side-box {
     float: right;
     width: 30%;
@@ -14,6 +14,31 @@
 
 #side-box > section:last-child {
     margin-bottom: 0;
+}
+
+dl {
+    margin: 5px 0;
+}
+
+dt {
+    display: inline;
+    color: #666;
+}
+
+dd {
+    display: inline;
+    margin: 0;
+    font-weight: bold;
+}
+
+/*
+   |--------------------------------------------------------------------|
+   |                           Messages Box                             |
+   |--------------------------------------------------------------------|
+*/
+#messages-box {
+    float: left;
+    width: 69%;
 }
 
 #messages-box > header.priority-high {
@@ -33,21 +58,15 @@
     color: inherit;
 }
 
-dl {
-    margin: 5px 0;
+#messages-box form button {
+    margin: 10px 0;
 }
 
-dt {
-    display: inline;
-    color: #666;
-}
-
-dd {
-    display: inline;
-    margin: 0;
-    font-weight: bold;
-}
-
+/*
+   |--------------------------------------------------------------------|
+   |                             Messages                               |
+   |--------------------------------------------------------------------|
+*/
 ul.message-list {
     list-style: none;
     width: 100%;
@@ -92,25 +111,11 @@ li.message:last-child {
     float: right;
 }
 
-.internal .message-text {
-    max-width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    font-family: monospace;
-    background-color: #FEF2BE;
-    color: #222;
-    border-radius: 0;
-}
-
 span.message-time {
     display: block;
     text-align: right;
     font-size: 0.6em;
     font-style: italic;
-}
-
-.internal span.message-time {
-    text-align: center;
 }
 
 span.message-sender {
@@ -119,13 +124,4 @@ span.message-sender {
     font-size: 0.9em;
     font-weight: bold;
 }
-
-.internal .message-sender {
-    text-align: center;
-    font-weight: 400;
-    font-style: italic;
-}
-
-#messages-box form button {
-    margin: 10px 0;
-}
+7

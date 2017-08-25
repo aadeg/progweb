@@ -10,6 +10,7 @@
 	<link rel='shortcut icon' type='image/x-icon' href='/static/imgs/favicon.ico'>
 	
 	<link rel="stylesheet" href="static/css/common.css">
+	<link rel="stylesheet" href="/static/css/form.css">
 	<link rel="stylesheet" href="static/css/effects.css">
 	<link rel="stylesheet" href="static/css/style.css">
 	<?php echo Template::getStylesheetHTML(); ?>

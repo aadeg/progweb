@@ -1,0 +1,170 @@
+/*
+   |--------------------------------------------------------------------|
+   |                              Layout                                |
+   |--------------------------------------------------------------------|
+*/
+ul.input-list {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+ul.input-list > li {
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+
+ul.input-list > li:first-child {
+    margin: 0;
+}
+
+ul.input-row {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+ul.input-row > li {
+    list-style: none;
+    float: left;
+    margin: 0 5px;
+}
+
+/*
+   |--------------------------------------------------------------------|
+   |                              Fields                                |
+   |--------------------------------------------------------------------|
+*/
+label {
+    margin: 0 0 5px 0;
+    display: block;
+    padding: 0;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    font-size: 16px;
+    box-shadow: none;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #acacac;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 41px;
+    height: 5em;
+}
+
+textarea[readonly] {
+    background-color: #EEEEEE;
+    cursor: not-allowed;
+}
+
+textarea[readonly]:focus {
+    border-color: #acacac;
+    box-shadow: none;
+}
+
+option {
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #808080;
+    box-shadow: 0 0 5px #868686;
+}
+
+input.small, select.small, textarea.small {
+    font-size: 0.9em;
+    padding: 5px;
+}
+
+input.invalid, select.invalid, textarea.invalid {
+    border-color: #DC3232;
+}
+
+span.error-msg {
+    color: #DC3232;
+}
+
+/*
+   |--------------------------------------------------------------------|
+   |                              Buttons                               |
+   |--------------------------------------------------------------------|
+*/
+button, .button {
+    font-size: 14px;
+    display: block;
+    background-color: #f8f4e3;
+    padding: 10px 40px;
+    border: 1px solid #a2a392;
+    cursor: pointer;
+}
+
+a.button {
+    color: inherit !important;
+}
+
+button:hover, .button:hover {
+    background-color: #d4cdc3;
+    border-color: #9a998c;
+}
+
+button:active, .button:active {
+    box-shadow: inset 2px 2px 7px #9a998c;
+    border-color: #9a998c;
+    outline: none;
+}
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active,
+.button[disabled],
+.button[disabled]:hover,
+.button[disabled]:active {
+    background-color:  #f0f3f4;
+    border-color:   #d7dbdd;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+button.small, .button.small {
+    font-size: 0.9em;
+    padding: 5px 10px;
+}
+
+button.inline, .button.inline {
+    margin: 0;
+    display: inline-block;
+}
+
+button.primary, .button.primary {
+    background-color: #0085BA;
+    color: #fff;
+    border-color: #0073AA;
+}
+
+button.primary:hover, .button.primary:hover {
+    background-color: #008ec2;
+}
+
+button.primary:active, .button.primari:active {
+    box-shadow: inset 2px 2px 7px #0073AA;
+    border-color: #0073AA;
+    outline: none;
+}
+
+button[disabled].primary,
+button[disabled].primary:hover,
+button[disabled].primary:active,
+.button[disabled].primary,
+.button[disabled].primary:hover,
+.button[disabled].primary:active{
+    cursor: not-allowed;
+    background-color:  #5499c7;
+    border: none;
+    box-shadow: none;
+}

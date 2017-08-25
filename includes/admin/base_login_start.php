@@ -9,10 +9,11 @@
 
 	<link rel='shortcut icon' type='image/x-icon' href='/static/imgs/favicon.ico'>
 
-	<link rel="stylesheet" href="../static/css/common.css">
-	<link rel="stylesheet" href="../static/css/admin/style.css">
-	<link rel="stylesheet" href="../static/css/effects.css">
-	<link rel="stylesheet" href="../static/css/admin/login.css">
+	<link rel="stylesheet" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/form.css">
+	<link rel="stylesheet" href="/static/css/admin/style.css">
+	<link rel="stylesheet" href="/static/css/effects.css">
+	<link rel="stylesheet" href="/static/css/admin/login.css">
 
 	<script src="../static/js/common.js"></script>
 	<script src="../static/js/effects.js"></script>

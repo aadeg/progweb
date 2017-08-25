@@ -1,3 +1,5 @@
+// CSS per interfaccia utente: ticket_view.php
+
 body {
     background-image: none;
     background-color: #eee;
@@ -14,7 +16,7 @@ main {
     padding: 10px;
 }
 
-section.panel {
+.panel {
     width: 100%;
     margin: 0;
 }
@@ -81,12 +83,3 @@ span.message-sender {
     margin: 10px 0;
 }
 
-textarea[readonly]:focus {
-    border-color: #acacac;
-    box-shadow: none;
-}
-
-textarea[readonly] {
-    background-color: #EEEEEE;
-    cursor: not-allowed;
-}
