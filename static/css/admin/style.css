@@ -190,6 +190,15 @@ button:active {
     outline: none;
 }
 
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active {
+    background-color:  #f0f3f4;
+    border-color:   #d7dbdd;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
 button.small {
     font-size: 0.9em;
     padding: 5px 10px;
@@ -209,6 +218,15 @@ button.primary:active {
     box-shadow: inset 2px 2px 7px #0073AA;
     border-color: #0073AA;
     outline: none;
+}
+
+button[disabled].primary,
+button[disabled].primary:hover,
+button[disabled].primary:active {
+    cursor: not-allowed;
+    background-color:  #5499c7;
+    border: none;
+    box-shadow: none;
 }
 
 button.danger {

@@ -43,7 +43,7 @@ Template::setTitle("Categoria {$view->category->label}");
     </div>
 
     <footer>
-	<button type="button" id="btn-add-field">Aggiungi un nuovo campo</button>
+	<button type="button" class="primary" id="btn-add-field">Aggiungi un nuovo campo</button>
     </footer>
 </section>
 

@@ -14,7 +14,7 @@ $itemSelected = array(
     "2" => "/^\/admin\/(add_operator|operators|ticket_categories)\.php/",
     "2-0" => "/^\/admin\/operators\.php/",
     "2-1" => "/^\/admin\/add_operator\.php/",
-    "2-2" => "/^\/admin\/ticket_categories\.php/"
+    "2-2" => "/^\/admin\/ticket_categor(y|ies)\.php/"
 );
 
 function selMenu($index){

@@ -113,21 +113,21 @@ TicketList.prototype._getPaginationCtrl = function(){
     var self = this;
     // Indice dell'ultima pagina
     var lastPage = Math.floor(this.visibleTickets.length / this.pageSize);
-    var nextAct = this.page != lastPage;
-    var prevAct = this.page != 0;
+    var nextEnabled = this.page != lastPage;
+    var prevEnabled = this.page != 0;
     
     var div = document.createElement('div');
     
     var nextBtn = document.createElement('button');
     appendTextNode(nextBtn, '>>');
     nextBtn.type = 'button';
-    if (!nextAct)
+    if (!nextEnabled)
         nextBtn.disabled = true;
 
     var prevBtn = document.createElement('button');
     appendTextNode(prevBtn, '<<');
     prevBtn.type = 'button';
-    if (!prevAct)
+    if (!prevEnabled)
         prevBtn.disabled = true;
 
     nextBtn.onclick = function(e) { return self._onPagNext(e); };
