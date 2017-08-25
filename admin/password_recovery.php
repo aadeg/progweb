@@ -11,6 +11,9 @@ $view = RecoveryView::passwordRecovery();
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
+    <header>
+        <h2>Recupera la password</h2>
+    </header>
 	<div class="body">
 	    <p>Per recuperare la password, inserisca l'email con la quale si è registrato.</p>
 

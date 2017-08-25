@@ -162,7 +162,7 @@ TicketList.prototype.render = function() {
     tdDesc.colSpan = 3;
     tdDesc.appendChild(this._getPaginationDesc());
     var tdCtrl = document.createElement('td');
-    tdCtrl.colSpan = 3;
+    tdCtrl.colSpan = 2;
     tdCtrl.appendChild(this._getPaginationCtrl());
     
     tr.appendChild(tdDesc);

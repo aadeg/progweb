@@ -25,6 +25,7 @@ class EmailSender {
     private static function getPHPMailer(){
 	$mail = new PHPMailer;
 	$mail->isSMTP();
+	$mail->SMTPDebug  = 1;
 	$mail->Host = Config::get('email.host');
 	$mail->SMTPAuth = Config::get('email.smtp_auth');
 	$mail->Username = Config::get('email.username');

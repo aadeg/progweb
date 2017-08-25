@@ -9,18 +9,21 @@ $view = AdminView::login();
 <div class="main-box">
     <?php require "../includes/admin/flash_messages.php"; ?>
     <section class="panel fadeIn left">
-	<div class="body">
-	    <form action="#" method="POST">
-		<ul class="input-list">
-		    <?php echo $view->form->as_li(); ?>
-		</ul>
-		<button type="submit" class="primary right">Login</button>
-	    </form>
-	    <div class="clear"></div>
-	</div>
-	<footer>
-	    <a href="/admin/password_recovery.php">Hai dimenticato la password?</a>
-	</footer>
+        <header>
+            <h2>Pannello di amministrazione</h2>
+        </header>
+        <div class="body">
+            <form action="#" method="POST">
+                <ul class="input-list">
+                    <?php echo $view->form->as_li(); ?>
+                </ul>
+                <button type="submit" class="primary right">Login</button>
+            </form>
+            <div class="clear"></div>
+        </div>
+        <footer>
+            <a href="/admin/password_recovery.php">Hai dimenticato la password?</a>
+        </footer>
     </section>
 </div>
 <?php include '../includes/admin/base_login_end.php' ?>

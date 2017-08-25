@@ -57,7 +57,7 @@ function selMenu($index){
 	<?php if ($operator->is_admin) { ?>
 	<li>
 	    <a href="#" class="<?php echo selMenu("2"); ?>">
-		<img src="/static/imgs/lock2.png" alt="lock" class="icon"></i> Amministrazione</a>
+		<img src="/static/imgs/lock2.png" alt="lock" class="icon"> Amministrazione</a>
 	    <ul class="side-menu second-lvl collapsed">
 		<li><a href="/admin/operators.php" class="<?php echo selMenu("2-0"); ?>">Elenco operatori</a></li>
 		<li><a href="/admin/add_operator.php" class="<?php echo selMenu("2-1"); ?>">Aggiungi operatore</a></li>

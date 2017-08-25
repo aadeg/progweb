@@ -34,7 +34,7 @@ $view = AdminView::tickets();
 		    <th>Oggetto</th>
 		    <th>Cliente</th>
 		    <th class="text-center">Categoria</th>
-		    <th>Ultimo aggiornamento</th>
+		    <th class="text-center">Ultimo aggiornamento</th>
 		</tr>
 	    </thead>
 	    <tbody>

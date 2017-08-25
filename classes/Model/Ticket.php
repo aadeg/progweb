@@ -2,6 +2,7 @@
 namespace Model;
 
 use \DateTime;
+use \Database\DB;
 
 class Ticket extends BaseModel {
     const TABLE_NAME = 'tickets';

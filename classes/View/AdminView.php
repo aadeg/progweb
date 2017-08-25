@@ -353,7 +353,7 @@ class AdminView {
 	    Redirect::to(404);
 
 	$categoryForm = new Form(array(
-	    new TextField('label', 'Etichetta', array(
+	    new TextField('category-label', 'Etichetta', array(
 		"placeholder" => 'Nome della categoria mostrata all\'utente',
 		"required" => "",
 		"autofocus" => "",
@@ -365,7 +365,7 @@ class AdminView {
 	if (Input::isSubmit()){
 	    $view->categoryForm->setValues(Input::getAll());
 
-	    $label = Input::get('label');
+	    $label = Input::get('category-label');
 	    if (!$label){
 		Session::flash('Etichetta della categoria mancante.',
 			       'error');
