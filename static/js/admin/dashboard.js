@@ -18,25 +18,25 @@ function _animateCounter(counter){
     if (step <= 0) step = 1;
     
     var timer = setInterval(function(){
-	if (cur + step >= target){
-	    elNum.textContent = target;
-	    clearInterval(timer);
-	    return;
-	}
-	
-	cur += step;
-	elNum.textContent = cur;
+        if (cur + step >= target){
+            elNum.textContent = target;
+            clearInterval(timer);
+            return;
+        }
+        
+        cur += step;
+        elNum.textContent = cur;
     }, 50);
 }
 
 onLoadHandlers.push(function(){
     var counters = document.getElementsByClassName('counter');
     for (var i = 0; i < counters.length; ++i)
-	_animateCounter(counters[i]);
+        _animateCounter(counters[i]);
     
     var rows = document.getElementsByClassName('ticket-row');
     for (var i = 0; i < rows.length; ++i){
-	var row = rows[i];
-	row.ondblclick = function(e) { return _onTicketDblClick(e, row); };
+        var row = rows[i];
+        row.ondblclick = function(e) { return _onTicketDblClick(e, row); };
     }
 });

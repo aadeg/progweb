@@ -39,25 +39,25 @@ TicketList.prototype.load = function(url) {
         function (data) {
             for (var i = 0; i < data.length; ++i){
                 var ticket = data[i];
-        // Customer name
-        ticket.customer = ticket.cust_last_name + " " + ticket.cust_first_name;
+                // Customer name
+                ticket.customer = ticket.cust_last_name + " " + ticket.cust_first_name;
 
-        // Subject
-        if (ticket.subject.length > self.maxSubjectLength){
-            ticket.subject = ticket.subject.slice(0, self.maxSubjectLength)
-            ticket.subject += '...';
-        }
+                // Subject
+                if (ticket.subject.length > self.maxSubjectLength){
+                    ticket.subject = ticket.subject.slice(0, self.maxSubjectLength)
+                    ticket.subject += '...';
+                }
 
-        // Priority
-        ticket.rowClass = self.priorityClasses[ticket.priority];
+                // Priority
+                ticket.rowClass = self.priorityClasses[ticket.priority];
 
-    }
+            }
 
-    self.tickets = data;
-    self.visibleTickets = data;
-    self._updatePageTickets();
-    self.render();
-}, loadingBox);
+            self.tickets = data;
+            self.visibleTickets = data;
+            self._updatePageTickets();
+            self.render();
+        }, loadingBox);
 }
 
 TicketList.prototype._getTicketRow = function(ticket){
@@ -65,15 +65,15 @@ TicketList.prototype._getTicketRow = function(ticket){
     if (ticket.rowClass)
         row.classList.add(ticket.rowClass);
     if (ticket.status == 'CLOSE')
-	row.classList.add('ticket-close');
+        row.classList.add('ticket-close');
     
     row.id = 't-' + ticket.id
     var data = [
-    ticket.id,
-    ticket.subject,
-    ticket.customer,
-    ticket.category,
-    ticket.last_activity
+        ticket.id,
+        ticket.subject,
+        ticket.customer,
+        ticket.category,
+        ticket.last_activity
     ];
     var centerCols = [3, 4];
 
@@ -177,9 +177,9 @@ TicketList.prototype._clearSelection = function() {
 }
 
 /* ================================================================
-                        Event Handlers
+   Event Handlers
    ================================================================ */
-    TicketList.prototype._onSearch = function(event){
+TicketList.prototype._onSearch = function(event){
     // Ricerca i ticket in base a:
     // - id
     // - oggetto
@@ -205,7 +205,7 @@ TicketList.prototype._clearSelection = function() {
                     stringStartsWith(ticket.id, newSearch) || 
                     stringContains(ticket.subject.toLowerCase(), newSearch) ||
                     stringContains(ticket.customer.toLowerCase(), newSearch)
-                    );
+                );
             }
 
             if (newCheckbox)

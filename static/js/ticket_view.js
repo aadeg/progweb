@@ -8,7 +8,7 @@ onLoadHandlers.push(function(){
     var ticketId = getSearchParameters().id;
     var url = '/ajax/message.php?action=get';
     var messageHandler = new MessageHandler(elMsgList, elForm, ticketId, url,
-					    'Tu', '');
+                                            'Tu', '');
 
     messageHandler.loadAll();
     messageHandler.enable();

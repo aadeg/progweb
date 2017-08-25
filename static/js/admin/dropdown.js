@@ -6,7 +6,7 @@ function dropdown(event){
     elDropdownUl.classList.toggle('show');
 
     document.body.onclick = function(event){
-	elDropdownUl.classList.remove('show');
+        elDropdownUl.classList.remove('show');
     }
 
     // L'evento è di tipo bubble, quindi per evitare

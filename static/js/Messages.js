@@ -1,7 +1,7 @@
 // required: common.js, effects.js
 
 function MessageHandler(elBox, elForm, ticketId, url,
-			customerLabel, operatorPrefix){
+                        customerLabel, operatorPrefix){
     var self = this;
     this.elBox = elBox;
     this.elForm = elForm;
@@ -18,22 +18,22 @@ function MessageHandler(elBox, elForm, ticketId, url,
 }
 
 MessageHandler.prototype.loadAll = function(data){
-    if (data === undefined) data = null;
+    if (data === undefined) ndata = null;
 
     this._clear();
     var self = this;
     fn = function(data){
-	for (var i in data){
-	    var msg = new Message(data[i], self.customerLabel, self.operatorPrefix);
-	    msg.render(self.elBox);
-	}
-	self.messages = data.length;
+        for (var i in data){
+            var msg = new Message(data[i], self.customerLabel, self.operatorPrefix);
+            msg.render(self.elBox);
+        }
+        self.messages = data.length;
     };
 
     if (data == null)
-	AjaxManager.performAjaxRequest('get', this.url, true, {}, fn, loadingBox);
+        AjaxManager.performAjaxRequest('get', this.url, true, {}, fn, loadingBox);
     else
-	fn(data);
+        fn(data);
 }
 
 MessageHandler.prototype.load = function(id){
@@ -42,28 +42,28 @@ MessageHandler.prototype.load = function(id){
     url += 'id=' + id;
     url += '&ticket=' + this.ticketId;
     AjaxManager.performAjaxRequest(
-	'get', url, true, {}, function(data){
-	    var msg = new Message(data, self.customerLabel, self.operatorPrefix);
-	    msg.render(self.elBox);
-	    self.messages += 1;
-	}, loadingBox);   
+        'get', url, true, {}, function(data){
+            var msg = new Message(data, self.customerLabel, self.operatorPrefix);
+            msg.render(self.elBox);
+            self.messages += 1;
+        }, loadingBox);   
 }
 
 MessageHandler.prototype.enable = function(){
     if (this.enabled)
-	return;
+        return;
     var self = this;
     
     this.elForm.onsubmit = function(e) { return self._onSendMessage(e); };
     this.autoRefresh = setInterval(function() { return self._onRefresh(); },
-				   20000);
+                                   20000);
     this.elMsgTextarea.disabled = false;
     this.enabled = true;
 }
 
 MessageHandler.prototype._clear = function(){
     while (this.elBox.firstChild)
-	this.elBox.removeChild(this.elBox.firstChild);
+        this.elBox.removeChild(this.elBox.firstChild);
 }
 
 MessageHandler.prototype._onSendMessage = function(event){
@@ -75,26 +75,26 @@ MessageHandler.prototype._onSendMessage = function(event){
     formData.ticket = this.ticketId;
     formData.action = 'add';
     AjaxManager.performAjaxRequest(
-	'post', url, true, formData, function(data, status){
-	    if (status != 200){
-		alert("Errore durante l'invio del messaggio");
-		self.elMsgTextarea.value = "";
-		window.location.reload();
-		return;
-	    }
+        'post', url, true, formData, function(data, status){
+            if (status != 200){
+                alert("Errore durante l'invio del messaggio");
+                self.elMsgTextarea.value = "";
+                window.location.reload();
+                return;
+            }
 
-	    self.load(data.message);
-	    self.elForm.reset();
-	}, loadingBox);
+            self.load(data.message);
+            self.elForm.reset();
+        }, loadingBox);
 }
 
 MessageHandler.prototype._onRefresh = function() {
     var self = this;
     AjaxManager.performAjaxRequest(
-	'get', this.url, true, {}, function (data){
-	    if (data.length != self.messages)
-		self.loadAll(data);
-	}, loadingBox);
+        'get', this.url, true, {}, function (data){
+            if (data.length != self.messages)
+                self.loadAll(data);
+        }, loadingBox);
 }
 
 MessageHandler.prototype._retrieveFormData = function(){
@@ -119,21 +119,21 @@ Message.prototype.render = function(el){
 
     var senderText = "";
     if (this.data.type == 'CUSTOMER')
-	senderText = this.customerLabel;
+        senderText = this.customerLabel;
     else if (this.data.type == 'OPERATOR')
-	senderText = this.operatorPrefix + this.data.operator_name;
+        senderText = this.operatorPrefix + this.data.operator_name;
     
     var sender = document.createElement('span');
     sender.classList.add('message-sender');
     if (senderText)
-	appendTextNode(sender, senderText);
+        appendTextNode(sender, senderText);
     divText.appendChild(sender);
 
     var pars = this.data.text.split('\n');
     for (var i = 0; i < pars.length; ++i){
-	var p = document.createElement('p');
-	appendTextNode(p, pars[i]);
-	divText.appendChild(p);
+        var p = document.createElement('p');
+        appendTextNode(p, pars[i]);
+        divText.appendChild(p);
     }
 
     var time = document.createElement('span');
