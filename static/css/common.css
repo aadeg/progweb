@@ -1,3 +1,30 @@
+/*
+   |-----------------------------------------------------------------|
+   |                              Reset                              |
+   |-----------------------------------------------------------------|
+*/
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, em, img, small, strong, b, u, i, center,
+dl, dt, dd, ol, ul, li,
+form, label, table, tbody, tfoot, thead, tr, th, td,
+aside, footer, header, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+aside, footer, header, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+
 html {
     height: 100%;
 }

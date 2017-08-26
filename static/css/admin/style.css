@@ -12,6 +12,10 @@ img.icon {
     height: 14px;
 }
 
+input, select, textarea {
+    padding: 8px;
+}
+
 /*
    |--------------------------------------------------------------------|
    |                              Header                                |
@@ -97,13 +101,17 @@ body > main > h2 {
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 thead {
-    font-weight: 400;
+     border-bottom: 1px solid #a2a392;
+}
+
+th {
+    font-weight: bold;
     color: #000;
     font-variant: small-caps;
-    border-bottom: 1px solid #a2a392;
     text-align: left;
 }
 
@@ -124,6 +132,7 @@ tfoot button {
 }
 
 td {
-    height: 2em;
+    height: 2.2em;
     cursor: pointer;
+    vertical-align: middle;
 }
