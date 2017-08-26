@@ -288,7 +288,9 @@ CustomField.prototype._getButtons = function(){
         this.elBtnDelete = document.createElement('button');
 
         this.elBtnConfirm.type = 'button';
+        this.elBtnConfirm.classList.add('success', 'small');
         this.elBtnDelete.type = 'button';
+        this.elBtnDelete.classList.add('danger', 'small');
 
         if (this.new){
             appendTextNode(this.elBtnConfirm, 'Aggiungi');

@@ -117,10 +117,10 @@ foreach ($optPriority as $key => &$value){
                     </li>
 
                     <li>
-                        <button class="small" type="button" id="close-button">Chiudi ticket</button>
+                        <button class="small warning" type="button" id="close-button">Chiudi ticket</button>
                     </li>
                     <li>
-                        <button class="small" type="button" id="delete-button">Rimuovi ticket</button>
+                        <button class="small danger" type="button" id="delete-button">Rimuovi ticket</button>
                     </li>
                 </ul>
             </form>

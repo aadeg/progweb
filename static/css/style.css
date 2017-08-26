@@ -88,7 +88,7 @@ body > header > a:hover {
 
 /*
    |--------------------------------------------------------------------|
-   |                              Panel                                 |
+   |                              Buttons                               |
    |--------------------------------------------------------------------|
    | 
    | Modifiche rispetto a form.css
@@ -96,6 +96,7 @@ body > header > a:hover {
 */
 .button {
     padding: 10px 20px;
+    display: block;
     margin: 20px 0;
 }
 
