@@ -2,8 +2,6 @@
 TO DO 
 ---------------------------------------
 
-- Fixare bottoni paginazione quando c'è una sola pagina
-- Testare paginazione tabella ticket
 
 ----------------------------------------
 DONE
@@ -16,3 +14,5 @@ DONE
 - Validare tutto CSS
 - Testare invio di Email su Windows
 - Validare HTML pannello admin
+- Fixare bottoni paginazione quando c'è una sola pagina
+- Testare paginazione tabella ticket
