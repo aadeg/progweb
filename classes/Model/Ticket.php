@@ -30,7 +30,7 @@ class Ticket extends BaseModel {
 
     public static function create($cus_first_name, $cus_last_name, 
                                   $cus_email, $subject, $category, 
-                                  $open_at=null){
+                                  $priority=1, $open_at=null){
         if(!$open_at)
             $open_at = date("Y-m-d H:i:s");
 
@@ -40,7 +40,9 @@ class Ticket extends BaseModel {
             "cust_email" => $cus_email,
             "subject" => $subject,
             "category" => $category, 
-            "open_at" => $open_at
+            "open_at" => $open_at,
+            "last_activity" => $open_at,
+            "priority" => $priority
         ));
         if ($ris->error())
             die($ris->errorMsg());

@@ -16,6 +16,7 @@ class DB {
     }
 
     public function query($sql){
+        // var_dump($sql);
         $result = $this->mysqli->query($sql);
 
         return $this->buildResult($result);
@@ -113,8 +114,12 @@ class DB {
             if ($value === null && $ignoreNull)
                 continue;
             
-            if (is_null($array[$field])){
+            if (is_null($value)){
                 $array[$field] = "is null";
+            } else if ($value === true) {
+                $array[$field] = '1';
+            } else if ($value === false) {
+                $array[$field] = '0';
             } else {
                 $array[$field] = $this->mysqli->real_escape_string($value);
             }

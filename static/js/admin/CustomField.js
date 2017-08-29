@@ -116,7 +116,7 @@ var _variableFields = {
         {
             tagName: 'input',
             type: 'text',
-            name: 'pattern',
+            name: 'regex_pattern',
             label: 'Pattern',
             'class': 'pattern',
             placeholder: 'Espressione regolare per validare il campo',

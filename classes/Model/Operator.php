@@ -25,6 +25,8 @@ class Operator extends BaseModel {
 
     public static function create($username, $password, $firstName,
                                   $lastName, $email, $isAdmin){
+
+        $isAdmin = ($isAdmin) ? "1" : "0";
         $ris = self::$db->insert(self::TABLE_NAME, array(
                     "username" =>   $username,
                     "password" =>   $password,
