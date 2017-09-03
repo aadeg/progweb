@@ -19,7 +19,7 @@ function ticketRow($t){
 <td>{$t->id}</td>
 <td>{$t->subject}</td>
 <td>{$t->cust_first_name} {$t->cust_last_name}</td>
-<td class="text-align">{$t->category}</td>
+<td class="text-center">{$t->category}</td>
 <td>{$t->last_activity}</td>
 </tr>
 EOD;
