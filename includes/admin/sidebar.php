@@ -11,10 +11,11 @@ $itemSelected = array(
     "1-1" => "/^\/admin\/tickets\.php\?(.*)t=pending/",
     "1-2" => "/^\/admin\/tickets\.php\?(.*)t=open/",
     "1-3" => "/^\/admin\/tickets\.php\?(.*)t=all/",
-    "2" => "/^\/admin\/(add_operator|operators|ticket_categories)\.php/",
+    "2" => "/^\/admin\/(add_operator|operators|ticket_categor(y|ies)|add_category)\.php/",
     "2-0" => "/^\/admin\/operators\.php/",
     "2-1" => "/^\/admin\/add_operator\.php/",
-    "2-2" => "/^\/admin\/ticket_categor(y|ies)\.php/"
+    "2-2" => "/^\/admin\/ticket_categor(y|ies)\.php/",
+    "2-3" => "/^\/admin\/add_category\.php/"
 );
 
 function selMenu($index){
