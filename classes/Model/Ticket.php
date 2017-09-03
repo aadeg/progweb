@@ -63,7 +63,7 @@ class Ticket extends BaseModel {
     public static function fillCategoryName(&$tickets){
         $categories = TicketCategory::getNames();
         foreach ($tickets as &$ticket)
-            $ticket->category = $categories[$ticket->category];
+            $ticket->category = @$categories[$ticket->category] ?: '';
     }
 
     public static function fillFormattedLastActivity(&$tickets){

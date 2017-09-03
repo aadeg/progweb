@@ -18,13 +18,13 @@ class TicketCategory extends BaseModel {
                               array('id' => $id))->first();
     }
 
-    public static function create($label, $parent=null){
+    public static function create($label){
         $ris = self::$db->insert(self::TABLE_NAME, array(
-            "label" => $label,
-            "parent" => $parent
+            "label" => $label
         ));
         if ($ris->error())
             die($ris->errorMsg());
+        return $ris->lastId();
     }
 
     public static function update($id, $fields){

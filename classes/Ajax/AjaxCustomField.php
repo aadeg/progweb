@@ -33,7 +33,6 @@ class AjaxCustomField extends AjaxRequest {
                 return $this->delete($data);
         }
         
-
         return $this->error(400, "Azione '$action' non valida");
     }
 

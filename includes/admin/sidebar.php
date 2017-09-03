@@ -61,7 +61,8 @@ function selMenu($index){
             <ul class="side-menu second-lvl collapsed">
                 <li><a href="/admin/operators.php" class="<?php echo selMenu("2-0"); ?>">Elenco operatori</a></li>
                 <li><a href="/admin/add_operator.php" class="<?php echo selMenu("2-1"); ?>">Aggiungi operatore</a></li>
-                <li><a href="/admin/ticket_categories.php" class="<?php echo selMenu("2-2"); ?>">Categorie ticket</a></li>
+                <li><a href="/admin/ticket_categories.php" class="<?php echo selMenu("2-2"); ?>">Categorie pratiche</a></li>
+                <li><a href="/admin/add_category.php" class="<?php echo selMenu("2-3"); ?>">Aggiungi categoria</a></li>
             </ul>
         </li>
         <?php } ?>

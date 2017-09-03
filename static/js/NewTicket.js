@@ -520,7 +520,7 @@ MessageStep.prototype._onCategoryChange = function(event){
 // ======================== AJAX ==========================
 MessageStep.prototype._loadCategories = function(){
     var self = this;
-    var url = 'ajax/ticket_categories.php';
+    var url = 'ajax/ticket_categories.php?action=get';
     AjaxManager.performAjaxRequest(
         'GET', url, true, {}, function(data) {
             var select = self.categorySelect;

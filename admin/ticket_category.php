@@ -47,4 +47,14 @@ Template::setTitle("Categoria {$view->category->label}");
     </footer>
 </section>
 
+<section class="panel">
+    <header>
+        <h3>Rimozione categoria</h3>
+    </header>
+
+    <div class="body">
+        <button type="button" class="danger" id="btn-delete">Rimuovi categoria</button>
+    </div>
+</section>
+
 <?php require '../includes/admin/base_end.php'; ?>

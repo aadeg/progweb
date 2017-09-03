@@ -354,7 +354,7 @@ class AdminView {
 
         $categoryForm = new Form(array(
             new TextField('category-label', 'Etichetta', array(
-                "placeholder" => 'Nome della categoria mostrata all\'utente',
+                "placeholder" => 'Nome della categoria mostrato all\'utente',
                 "required" => "",
                 "autofocus" => "",
                 "value" => $category->label
@@ -379,8 +379,34 @@ class AdminView {
             Session::flash('Etichetta modificata con successo.');
             Redirect::to('');
         }
-        
 
+        return $view;
+    }
+
+    public static function addCategory(){
+        $view = new \stdClass();
+
+        $form = new Form(array(
+            new TextField('label', 'Etichetta', array(
+                "placeholder" => 'Nome della categoria mostrato all\'utente',
+                "required" => "",
+                "autofocus" => ""
+            ))));
+        $view->form = $form;
+
+        if (Input::isSubmit()){
+            $view->form->setValues(Input::getAll());
+
+            $label = Input::get('label');
+            if ($label == null){
+                Session::flash('Compila tutti i campi richiesti', 'error');
+                return $view;
+            }
+
+            $id = TicketCategory::create($label);
+            Session::flash('Categoria creata con successo', 'success');
+            Redirect::to("/admin/ticket_category.php?id={$id}");
+        }
 
         return $view;
     }
