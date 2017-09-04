@@ -44,5 +44,21 @@ class AjaxRequest {
         return ['message' => $msg];
     }
 
+    protected function requireFields($data, $fields, &$errorMsg){
+        foreach ($fields as $field){
+            if (!$this->requireField($data, $field, $errorMsg))
+                return false;
+        }
+        return true;
+    }
+
+    protected function requireField($data, $field, &$errorMsg){
+        if (!isset($data[$field])){
+            $errorMsg = ['message' => "Campo '$field' mancante"];
+            $this->responseCode = 400;
+            return false;
+        }
+        return true;
+    }
 }
 ?>

@@ -16,8 +16,8 @@ class AjaxCustomField extends AjaxRequest {
     protected function getAllowedMethods() { return ['GET', 'POST']; }
 
     protected function onRequest($data){
-        if (!isset($data['action']))
-            return $this->error(400, "Campo 'action' mancante");
+        if (!$this->requireField($data, 'action', $err))
+            return $err;
 
         $action = $data['action'];
         unset($data['action']);
@@ -37,8 +37,8 @@ class AjaxCustomField extends AjaxRequest {
     }
 
     private function get($data){
-        if (!isset($data['category']))
-            return $this->error(400, "Campo 'category' mancante");
+        if (!$this->requireField($data, 'category', $err))
+            return $err;
 
         $categoryId = $data['category'];
         $custFields = CustomField::getByCategory($categoryId);
@@ -46,11 +46,9 @@ class AjaxCustomField extends AjaxRequest {
     }
 
     private function add($data){
-        $requiredFields = ['label', 'type', 'ticket_category'];
-        foreach ($requiredFields as $req){
-            if (!isset($data[$req]))
-                return $this->error(400, "Campo '{$req}' mancante");
-        }
+        if (!$this->requireFields($data, ['label', 'type', 'ticket_category'], $err))
+            return $err;
+
         $allowedFields = ['label', 'type', 'ticket_category', 'placeholder',
                           'order_index', 'required', 'default_value',
                           'min_value', 'max_value', 'regex_pattern',
@@ -61,6 +59,7 @@ class AjaxCustomField extends AjaxRequest {
 
             $value = ($value == '') ? null : $value;
         }
+        
         if (isset($data['required']) && $data['required'] == 'true')
             $data['required'] = true;
         else
@@ -71,11 +70,9 @@ class AjaxCustomField extends AjaxRequest {
     }
 
     private function update($data){
-        $requiredFields = ['id', 'label', 'type'];
-        foreach ($requiredFields as $req){
-            if (!isset($data[$req]))
-                return $this->error(400, "Campo '{$req}' mancante");
-        }
+        if (!$this->requireFields($data, ['id', 'label', 'type'], $err))
+            return $err;
+
         $allowedFields = ['id', 'label', 'type', 'placeholder',
                           'order_index', 'required', 'default_value',
                           'min_value', 'max_value', 'regex_pattern',
@@ -99,8 +96,8 @@ class AjaxCustomField extends AjaxRequest {
     }
 
     private function delete($data){
-        if (!isset($data['id']))
-            return $this->error(400, "Campo 'id' mancante");
+        if (!$this->requireField($data, 'id', $err))
+            return $err;
 
         $custFieldId = $data['id'];
         CustomField::delete($custFieldId);

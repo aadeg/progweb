@@ -29,7 +29,6 @@ class AjaxNewTicket extends AjaxRequest {
         $message = $this->getCustomFieldsMsg($categoryId, $data);
         $message .= $data['message'];
 
-
         $ticketId = Ticket::create($firstName, $lastName, $email,
                                    $subject, $categoryId);
         Message::create($ticketId, Message::TYPE_CUSTOMER, $message);
@@ -51,15 +50,11 @@ class AjaxNewTicket extends AjaxRequest {
     }
 
     private function isValid($data){
-        $requiredFields = [
+        $fieldsRequired = [
             'first-name', 'last-name', 'email',
             'category', 'subject', 'message'];
-        foreach ($requiredFields as $field){
-            if (!isset($data[$field])){
-                echo "1 - $field\n";
-                return false;
-            }
-        }
+        if (!$this->requireFields($data, $fieldsRequired, $err))
+            return false;
 
         if (!preg_match(self::EMAIL_PATTERN, $data['email']))
             return false;
@@ -86,7 +81,6 @@ class AjaxNewTicket extends AjaxRequest {
             } else if ($field->type == 'number') {
                 if (!preg_match(self::NUM_PATTERN, $value))
                     return false;
-
 
                 $num = intval($value);
                 if ($field->min_value && $num < $field->min_value)

@@ -135,6 +135,10 @@ TicketView.prototype._onClose = function(event){
     var url = 'ajax/ticket.php?action=edit';
     url += '&id=' + this.ticketId;
     url += '&status=' + 'CLOSE';
+
+    if (!confirm("Sei sicuro di vuol chiudere la pratica?"))
+        return;
+    
     AjaxManager.performAjaxRequest(
         'get', url, true, {}, function(data, status){
             if (status != 200){
@@ -149,7 +153,7 @@ TicketView.prototype._onDelete = function(event){
     var url = 'ajax/ticket.php?action=delete';
     url += '&id=' + this.ticketId;
     
-    if (confirm('Sei sicuro di voler rimuovere il ticket?')){
+    if (confirm('Sei sicuro di voler rimuovere la pratica?')){
         AjaxManager.performAjaxRequest(
             'get', url, true, {}, function(){
                 window.location.href = '/admin/index.php';
