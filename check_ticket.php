@@ -10,7 +10,7 @@ Template::setTitle("Visualizza pratica");
 
 <section class="panel fadeIn">
     <header>
-        <h2>Mostra la tua pratica</h2>
+        <h2>Visualizza la tua pratica</h2>
     </header>
     
     <div class="body">
