@@ -27,7 +27,7 @@ CREATE TABLE `custom_fields` (
   `type` enum('text','number','email','regex','textarea','select') NOT NULL,
   `ticket_category` int(11) NOT NULL,
   `label` varchar(60) NOT NULL,
-  `placeholder` varchar(124) DEFAULT NULL,k
+  `placeholder` varchar(124) DEFAULT NULL,
   `order_index` int(11) DEFAULT NULL,
   `min_value` int(11) DEFAULT NULL,
   `default_value` varchar(45) DEFAULT NULL,
