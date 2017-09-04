@@ -1,5 +1,5 @@
 <?php
-namespace Ajax; 
+namespace Ajax;
 
 use \Database\DB;
 use \DateTime;
@@ -73,9 +73,10 @@ class AjaxTicket extends AjaxRequest {
     private function delete($data){
         if (!isset($data['id']))
                 return $this->error(400, "Campo 'id' mancante");
-
         
         $ris = Ticket::delete($data['id']);
+        if ($ris->error())
+            die($ris->errorMsg());
         return [];
     }
 

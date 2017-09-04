@@ -6,7 +6,7 @@ $operator = AuthManager::currentOperator();
 
 $itemSelected = array(
     "0" => "/^\/admin\/(index\.php)?$/",
-    "1" => "/^\/admin\/tickets\.php(\?)?/",
+    "1" => "/^\/admin\/(tickets|ticket_view)\.php(\?)?/",
     "1-0" => "/^\/admin\/tickets\.php\?(.*)t=new/",
     "1-1" => "/^\/admin\/tickets\.php\?(.*)t=pending/",
     "1-2" => "/^\/admin\/tickets\.php\?(.*)t=open/",

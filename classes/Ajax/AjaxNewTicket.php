@@ -55,8 +55,10 @@ class AjaxNewTicket extends AjaxRequest {
             'first-name', 'last-name', 'email',
             'category', 'subject', 'message'];
         foreach ($requiredFields as $field){
-            if (!isset($data[$field]))
+            if (!isset($data[$field])){
+                echo "1 - $field\n";
                 return false;
+            }
         }
 
         if (!preg_match(self::EMAIL_PATTERN, $data['email']))

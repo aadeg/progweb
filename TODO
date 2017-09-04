@@ -2,8 +2,6 @@
 TO DO 
 ---------------------------------------
 
-- Aggiungere possibilità di aggiunger una nuova categoria
-
 ----------------------------------------
 DONE
 ----------------------------------------
@@ -17,3 +15,4 @@ DONE
 - Validare HTML pannello admin
 - Fixare bottoni paginazione quando c'è una sola pagina
 - Testare paginazione tabella ticket
+- Aggiungere possibilità di aggiunger una nuova categoria

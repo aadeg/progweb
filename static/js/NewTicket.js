@@ -420,8 +420,12 @@ MessageStep.prototype.load = function() {
     for (var i = 0; i < selects.length; ++i){
         var key = this.storagePrefix + selects[i].name;
         var item = sessionStorage.getItem(key);
-        if (item)
-            selects[i].selectedIndex = parseInt(item);
+        if (item){
+            var select = selects[i];
+            for (var i = 0; i < select.options.length; ++i)
+                if (item == select.options[i].value)
+                    select.options[i].selected = true;
+        }
     }
 
     var textareas = this.ul.getElementsByTagName('textarea');
@@ -436,7 +440,7 @@ MessageStep.prototype.load = function() {
 MessageStep.prototype.save = function(){
     sessionStorage.setItem(
         this.storagePrefix + this.categorySelect.name,
-        this.elCategory.selectedIndex
+        this.elCategory.options[this.elCategory.selectedIndex].value
     );
 
     if (this.subjectField)

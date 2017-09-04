@@ -35,8 +35,7 @@ class EmailSender {
         $mail->CharSet = "UTF-8";
 
         $mail->setFrom(Config::get('email.default_from'),
-                       Config::get('e
-mail.default_name'));
+                       Config::get('email.default_name'));
         return $mail;
     }
 
