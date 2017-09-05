@@ -105,7 +105,7 @@ class AuthManager {
     public static function adminRequired(){
         $operator = self::currentOperator();
         if (!$operator || !$operator->is_admin)
-            Redirect::to(403);
+            Redirect::error(403);
     }
 
 }
