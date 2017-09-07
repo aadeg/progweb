@@ -22,7 +22,7 @@ $view = AdminView::tickets();
         <form class="ticket-search" action="#">
             <input type="text" id="search-bar" placeholder="Ricerca nella tabella">
             <div id="only-checkbox-div">
-                <label for="only-checkbox">Mostra solo i tuoi</label>
+                <label for="only-checkbox">Mostra solo le tue pratiche</label>
                 <input id="only-checkbox" type="checkbox">
             </div>
         </form>

@@ -4,33 +4,36 @@
 	<title>Manuale Utente - SimpleTicket</title>
 	<meta charset="utf-8">
 
+        <link rel='shortcut icon' type='image/x-icon' href='/static/imgs/favicon.ico'>
 	<link rel="stylesheet" href="/static/css/guide.css">
     </head>
     
     <body>
 	<div class="container">
 	    <header>
-		<img src="/static/imgs/logo.png" class="logo" alt="Logo">
-		<h1>SimpleTicket</h1>
+                <a href="/">
+		    <img src="/static/imgs/logo.png" class="logo" alt="Logo">
+		    <h1>SimpleTicket</h1>
+                </a>
 		<h2>Manuale utente</h2>
 	    </header>
 
 	    <main>
 		<p>
-		    <strong>SimpleTicket</strong> ha lo scopo di raccogliere e gestire le richieste di supporto provenienti dai clienti, facilitando così la comunicazione tra cliente e gestore di un servio. 
+		    Il programma permette ad un generico fornitore di servizi di raccogliere e gestire le richieste di supporto provenienti dai clienti, facilitando così la comunicazione con la clientela. 
 		</p>
-		<p>Il programma è diviso di due principali parti:</p>
+		<p>SimpleTicket è diviso di due principali parti:</p>
 		    <ul>
 			<li><em>Interfaccia utente</em> tramite la quale i clienti possono inviare segnalazioni e richieste di supporto;</li>
 			<li><em>Pannello di amministrazione</em> dove gli operatori addetti possono gestire le segnalazioni.</li>
 		    </ul>
 
 		<h3>Interfaccia utente</h3>
-		<p>Per richiedere il supporto, i clienti dovranno aprire una nuova <strong>pratica</strong> tramite l'apposito <a href="/new_ticket.php" target="_blank">modulo</a>. Una volta fatto, potranno interagire con un operatore grazie all'invio di messasggi testuali. Il cliente può <a href="/check_ticket.php" target="_blank">visualizzare</a> una pratica aperta in qualsiasi momento: nel caso in cui si sia dimenticato i dati necessari a farlo, potrà richiederne l'invio tramite email.</p> 
+		<p>Per richiedere il supporto, i clienti dovranno aprire una nuova <strong>pratica</strong> tramite l'apposito <a href="/new_ticket.php" target="_blank">modulo</a>. Una volta compilato ed inviata la richiesta, viene fortino il <em>numero della pratica</em> grazie al quale è possibile <a href="/check_ticket.php" target="_blank">visualizzare</a> in qualsiasi momento lo stato della pratica e messaggiare con l'operatore che ha preso in carico la segnalazione. Nel caso in cui si sia smarrito il <em>numero della pratica</em> è possibile richiederne l'invio tramite email.</p> 
 		
 		<h3>Pannello di amministrazione</h3>
-		<p>Gli operatori potranno gestire le pratiche aperte dai clienti tramite il <a href="/admin" target="_blank">pannello di amministrazione</a>. Le pratiche possono essere ordinate secondo categorie e smistate tra i vari operatori. È inoltre possibile rimuovere una pratica o chiderla quando essa è arrivata a conclusione. L'accesso al pannello è protetto da password e, nel caso un operatore perda la propria password, è possibile recuperarla tramite email.</p>
-		<p>Gli operatori con il permesso di <strong>amministratore</strong> potranno aggiungere o rimuovere altri operatori e gestire le categorie nelle quali sono organizzate le pratiche. Per ogni categoria è possibile aggiungere dinamicamente campi personalizzati che i clienti dovranno compilare prima di aprire una pratica: in questo modo, in base alla tipologia di problema,  è possibile chiedere preventivamente ai clienti i dati necessari a soddisfare la loro pratica.</p>
+		<p>Gli operatori possono gestire le pratiche aperte dai clienti tramite il <a href="/admin" target="_blank">pannello di amministrazione</a>. Le pratiche possono essere ordinate secondo categorie e smistate tra i vari operatori. Tramite l'apposita lista è possibile visualizzare una qualsiasi pratica, interagire con il cliente inviando messaggi, spostare la pratica in una nuova categoria, rimuoverla e chiuderla. L'accesso al pannello è protetto da password e, nel caso un operatore perda la propria password, è possibile recuperarla tramite email.</p>
+		<p>Gli operatori con il permesso di <strong>amministratore</strong> potranno aggiungere o rimuovere altri operatori e gestire le categorie nelle quali sono organizzate le pratiche. Per ogni categoria è possibile aggiungere dinamicamente campi personalizzati che i clienti dovranno compilare al momento di aprire una pratica: in questo modo, in base alla tipologia di problema,  è possibile chiedere preventivamente ai clienti i dati necessari a soddisfare la loro pratica.</p>
 	    </main>
 	</div>
     </body>
