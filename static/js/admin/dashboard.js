@@ -1,6 +1,6 @@
 // require: common.js
 
-function _onTicketDblClick(event, row){
+function _onTicketDblClick(row){
     var ticketId = row.id.split('-')[1];
     var url = '/admin/ticket_view.php?id=' + ticketId;
     var win = window.open(url, '_blank');
@@ -37,6 +37,6 @@ onLoadHandlers.push(function(){
     var rows = document.getElementsByClassName('ticket-row');
     for (var i = 0; i < rows.length; ++i){
         var row = rows[i];
-        row.ondblclick = function(e) { return _onTicketDblClick(e, row); };
+        row.ondblclick = new Function("_onTicketDblClick(this)");
     }
 });
