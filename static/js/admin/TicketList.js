@@ -2,7 +2,7 @@ function TicketList(el, operatorId){
     // ( CONFIG
     this.priorityClasses = ['ticket-low', null, 'ticket-high'];
     this.maxSubjectLength = 50;
-    this.pageSize = 15;
+    this.pageSize = 10;
     // )
     
     var self = this;

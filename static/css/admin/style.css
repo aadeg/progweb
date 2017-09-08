@@ -12,6 +12,10 @@ img.icon {
     height: 14px;
 }
 
+img.icon.small {
+    height: 10px;
+}
+
 input, select, textarea {
     padding: 8px;
 }

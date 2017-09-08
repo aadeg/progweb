@@ -31,7 +31,8 @@ $operator = AuthManager::currentOperator();
         <h1 class="left">SimpleTicket</h1>
         <div class="dropdown right">
             <a href="#" onclick="dropdown(event);">
-                <?php echo $operator->first_name . ' ' . $operator->last_name; ?> <i class="fa fa-caret-down"></i>
+                <?php echo $operator->first_name . ' ' . $operator->last_name; ?>
+                <img src="/static/imgs/down_arrow.png" alt="dashboard" class="icon small">
             </a>
             <ul id="operator-dropdown">
                 <li><a href="/admin/profile.php">Profilo</a></li>
