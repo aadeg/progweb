@@ -3,6 +3,10 @@
 body {
     background-image: none;
     background-color: #eee;
+    background-image: url('../imgs/ticket_bg.png');
+    background-repeat: repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 body > header {

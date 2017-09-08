@@ -1,3 +1,10 @@
+body {
+    background-image: url('../../imgs/admin_bg.png');
+    background-position: center center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
 dt {
     font-weight: bold;
     display: inline;
