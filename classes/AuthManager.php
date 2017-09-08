@@ -59,7 +59,7 @@ class AuthManager {
         );
         $subject = "Recupero della password";
         $body = "Buongiorno $op_full_name,\n";
-        $body .= "Come da lei richiesto, le inviamo le informazioni necessarie a recuperare la sua password.\n";
+        $body .= "Come da lei richiesto, le inviamo le informazioni necessarie per recuperare la sua password.\n";
         $body .= "Il codice per recuperare la password è:\n\n";
         $body .= "$token\n\n";
         $body .= "SimpleTicket";
