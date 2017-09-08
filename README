@@ -4,6 +4,6 @@ Autore: Andrea Giove
 Il dump del database è nel file progweb.sql.
 
 Per inviare le email è stata usata la libreria PHPMailer (https://github.com/PHPMailer/PHPMailer).
-I file incorporati nel progetto sono sono:
+I file incorporati nel progetto sono:
  + classes/Email/PHPMailer.php
  + classes/Email/SMTP.php
