@@ -133,12 +133,11 @@ class UserView {
 
             $body = <<<EOD
 Buongiorno,
-come da lei richiesto, le abbiamo inviato l'elenco delle pratica attualmente aperte con i relativi numeri:
+come da lei richiesto, le abbiamo inviato l'elenco delle pratiche attualmente aperte:
 
-NUMERO    OGGETTO PRATICA
+NUMERO    OGGETTO DELLA PRATICA
 
 EOD;
-            var_dump($tickets);
             foreach ($tickets as $t){
                 $code = $t->id;
                 for ($i = strlen($code); $i <= 15; $i++)

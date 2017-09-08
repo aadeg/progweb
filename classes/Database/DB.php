@@ -16,7 +16,6 @@ class DB {
     }
 
     public function query($sql){
-        // var_dump($sql);
         $result = $this->mysqli->query($sql);
 
         return $this->buildResult($result);
