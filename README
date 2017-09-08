@@ -1,0 +1,9 @@
+Progetto di Progettazione Web 2016/2017
+Autore: Andrea Giove
+
+Il dump del database è nel file progweb.sql.
+
+Per inviare le email è stata usata la libreria PHPMailer (https://github.com/PHPMailer/PHPMailer).
+I file incorporati nel progetto sono sono:
+ + classes/Email/PHPMailer.php
+ + classes/Email/SMTP.php
